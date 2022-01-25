@@ -1,0 +1,21 @@
+@import 'styles/variables';
+
+.header {
+  position: relative;
+  height: 8rem;
+
+  .user-name {
+    font-family: 'Abel', sans-serif;
+    font-size: 1.8rem;
+    position: absolute;
+    top: 2.8rem;
+    right: 19.5rem;
+    color: $silver-color;
+  }
+
+  .divider {
+    position: absolute;
+    top: 2.5rem;
+    right: 18rem;
+  }
+}
