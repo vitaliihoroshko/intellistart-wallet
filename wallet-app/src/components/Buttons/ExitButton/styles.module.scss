@@ -1,0 +1,26 @@
+@import 'styles/variables';
+
+.button {
+  position: absolute;
+  top: 3.1rem;
+  right: 8.65rem;
+  width: 7.9rem;
+  background-color: $white-color;
+  border: none;
+  cursor: pointer;
+
+  .exit-icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  span {
+    font-family: 'Abel', sans-serif;
+    font-size: 1.8rem;
+    position: absolute;
+    top: -0.3rem;
+    left: 2.8rem;
+    color: $silver-color;
+  }
+}

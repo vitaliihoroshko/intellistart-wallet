@@ -1,9 +1,7 @@
+import Layout from 'components/Layout';
+
 const App = () => {
-  return (
-    <div>
-      <h1>Wallet App</h1>
-    </div>
-  );
+  return <Layout></Layout>;
 };
 
 export default App;

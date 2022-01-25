@@ -1,0 +1,19 @@
+.logo {
+  position: absolute;
+  top: 2rem;
+  left: 8.5rem;
+
+  .image {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .name {
+    font-family: 'Poppins Bold', sans-serif;
+    font-size: 3rem;
+    position: absolute;
+    top: 0;
+    left: 6rem;
+  }
+}
