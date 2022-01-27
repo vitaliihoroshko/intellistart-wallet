@@ -1,0 +1,158 @@
+@import 'styles/variables';
+.currency__container {
+  width: 34.8rem;
+  height: 34.7rem;
+  background: $purple-color url('currency-bg.svg') bottom no-repeat;
+  color: $white-color;
+  border-radius: 3rem;
+}
+
+.currency__box {
+  width: 34.8rem;
+  font-size: 1.8rem;
+  line-height: 2.3rem;
+  font-family: 'Abel', sans-serif;
+  border-collapse: collapse;
+}
+
+.currency__head {
+  background:rgba(255, 255, 255, 0.2);
+  border-radius: 3rem 3rem 0 0;
+  height: 6rem;
+  margin: 0;
+}
+
+th {
+  height: 6rem;
+  font-weight: normal;
+  text-align: left;
+}
+
+.currency__currency {
+  width: 13.9rem;
+  padding: 1.7rem 0 2rem 3rem;
+}
+.currency__purchase {
+  width: 14.3rem;
+  padding: 1.7rem 0 2rem 0;
+}
+.currency__sale {
+  width: 6.6rem;
+  padding: 1.7rem 3rem 2rem 0;
+  text-align: right;
+}
+
+td {
+  height: 2.6rem;
+  font-size: 1.6rem;
+  line-height: 2rem;
+  padding: 1.3rem 0 1.4rem 0;
+}
+
+tr:first-child>td {
+  padding-top: 2rem;
+  padding-bottom: 1.3rem;
+}
+
+tr:nth-child(2)>td{
+  padding-top: 1.4rem;
+  padding-bottom: 1.3rem;
+}
+
+tr:last-child>td {
+  padding-top: 1.4rem;
+}
+
+//phone <768px
+@media screen and (max-width: $phone-max) {
+  .currency__container {
+    width: 28rem;
+    height: 17.4rem;
+    background: $purple-color url('currency-bg-phone.svg') bottom no-repeat;
+  }
+  .currency__box {
+    width: 28rem;
+    height: 17.4rem;
+  }
+  td {
+    height: 2.6rem;
+    padding: 0.7rem 0;
+  }
+  .currency__head {
+    height: 5rem;
+  }
+  .currency__currency {
+    width: 10.3rem;
+    padding-left: 2rem;
+  }
+  .currency__purchase {
+    width: 12.1rem;
+    padding-left: 1.5rem;
+  }
+  .currency__sale {
+    width: 5.6rem;
+    text-align: right;
+    padding-right: 1.9rem;
+  }
+  th {
+    height: 5rem;
+    padding: 1.1rem 0 1.6rem 0;
+    text-align: left;
+  }
+  th:nth-child(2) {
+    padding-left: 0.1rem;
+  }
+  th:last-child {
+    padding-right: 1.6rem;
+  }
+  tr:first-child>td {
+    padding-top: 1rem;
+  }
+  tr:last-child>td {
+    padding-bottom: 2.6rem;
+  }
+}
+//tablet 768px-1280px
+@media screen and (min-width: $tablet-min) and (max-width: $tablet-max) {
+  .currency__container {
+    width: 33.4rem;
+    height: 17.4rem;
+    background: $purple-color url('currency-bg-tablet.svg') bottom no-repeat;
+  }
+  .currency__box {
+    width: 33.4rem;
+  }
+  .currency__head {
+    height: 5rem;
+  }
+  th {
+    height: 5rem;
+    padding: 1.1rem 0 1.6rem 0;
+    text-align: left;
+  }
+  td {
+    height: 2rem;
+    padding: 0.7rem 0;
+  }
+  td:last-child, th:last-child {
+    text-align: right;
+    padding-right: 2rem;
+  }
+  tr:last-child>td {
+    padding-bottom: 2.6rem;
+  }
+  tr:first-child>td {
+    padding-top: 1rem;
+  }
+  .currency__currency {
+    width: 13.9rem;
+    padding-left: 2rem;
+  }
+  .currency__purchase {
+    width: 13.9rem;
+  }
+  .currency__sale {
+    width: 5.6rem;
+    text-align: right;
+  }
+}
