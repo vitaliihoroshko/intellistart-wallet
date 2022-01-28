@@ -1,0 +1,30 @@
+@import 'styles/variables';
+
+.some__button {
+  background-color: $white-color;
+  color: $royal-blue-color;
+  border: 0.1rem solid $royal-blue-color;
+  padding: 1.3rem 6.5rem 1.3rem 7.1rem;
+  border-radius: 2rem;
+  text-align: center;
+  font-size: 1.8rem;
+  line-height: 2.3rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 1.5s;
+
+  &:hover {
+    background-color: $royal-blue-color;
+    color: $white-color;
+  }
+}
+.transparent__btn {
+  background-color: $java-color;
+  color: $white-color;
+  margin-bottom: 2rem;
+  border: none;
+  &:hover {
+    background-color: $mountain-meadow-color;
+  }
+}
