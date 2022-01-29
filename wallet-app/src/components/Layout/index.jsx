@@ -1,4 +1,5 @@
 import Header from 'components/Header';
+import PropTypes from 'prop-types';
 
 const Layout = ({ children }) => {
   return (
@@ -7,6 +8,10 @@ const Layout = ({ children }) => {
       <main>{children}</main>
     </>
   );
+};
+
+Layout.propTypes = {
+  children: PropTypes.any,
 };
 
 export default Layout;
