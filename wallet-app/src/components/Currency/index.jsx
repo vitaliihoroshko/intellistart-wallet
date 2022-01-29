@@ -1,23 +1,32 @@
+import { useEffect, useState } from 'react';
 import styles from './styles.module.scss';
+import { usd, eur, rur, apiCall } from './privat-api.js';
 
 const Currency = () => {
-  function createData(currency, purchase, sale) {
-    purchase = (Math.round(purchase * 100) / 100).toFixed(2);
-    sale = (Math.round(sale * 100) / 100).toFixed(2);
-    return { currency, purchase, sale };
-  }
-  let usdPurchase = '27.55';
-  let usdSale = '27.65';
-  let eurSale = '30.10';
-  let eurPurchase9 = '30.00';
-  let rurPurchase = 0;
-  let rurSale = 0;
-  const rows = [
-    createData('USD', usdPurchase, usdSale),
-    createData('EUR', eurPurchase9, eurSale),
-    createData('RUR', rurPurchase, rurSale),
-  ];
-
+  const [usdPurchase, setUsdPurchase] = useState();
+  const [usdSale, setUsdSale] = useState();
+  const [eurPurchase, setEurPurchase] = useState();
+  const [eurSale, setEurSale] = useState();
+  const [rurPurchase, setRurPurchase] = useState();
+  const [rurSale, setRurSale] = useState();
+  useEffect(() => {
+    (async () => {
+      const data = await apiCall();
+      for (const element of data) {
+        if (element.ccy == 'RUR') {
+          setRurPurchase(element.buy);
+          setRurSale(element.sale);
+        } else if (element.ccy == 'EUR') {
+          setEurPurchase(element.buy);
+          setEurSale(element.sale);
+          console.log(eurPurchase + ' eur Buy');
+        } else if (element.ccy == 'USD') {
+          setUsdPurchase(element.buy);
+          setUsdSale(element.sale);
+        }
+      }
+    })();
+  });
   function DenseTable() {
     return (
       <table className={styles['currency__box']}>
@@ -29,13 +38,21 @@ const Currency = () => {
           </tr>
         </thead>
         <tbody>
-          {rows.map(row => (
-            <tr key="">
-              <td className={styles['currency__currency']}>{row.currency}</td>
-              <td className={styles['currency__purchase']}>{row.purchase}</td>
-              <td className={styles['currency__sale']}>{row.sale}</td>
-            </tr>
-          ))}
+          <tr>
+            <td className={styles['currency__currency']}>{usd}</td>
+            <td className={styles['currency__purchase']}>{usdPurchase}</td>
+            <td className={styles['currency__sale']}>{usdSale}</td>
+          </tr>
+          <tr>
+            <td className={styles['currency__currency']}>{eur}</td>
+            <td className={styles['currency__purchase']}>{eurPurchase}</td>
+            <td className={styles['currency__sale']}>{eurSale}</td>
+          </tr>
+          <tr>
+            <td className={styles['currency__currency']}>{rur}</td>
+            <td className={styles['currency__purchase']}>{rurPurchase}</td>
+            <td className={styles['currency__sale']}>{rurSale}</td>
+          </tr>
         </tbody>
       </table>
     );

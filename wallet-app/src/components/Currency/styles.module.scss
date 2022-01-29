@@ -5,6 +5,7 @@
   background: $purple-color url('currency-bg.svg') bottom no-repeat;
   color: $white-color;
   border-radius: 3rem;
+  will-change: transform;
 }
 
 .currency__box {

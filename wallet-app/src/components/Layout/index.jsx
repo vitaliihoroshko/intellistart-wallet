@@ -1,5 +1,4 @@
 import Header from 'components/Header';
-import Currency from 'components/Currency';
 import PropTypes from 'prop-types';
 
 const Layout = ({ children }) => {
@@ -7,7 +6,6 @@ const Layout = ({ children }) => {
     <>
       <Header />
       <main>{children}</main>
-      <Currency />
     </>
   );
 };
