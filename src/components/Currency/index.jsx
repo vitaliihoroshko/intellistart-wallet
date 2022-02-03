@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import styles from './styles.module.scss';
 import { usd, eur, rur, apiCall } from './privat-api.js';
 
+function Round(num) {
+  return (Math.round(num * 100) / 100).toFixed(2);
+}
+
 const Currency = () => {
   const [usdPurchase, setUsdPurchase] = useState();
   const [usdSale, setUsdSale] = useState();
@@ -14,15 +18,14 @@ const Currency = () => {
       const data = await apiCall();
       for (const element of data) {
         if (element.ccy == 'RUR') {
-          setRurPurchase(element.buy);
-          setRurSale(element.sale);
+          setRurPurchase(Round(element.buy));
+          setRurSale(Round(element.sale));
         } else if (element.ccy == 'EUR') {
-          setEurPurchase(element.buy);
-          setEurSale(element.sale);
-          console.log(eurPurchase + ' eur Buy');
+          setEurPurchase(Round(element.buy));
+          setEurSale(Round(element.sale));
         } else if (element.ccy == 'USD') {
-          setUsdPurchase(element.buy);
-          setUsdSale(element.sale);
+          setUsdPurchase(Round(element.buy));
+          setUsdSale(Round(element.sale));
         }
       }
     })();
