@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './styles.module.scss';
-import { usd, eur, rur, apiCall } from './privat-api.js';
+import { usd, eur, rur, apiCall } from '../../api/privat-api.js';
 
 function Round(num) {
   return (Math.round(num * 100) / 100).toFixed(2);
