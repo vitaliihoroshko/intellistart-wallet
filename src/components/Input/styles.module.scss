@@ -1,0 +1,31 @@
+@import 'styles/variables';
+
+.input {
+  position: relative;
+  margin-bottom: 2.9rem;
+
+  .icon {
+    position: absolute;
+    left: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  input {
+    font-family: 'Abel', sans-serif;
+    font-size: 1.8rem;
+    background-color: $white-color;
+    width: 40.95rem;
+    border: none;
+    border-bottom: 1px solid $alto-color;
+    padding: 1rem 5.45rem;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::placeholder {
+      color: $silver-color;
+    }
+  }
+}
