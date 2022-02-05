@@ -4,6 +4,12 @@
   position: relative;
   height: 8rem;
 
+  .logo {
+    position: absolute;
+    top: 2rem;
+    left: 8.5rem;
+  }
+
   .user-name {
     font-family: 'Abel', sans-serif;
     font-size: 1.8rem;
