@@ -1,0 +1,24 @@
+@import 'styles/variables';
+
+.error {
+  position: relative;
+  width: 40.95rem;
+
+  &-icon {
+    width: 2.3rem;
+    height: 2.3rem;
+    position: absolute;
+    top: -6.3rem;
+    right: 1rem;
+  }
+
+  &-text {
+    font-family: 'Abel', sans-serif;
+    font-size: 1.4rem;
+    color: $red-color;
+    position: absolute;
+    top: -2.2rem;
+    left: 48%;
+    transform: translateX(-50%);
+  }
+}
