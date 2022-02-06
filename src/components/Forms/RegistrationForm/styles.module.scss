@@ -1,0 +1,28 @@
+@import 'styles/variables';
+
+.form {
+  position: relative;
+
+  .logo {
+    position: absolute;
+    top: 4rem;
+    left: 17.9rem;
+  }
+
+  form {
+    background-color: $white-color;
+    width: 54rem;
+    height: 61.6rem;
+    border-radius: 2rem;
+    padding-top: 12rem;
+    padding-left: 6.55rem;
+
+    .buttons {
+      margin: 5rem 5.45rem;
+
+      button {
+        margin-bottom: 2rem;
+      }
+    }
+  }
+}
