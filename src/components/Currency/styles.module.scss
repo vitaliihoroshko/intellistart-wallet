@@ -2,7 +2,7 @@
 .currency__container {
   width: 34.8rem;
   height: 34.7rem;
-  background: $purple-color url('currency-bg.svg') bottom no-repeat;
+  background: $purple-color url('../../assets/images/currency-bg.svg') bottom no-repeat;
   color: $white-color;
   border-radius: 3rem;
   will-change: transform;
@@ -69,48 +69,63 @@ tr:last-child>td {
   .currency__container {
     width: 28rem;
     height: 17.4rem;
-    background: $purple-color url('currency-bg-phone.svg') bottom no-repeat;
+    background: $purple-color url('../../assets/images/currency-bg-phone.svg') bottom no-repeat;
   }
   .currency__box {
     width: 28rem;
     height: 17.4rem;
   }
-  td {
-    height: 2.6rem;
-    padding: 0.7rem 0;
-  }
   .currency__head {
     height: 5rem;
   }
+  td {
+    height: 2rem;
+    padding: 0.7rem 0;
+  }
+  //line1
+  tr:first-child>td {
+    padding-top: 1rem;
+    padding-bottom: 0.7rem;
+  }
+  tr:nth-child(2)>td {
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+  }
+    //last line
+  tr:last-child>td {
+    padding-top: 0.7rem;
+    padding-bottom: 2.6rem;
+  }
+  //column1
   .currency__currency {
     width: 10.3rem;
     padding-left: 2rem;
   }
+  th.currency__currency {
+    height: 5rem;
+    padding: 1.1rem 0 1.6rem 2rem;
+    text-align: left;
+  }
+  //column2
   .currency__purchase {
     width: 12.1rem;
     padding-left: 1.5rem;
   }
-  .currency__sale {
-    width: 5.6rem;
-    text-align: right;
-    padding-right: 1.9rem;
-  }
-  th {
+  th.currency__purchase {
     height: 5rem;
     padding: 1.1rem 0 1.6rem 0;
     text-align: left;
   }
-  th:nth-child(2) {
-    padding-left: 0.1rem;
+  //column3
+  .currency__sale {
+    width: 5.6rem;
+    padding-right: 2rem;
+    text-align: right;
   }
-  th:last-child {
-    padding-right: 1.6rem;
-  }
-  tr:first-child>td {
-    padding-top: 1rem;
-  }
-  tr:last-child>td {
-    padding-bottom: 2.6rem;
+  th.currency__sale {
+    height: 5rem;
+    padding: 1.1rem 1.7rem 1.6rem 0;
+    text-align: right;
   }
 }
 //tablet 768px-1280px
@@ -118,42 +133,61 @@ tr:last-child>td {
   .currency__container {
     width: 33.4rem;
     height: 17.4rem;
-    background: $purple-color url('currency-bg-tablet.svg') bottom no-repeat;
+    background: $purple-color url('../../assets/images/currency-bg-tablet.svg') bottom no-repeat;
   }
   .currency__box {
     width: 33.4rem;
+    height: 17.4rem;
   }
   .currency__head {
     height: 5rem;
-  }
-  th {
-    height: 5rem;
-    padding: 1.1rem 0 1.6rem 0;
-    text-align: left;
   }
   td {
     height: 2rem;
     padding: 0.7rem 0;
   }
-  td:last-child, th:last-child {
-    text-align: right;
-    padding-right: 2rem;
-  }
-  tr:last-child>td {
-    padding-bottom: 2.6rem;
-  }
+  //line1
   tr:first-child>td {
     padding-top: 1rem;
+    padding-bottom: 0.7rem;
   }
+  tr:nth-child(2)>td {
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+  }
+    //last line
+  tr:last-child>td {
+    padding-top: 0.7rem;
+    padding-bottom: 2.6rem;
+  }
+  //column1
   .currency__currency {
     width: 13.9rem;
-    padding-left: 2rem;
+    padding-left: 1.9rem;
   }
+  th.currency__currency {
+    height: 5rem;
+    padding: 1.1rem 0 1.6rem 1.9rem;
+    text-align: left;
+  }
+  //column2
   .currency__purchase {
     width: 13.9rem;
   }
+  th.currency__purchase {
+    height: 5rem;
+    padding: 1.1rem 0 1.6rem 0;
+    text-align: left;
+  }
+  //column3
   .currency__sale {
     width: 5.6rem;
+    padding-right: 2rem;
+    text-align: right;
+  }
+  th.currency__sale {
+    height: 5rem;
+    padding: 1.1rem 2rem 1.6rem 0;
     text-align: right;
   }
 }
