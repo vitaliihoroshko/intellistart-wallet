@@ -1,10 +1,12 @@
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import styles from './styles.module.scss';
+
+import RegularButton from 'components/Buttons/RegularButton';
+import LinkButton from 'components/Buttons/LinkButton';
 import postIcon from 'assets/images/post-icon.svg';
 import passwordIcon from 'assets/images/password-icon.svg';
 import errorIcon from 'assets/images/error-icon.svg';
-import RegularButton from 'components/Buttons/RegularButton';
+import styles from './styles.module.scss';
 
 const LoginForm = () => {
   const validationsSchema = yup.object().shape({
@@ -75,15 +77,10 @@ const LoginForm = () => {
             )}
 
             <div className={styles.form__btns}>
-              <RegularButton
-                isTransparent={true}
-                disabled={!isValid || !dirty}
-                onClick={handleSubmit}
-                type={`submit`}
-              >
+              <RegularButton disabled={!isValid || !dirty} onClick={handleSubmit} type="submit">
                 Log in
               </RegularButton>
-              <RegularButton isTransparent={false}>Registration</RegularButton>
+              <LinkButton to="/register">Registration</LinkButton>
             </div>
           </form>
         )}

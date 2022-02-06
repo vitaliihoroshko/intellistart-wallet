@@ -1,0 +1,28 @@
+@import 'styles/variables';
+
+.link {
+  font-family: 'Abel', sans-serif;
+  font-size: 1.8rem;
+  background-color: $white-color;
+  color: $purple-color;
+  display: inline-block;
+  width: 30rem;
+  border: 1px solid $purple-color;
+  padding: 1.3rem 0;
+  border-radius: 2rem;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  line-height: 2.2rem;
+  letter-spacing: 0.1em;
+  transition: all 0.5s;
+
+  &:hover {
+    background-color: $purple-color;
+    color: $white-color;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

@@ -1,13 +1,20 @@
-import styles from './styles.module.scss';
-import PropTypes from 'prop-types';
+import { string, bool, node } from 'prop-types';
 
-const RegularButton = ({ isTransparent, children }) => {
-  const classNames = [styles.some__button, isTransparent ? styles[`transparent__btn`] : ''];
-  return <button className={classNames.join(' ')}>{children}</button>;
+import styles from './styles.module.scss';
+
+const RegularButton = ({ type, isTransparent, children }) => {
+  const classNames = [styles.button, isTransparent ? styles['transparent-button'] : ''];
+  return (
+    <button type={type ? type : 'button'} className={classNames.join(' ')}>
+      {children}
+    </button>
+  );
 };
 
 RegularButton.propTypes = {
-  isTransparent: PropTypes.node,
-  children: PropTypes.node,
+  type: string,
+  isTransparent: bool,
+  children: node.isRequired,
 };
+
 export default RegularButton;
