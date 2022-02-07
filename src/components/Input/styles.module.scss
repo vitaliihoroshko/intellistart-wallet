@@ -27,5 +27,17 @@
     &::placeholder {
       color: $silver-color;
     }
+
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 3rem $white-color inset !important;
+      box-shadow: 0 0 0 3rem $white-color inset !important;
+
+      &:hover,
+      &:focus,
+      &:active {
+        -webkit-box-shadow: 0 0 0 3rem $white-color inset !important;
+        box-shadow: 0 0 0 3rem $white-color inset !important;
+      }
+    }
   }
 }

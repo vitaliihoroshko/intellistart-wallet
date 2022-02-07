@@ -1,6 +1,10 @@
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form } from 'formik';
 import { object, string, ref } from 'yup';
 
+import { signUserUp } from 'api/api-helper';
+import { authSliceActions } from 'store/slices/authSlice';
 import Logo from 'components/Logo';
 import Input from 'components/Input';
 import RegularButton from 'components/Buttons/RegularButton';
@@ -11,6 +15,10 @@ import userIcon from 'assets/images/user-icon.svg';
 import styles from './styles.module.scss';
 
 const RegistrationForm = () => {
+  const [submittedEmail, setSubmittedEmail] = useState('');
+  const authError = useSelector(state => state.auth.session.error);
+  const dispatch = useDispatch();
+
   const initialValues = {
     email: '',
     password: '',
@@ -18,10 +26,29 @@ const RegistrationForm = () => {
     name: '',
   };
 
-  const onSubmit = values => console.log(values);
+  const submitHandler = async (values, actions) => {
+    const { email, password, name } = values;
+    setSubmittedEmail(email);
+    try {
+      const { token, user } = await signUserUp({ email, password, username: name });
+      dispatch(authSliceActions.signUserIn({ token, user }));
+    } catch (error) {
+      if (error.response.status === 400) {
+        dispatch(authSliceActions.setError('Validation error'));
+      } else if (error.response.status === 409) {
+        dispatch(authSliceActions.setError('User with such email already exists'));
+      }
+    }
+    actions.validateForm();
+  };
 
   const validationSchema = object({
-    email: string().required('This field is required').email('Invalid email format'),
+    email: string()
+      .required('This field is required')
+      .email('Invalid email format')
+      .test('Unique Email', authError, value => {
+        return authError && authError.includes('email') && submittedEmail !== value;
+      }),
     password: string()
       .required('This field is required')
       .min(6, 'Password must be 6 chars minimum')
@@ -37,7 +64,11 @@ const RegistrationForm = () => {
       <div className={styles.logo}>
         <Logo />
       </div>
-      <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={submitHandler}
+      >
         <Form>
           <Input type="email" name="email" placeholder="E-mail" icon={postIcon} />
           <Input type="password" name="password" placeholder="Password" icon={passwordIcon} />
