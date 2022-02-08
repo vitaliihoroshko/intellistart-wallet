@@ -1,12 +1,18 @@
-import { Formik } from 'formik';
+import { Formik, Form } from 'formik';
 import * as yup from 'yup';
 
+import Logo from 'components/Logo';
+import Input from 'components/Input';
 import RegularButton from 'components/Buttons/RegularButton';
 import LinkButton from 'components/Buttons/LinkButton';
 import postIcon from 'assets/images/post-icon.svg';
 import passwordIcon from 'assets/images/password-icon.svg';
-import errorIcon from 'assets/images/error-icon.svg';
 import styles from './styles.module.scss';
+
+const initialValues = {
+  email: '',
+  password: '',
+};
 
 const LoginForm = () => {
   const validationsSchema = yup.object().shape({
@@ -21,69 +27,24 @@ const LoginForm = () => {
 
   return (
     <div className={styles['form-wrapper']}>
+      <div className={styles.logo}>
+        <Logo />
+      </div>
       <Formik
-        initialValues={{
-          email: '',
-          password: '',
-        }}
-        validateOnBlur
+        initialValues={initialValues}
         onSubmit={values => {
           console.log({ values });
         }}
         validationSchema={validationsSchema}
       >
-        {({ values, errors, touched, handleChange, handleBlur, isValid, handleSubmit, dirty }) => (
-          <form className={styles.form}>
-            <label className={styles.form__label}>
-              <img src={postIcon} alt="E-mail icon" />
-              <input
-                className={styles.form__input}
-                type={`email`}
-                name={`email`}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email}
-                placeholder={`E-mail`}
-              />
-              {touched.email && errors.email && (
-                <div>
-                  <img className={styles.error} src={errorIcon} alt="Error" />
-                </div>
-              )}
-            </label>
-            {touched.email && errors.email && (
-              <p className={styles.error__description}>{errors.email}</p>
-            )}
-
-            <label className={styles.form__label}>
-              <img src={passwordIcon} alt="Password icon" />
-              <input
-                className={styles.form__input}
-                type={`password`}
-                name={`password`}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.password}
-                placeholder={`Password`}
-              />
-              {touched.password && errors.password && (
-                <div>
-                  <img className={styles.error} src={errorIcon} alt="Error" />
-                </div>
-              )}
-            </label>
-            {touched.password && errors.password && (
-              <p className={styles.error__description}>{errors.password}</p>
-            )}
-
-            <div className={styles.form__btns}>
-              <RegularButton disabled={!isValid || !dirty} onClick={handleSubmit} type="submit">
-                Log in
-              </RegularButton>
-              <LinkButton to="/register">Registration</LinkButton>
-            </div>
-          </form>
-        )}
+        <Form className={styles.form}>
+          <Input type="email" name="email" placeholder="E-mail" icon={postIcon} />
+          <Input type="password" name="password" placeholder="Password" icon={passwordIcon} />
+          <div className={styles.form__btns}>
+            <RegularButton type="submit">Log in</RegularButton>
+            <LinkButton to="/register">Registration</LinkButton>
+          </div>
+        </Form>
       </Formik>
     </div>
   );
