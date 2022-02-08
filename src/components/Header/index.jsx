@@ -6,7 +6,7 @@ import divider from 'assets/images/divider.svg';
 import styles from './styles.module.scss';
 
 const Header = () => {
-  const user = useSelector(state => state.auth.user);
+  const user = useSelector(state => state.session.user);
 
   return (
     <header className={styles.header}>
