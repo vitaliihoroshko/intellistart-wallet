@@ -1,0 +1,25 @@
+@import 'styles/variables';
+
+.button {
+  position: fixed;
+  right: 8.5rem;
+  bottom: 4rem;
+  z-index: 95;
+  width: 4.4rem;
+  height: 4.4rem;
+  background-color: $green-color;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 62.5%;
+  box-shadow: 0rem 0.6rem 1.5rem $forest-shadow-color;
+  transition: all 0.5s;
+
+  &:hover {
+    background-color: $mountain-meadow-color;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
