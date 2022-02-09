@@ -1,0 +1,70 @@
+@import 'styles/variables';
+
+.modal {
+  height: 100%;
+  width: 100%;
+  background-color: rgba($black-color, 0.25);
+  position: fixed;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s;
+
+  &_active {
+    height: 100%;
+    width: 100%;
+    background-color: rgba($black-color, 0.25);
+    position: fixed;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: all;
+    opacity: 1;
+    transition: all 0.5s;
+  }
+}
+
+.modal_content {
+  padding: 2rem;
+  border-radius: 2rem;
+  background-color: $white-color;
+  min-height: 54rem;
+  width: 54rem;
+}
+
+.btn_close {
+  float: right;
+  cursor: pointer;
+  border: none;
+  background-color: $white-color;
+
+  &>svg {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+}
+
+.modal_title {
+  font-family: 'Poppins', sans-serif;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+  text-align: center;
+  font-weight: 400;
+  font-size: 3rem;
+  line-height: 4.5rem;
+}
+
+.modal_btns {
+  display: flex;
+  flex-direction: column;
+  max-width: 30rem;
+  margin: 5rem auto auto auto;
+
+  button {
+    margin-bottom: 2rem;
+  }
+}
