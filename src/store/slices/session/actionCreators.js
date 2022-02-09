@@ -1,5 +1,5 @@
 import { signUserUp, signUserIn, signUserOut } from 'api/api-helper';
-import { signIn, setError } from '.';
+import { signIn, signOut, setError } from '.';
 
 export const signUpActionCreator = (signUpDto, validationCallback) => {
   return async dispatch => {
