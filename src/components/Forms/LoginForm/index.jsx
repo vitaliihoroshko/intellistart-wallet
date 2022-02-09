@@ -1,6 +1,9 @@
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form } from 'formik';
-import * as yup from 'yup';
+import { object, string } from 'yup';
 
+import { signInActionCreator } from 'store/slices/session/actionCreators';
 import Logo from 'components/Logo';
 import Input from 'components/Input';
 import RegularButton from 'components/Buttons/RegularButton';
@@ -9,21 +12,40 @@ import postIcon from 'assets/images/post-icon.svg';
 import passwordIcon from 'assets/images/password-icon.svg';
 import styles from './styles.module.scss';
 
-const initialValues = {
-  email: '',
-  password: '',
-};
-
 const LoginForm = () => {
-  const validationsSchema = yup.object().shape({
-    email: yup.string().email('Incorrect email address').required('Required field!'),
-    password: yup
-      .string()
-      .typeError('Incorrect password')
-      .required('Required field!')
-      .min(6, 'Password is too short - should be 6 chars minimum.')
-      .max(12, 'Password is too long - should be 12 chars maximum.'),
+  const [submittedEmail, setSubmittedEmail] = useState('');
+  const [submittedPassword, setSubmittedPassword] = useState('');
+  const sessionError = useSelector(state => state.session.error);
+  const dispatch = useDispatch();
+
+  const initialValues = {
+    email: '',
+    password: '',
+  };
+
+  const validationsSchema = object({
+    email: string()
+      .required('This field is required')
+      .email('Invalid email format')
+      .test('Existing User', sessionError, value => {
+        return !(sessionError && sessionError.includes('email') && submittedEmail === value);
+      }),
+    password: string()
+      .required('This field is required')
+      .min(6, 'Password must be 6 chars minimum')
+      .max(12, 'Password must be 12 chars maximum')
+      .test('Correct Password', sessionError, value => {
+        return !(sessionError && sessionError.includes('password') && submittedPassword === value);
+      }),
   });
+
+  const submitHandler = (values, actions) => {
+    const { email, password } = values;
+    setSubmittedEmail(email);
+    setSubmittedPassword(password);
+    const { validateForm } = actions;
+    dispatch(signInActionCreator({ email, password }, validateForm));
+  };
 
   return (
     <div className={styles['form-wrapper']}>
@@ -32,10 +54,8 @@ const LoginForm = () => {
       </div>
       <Formik
         initialValues={initialValues}
-        onSubmit={values => {
-          console.log({ values });
-        }}
         validationSchema={validationsSchema}
+        onSubmit={submitHandler}
       >
         <Form className={styles.form}>
           <Input type="email" name="email" placeholder="E-mail" icon={postIcon} />
