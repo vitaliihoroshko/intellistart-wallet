@@ -11,14 +11,14 @@ const sessionSlice = createSlice({
   name: 'session',
   initialState,
   reducers: {
-    signUserIn(state, action) {
+    signIn(state, action) {
       state.token = action.payload.token;
       state.user = action.payload.user;
       state.isAuth = true;
       if (state.error) state.error = null;
     },
 
-    signUserOut() {
+    signOut() {
       return initialState;
     },
 
@@ -28,6 +28,8 @@ const sessionSlice = createSlice({
   },
 });
 
-export const sessionSliceActions = sessionSlice.actions;
+const { reducer, actions } = sessionSlice;
 
-export default sessionSlice.reducer;
+export const { signIn, signOut, setError } = actions;
+
+export default reducer;
