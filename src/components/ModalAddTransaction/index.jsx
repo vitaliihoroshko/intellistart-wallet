@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 
 import styles from './styles.module.scss';
 import { ReactComponent as Close } from 'assets/images/close.svg';
+import Switcher from 'components/Switcher';
 import RegularButton from 'components/Buttons/RegularButton';
 
 const ModalAddTransaction = ({ active, setActive }) => {
@@ -25,6 +26,7 @@ const ModalAddTransaction = ({ active, setActive }) => {
           <Close />
         </button>
         <h2 className={styles['modal_title']}>Add transaction</h2>
+        <Switcher />
         <div className={styles.modal_btns}>
           <RegularButton>Add</RegularButton>
           <RegularButton isTransparent={true}>Cancel</RegularButton>
