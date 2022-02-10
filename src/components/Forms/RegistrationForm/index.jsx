@@ -3,8 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form } from 'formik';
 import { object, string, ref } from 'yup';
 
-import { signUserUp } from 'api/api-helper';
-import { sessionSliceActions } from 'store/slices/sessionSlice';
+import { signUpActionCreator } from 'store/slices/session/actionCreators';
 import Logo from 'components/Logo';
 import Input from 'components/Input';
 import RegularButton from 'components/Buttons/RegularButton';
@@ -29,17 +28,8 @@ const RegistrationForm = () => {
   const submitHandler = async (values, actions) => {
     const { email, password, username } = values;
     setSubmittedEmail(email);
-    try {
-      const { token, user } = await signUserUp({ email, password, username });
-      dispatch(sessionSliceActions.signUserIn({ token, user }));
-    } catch (error) {
-      if (error.response.status === 400) {
-        dispatch(sessionSliceActions.setError('Validation error'));
-      } else if (error.response.status === 409) {
-        dispatch(sessionSliceActions.setError('User with such email already exists'));
-      }
-      actions.validateForm();
-    }
+    const { validateForm } = actions;
+    dispatch(signUpActionCreator({ email, password, username }, validateForm));
   };
 
   const validationSchema = object({
@@ -47,7 +37,7 @@ const RegistrationForm = () => {
       .required('This field is required')
       .email('Invalid email format')
       .test('Unique Email', sessionError, value => {
-        return sessionError && sessionError.includes('email') && submittedEmail !== value;
+        return !(sessionError && sessionError.includes('email') && submittedEmail === value);
       }),
     password: string()
       .required('This field is required')
