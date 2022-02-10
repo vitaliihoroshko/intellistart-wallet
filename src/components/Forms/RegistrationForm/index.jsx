@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form } from 'formik';
 import { object, string, ref } from 'yup';
 
-import { signUpActionCreator } from 'store/slices/session/actionCreators';
+import { signUserUp } from 'store/slices/session/actions';
 import Logo from 'components/Logo';
 import Input from 'components/Input';
 import RegularButton from 'components/Buttons/RegularButton';
@@ -29,7 +29,7 @@ const RegistrationForm = () => {
     const { email, password, username } = values;
     setSubmittedEmail(email);
     const { validateForm } = actions;
-    dispatch(signUpActionCreator({ email, password, username }, validateForm));
+    dispatch(signUserUp({ email, password, username }, validateForm));
   };
 
   const validationSchema = object({

@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 
-import { singOutActionCreator } from 'store/slices/session/actionCreators';
+import { signUserOut } from 'store/slices/session/actions';
 import exitIcon from 'assets/images/exit-icon.svg';
 import styles from './styles.module.scss';
 
@@ -8,7 +8,7 @@ const ExitButton = () => {
   const token = useSelector(state => state.session.token);
   const dispatch = useDispatch();
 
-  const clickHandler = async () => dispatch(singOutActionCreator(token));
+  const clickHandler = async () => dispatch(signUserOut(token));
 
   return (
     <button className={styles.button} onClick={clickHandler}>
