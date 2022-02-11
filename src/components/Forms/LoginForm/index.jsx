@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form } from 'formik';
 import { object, string } from 'yup';
 
-import { signInActionCreator } from 'store/slices/session/actionCreators';
+import { signUserIn } from 'store/slices/session/actions';
 import Logo from 'components/Logo';
 import Input from 'components/Input';
 import RegularButton from 'components/Buttons/RegularButton';
@@ -44,7 +44,7 @@ const LoginForm = () => {
     setSubmittedEmail(email);
     setSubmittedPassword(password);
     const { validateForm } = actions;
-    dispatch(signInActionCreator({ email, password }, validateForm));
+    dispatch(signUserIn({ email, password }, validateForm));
   };
 
   return (
