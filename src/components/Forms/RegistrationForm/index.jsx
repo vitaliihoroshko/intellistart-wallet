@@ -25,7 +25,7 @@ const RegistrationForm = () => {
     username: '',
   };
 
-  const submitHandler = async (values, actions) => {
+  const submitHandler = (values, actions) => {
     const { email, password, username } = values;
     setSubmittedEmail(email);
     const { validateForm } = actions;

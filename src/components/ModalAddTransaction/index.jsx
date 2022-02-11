@@ -2,9 +2,9 @@ import { bool, func } from 'prop-types';
 import { useEffect } from 'react';
 
 import styles from './styles.module.scss';
-import { ReactComponent as Close } from 'assets/images/close.svg';
 import Switcher from 'components/Switcher';
 import RegularButton from 'components/Buttons/RegularButton';
+import CloseButton from 'components/CloseButton';
 
 const ModalAddTransaction = ({ active, setActive }) => {
   useEffect(() => {
@@ -22,9 +22,9 @@ const ModalAddTransaction = ({ active, setActive }) => {
       onClick={() => setActive(false)}
     >
       <div className={styles['modal_content']} onClick={event => event.stopPropagation()}>
-        <button className={styles['btn_close']} onClick={() => setActive(false)}>
-          <Close />
-        </button>
+        <div className={styles['close_button']}>
+          <CloseButton clickHandler={() => setActive(false)} />
+        </div>
         <h2 className={styles['modal_title']}>Add transaction</h2>
         <Switcher />
         <div className={styles.modal_btns}>

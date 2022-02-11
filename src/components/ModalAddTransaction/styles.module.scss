@@ -34,18 +34,13 @@
   background-color: $white-color;
   min-height: 54rem;
   width: 54rem;
+  position: relative;
 }
 
-.btn_close {
-  float: right;
-  cursor: pointer;
-  border: none;
-  background-color: $white-color;
-
-  &>svg {
-    width: 1.6rem;
-    height: 1.6rem;
-  }
+.close_button {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
 }
 
 .modal_title {
