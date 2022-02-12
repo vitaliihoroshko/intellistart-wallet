@@ -1,10 +1,10 @@
 import { bool, func } from 'prop-types';
 import { useEffect } from 'react';
 
-import styles from './styles.module.scss';
 import Switcher from 'components/Switcher';
 import RegularButton from 'components/Buttons/RegularButton';
-import CloseButton from 'components/CloseButton';
+import CloseButton from 'components/Buttons/CloseButton';
+import styles from './styles.module.scss';
 
 const ModalAddTransaction = ({ active, setActive }) => {
   useEffect(() => {

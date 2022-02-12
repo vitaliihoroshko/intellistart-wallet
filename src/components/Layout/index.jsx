@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
+import { node } from 'prop-types';
 
 import Header from 'components/Header';
 import AddTransactionsButton from 'components/Buttons/AddTransactionsButton';
-import ModalAddTransaction from 'components/ModalAddTransaction';
+import ModalAddTransaction from 'components/Modals/ModalAddTransaction';
 
 const Layout = ({ children }) => {
   const [modalActive, setModalActive] = useState(false);
@@ -19,7 +19,7 @@ const Layout = ({ children }) => {
 };
 
 Layout.propTypes = {
-  children: PropTypes.any,
+  children: node.isRequired,
 };
 
 export default Layout;
