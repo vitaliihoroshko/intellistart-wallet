@@ -1,4 +1,5 @@
 @import 'styles/variables';
+@import 'styles/mixins';
 
 .button {
   position: absolute;
@@ -22,5 +23,23 @@
     top: -0.3rem;
     left: 2.8rem;
     color: $silver-color;
+
+    @include respond(30em) {
+      display: none;
+    }
+  }
+
+  @include respond(tablet) {
+    right: 4.05rem;
+  }
+
+  @include respond(30em) {
+    width: 1.8rem;
+    height: 1.8rem;
+    right: 2.1rem;
+  }
+
+  @include respond(phone) {
+    top: 2.1rem;
   }
 }
