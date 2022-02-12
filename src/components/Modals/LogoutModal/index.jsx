@@ -3,7 +3,7 @@ import { bool, func } from 'prop-types';
 
 import { signUserOut } from 'store/slices/session/actions';
 import RegularButton from 'components/Buttons/RegularButton';
-import CloseButton from 'components/CloseButton';
+import CloseButton from 'components/Buttons/CloseButton';
 import styles from './styles.module.scss';
 
 const LogoutModal = ({ isOpened, closeHandler }) => {

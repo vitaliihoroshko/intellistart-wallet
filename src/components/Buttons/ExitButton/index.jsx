@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import LogoutModal from 'components/LogoutModal';
+import LogoutModal from 'components/Modals/LogoutModal';
 import exitIcon from 'assets/images/exit-icon.svg';
 import styles from './styles.module.scss';
 
