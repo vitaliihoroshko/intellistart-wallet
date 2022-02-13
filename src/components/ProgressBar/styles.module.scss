@@ -1,0 +1,20 @@
+@import 'styles/variables';
+
+.bar {
+  font-size: 3rem;
+  width: 40.95rem;
+  height: 0.4rem;
+  background-color: $aqua-haze-color;
+  border-radius: 1rem;
+  margin-top: -2rem;
+  margin-bottom: 1.6rem;
+  cursor: pointer;
+
+  .progress {
+    height: 0.4rem;
+    background-color: $green-color;
+    border-radius: 1rem;
+    box-shadow: $forest-shadow-color;
+    transition: width 0.4s;
+  }
+}
