@@ -11,6 +11,7 @@ import LinkButton from 'components/Buttons/LinkButton';
 import postIcon from 'assets/images/post-icon.svg';
 import passwordIcon from 'assets/images/password-icon.svg';
 import userIcon from 'assets/images/user-icon.svg';
+import { evaluatePasswordProgress } from 'utils/evaluationFunctions/password';
 import styles from './styles.module.scss';
 
 const RegistrationForm = () => {
@@ -61,7 +62,13 @@ const RegistrationForm = () => {
       >
         <Form>
           <Input type="email" name="email" placeholder="E-mail" icon={postIcon} />
-          <Input type="password" name="password" placeholder="Password" icon={passwordIcon} />
+          <Input
+            type="password"
+            name="password"
+            placeholder="Password"
+            icon={passwordIcon}
+            evaluationFunction={evaluatePasswordProgress}
+          />
           <Input
             type="password"
             name="confirmPassword"
