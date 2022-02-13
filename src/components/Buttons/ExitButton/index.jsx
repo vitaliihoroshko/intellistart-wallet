@@ -14,7 +14,7 @@ const ExitButton = () => {
     <button className={styles.button} onClick={clickHandler}>
       <img src={exitIcon} alt="exit-icon" width={18} height={18} className={styles['exit-icon']} />
       <span className={styles.exit}>Exit</span>
-      &nbsp;
+      {/* &nbsp; */}
     </button>
   );
 };

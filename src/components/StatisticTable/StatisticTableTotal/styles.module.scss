@@ -1,0 +1,22 @@
+@import "../../../styles/variables.scss";
+
+.wrapper {
+	font-style: normal;
+	font-weight: normal;
+	margin-top: 1.5rem;
+	font-size: 1.6rem;
+	line-height: 2rem;
+	font-family: "Abel", sans-serif;
+	display: flex;
+	justify-content: space-between;
+	max-width: 35rem;
+	padding: 0 30px 0 20px;
+	width: 100%;
+}
+
+.expenses__num {
+	color: #ff6596;
+}
+.incomes__num {
+	color: #24cca7;
+}

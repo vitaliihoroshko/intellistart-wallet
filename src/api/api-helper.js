@@ -31,3 +31,13 @@ export const signUserOut = async token => {
     },
   });
 };
+
+export const getChartData = async (token, year, month) => {
+  const response = await axios.get(`${API_URL}/transactions-summary?year=${year}&month=${month}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const chartData = response.data;
+  return chartData;
+};
