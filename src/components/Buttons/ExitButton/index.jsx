@@ -1,18 +1,17 @@
-import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
-import LogoutModal from 'components/Modals/LogoutModal';
+import { setIsModalLogoutOpen } from 'store/slices/global';
 import exitIcon from 'assets/images/exit-icon.svg';
 import styles from './styles.module.scss';
 
 const ExitButton = () => {
-  const [modalIsOpened, setModalIsOpened] = useState(false);
+  const dispatch = useDispatch();
 
-  const openModal = () => setModalIsOpened(true);
-  const closeModal = () => setModalIsOpened(false);
+  const clickHandler = () => dispatch(setIsModalLogoutOpen(true));
 
   return (
     <>
-      <button className={styles.button} onClick={openModal}>
+      <button className={styles.button} onClick={clickHandler}>
         <img
           src={exitIcon}
           alt="exit-icon"
@@ -23,7 +22,6 @@ const ExitButton = () => {
         <span className={styles.exit}>Exit</span>
         &nbsp;
       </button>
-      <LogoutModal isOpened={modalIsOpened} closeHandler={closeModal} />
     </>
   );
 };
