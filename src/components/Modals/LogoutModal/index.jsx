@@ -1,16 +1,20 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { bool, func } from 'prop-types';
 
+import { setIsModalLogoutOpen } from 'store/slices/global';
 import { signUserOut } from 'store/slices/session/actions';
 import RegularButton from 'components/Buttons/RegularButton';
 import CloseButton from 'components/Buttons/CloseButton';
 import styles from './styles.module.scss';
 
-const LogoutModal = ({ isOpened, closeHandler }) => {
+const LogoutModal = () => {
+  const isOpened = useSelector(state => state.global.isModalLogoutOpen);
   const token = useSelector(state => state.session.token);
   const dispatch = useDispatch();
 
   const preventClick = event => event.stopPropagation();
+
+  const closeHandler = () => dispatch(setIsModalLogoutOpen(false));
+
   const logoutHandler = () => {
     dispatch(signUserOut(token));
     closeHandler();
@@ -34,11 +38,6 @@ const LogoutModal = ({ isOpened, closeHandler }) => {
       </div>
     </div>
   );
-};
-
-LogoutModal.propTypes = {
-  isOpened: bool.isRequired,
-  closeHandler: func.isRequired,
 };
 
 export default LogoutModal;
