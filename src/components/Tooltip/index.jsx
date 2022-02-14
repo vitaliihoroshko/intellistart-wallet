@@ -5,7 +5,6 @@ const Tooltip = ({ title, children }) => {
   return (
     <TooltipComponent
       title={title}
-      followCursor={true}
       componentsProps={{
         tooltip: {
           sx: {
