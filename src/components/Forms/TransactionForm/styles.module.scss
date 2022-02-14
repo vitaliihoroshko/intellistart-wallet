@@ -42,7 +42,7 @@
       left: -0.1rem;
       width: 4.4rem;
       height: 4.4rem;
-      background: url('../../assets/images/plus.svg') no-repeat;
+      background: url('../../../assets/images/plus.svg') no-repeat;
       background-position: center;
       background-color: $green-color;
       border-radius: 2.2rem;
@@ -74,7 +74,7 @@
 
         .indicator {
           left: 3.7rem;
-          background: url('../../assets/images/minus.svg') no-repeat;
+          background: url('../../../assets/images/minus.svg') no-repeat;
           background-position: center;
           background-color: $pink-color;
           box-shadow: 0rem 0.6rem 1.5rem $red-shadow-color;
@@ -94,4 +94,86 @@
 
 .expenses {
   color: $pink-color;
+}
+
+.input {
+  position: relative;
+  margin-bottom: 2.9rem;
+
+  input {
+    font-family: 'Abel', sans-serif;
+    font-size: 1.8rem;
+    background-color: $white-color;
+    border: none;
+    border-bottom: 1px solid $alto-color;
+    padding: 1rem;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::placeholder {
+      color: $silver-color;
+      text-align: center;
+    }
+
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 3rem $white-color inset !important;
+      box-shadow: 0 0 0 3rem $white-color inset !important;
+
+      &:hover,
+      &:focus,
+      &:active {
+        -webkit-box-shadow: 0 0 0 3rem $white-color inset !important;
+        box-shadow: 0 0 0 3rem $white-color inset !important;
+      }
+    }
+  }
+}
+
+.modal_btns {
+  display: flex;
+  flex-direction: column;
+  max-width: 30rem;
+  margin: 5rem auto auto auto;
+
+  button {
+    margin-bottom: 2rem;
+  }
+}
+
+.amount_date_wrapper {
+  display: flex;
+  justify-content: center;
+
+  input {
+    width: 19rem;
+  }
+
+  .date_wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: 3rem;
+
+    .calendar_icon {
+      position: absolute;
+      left: 16rem;
+      cursor: pointer ;
+    }
+  }
+}
+
+.comment_input {
+  display: flex;
+  justify-content: center;
+
+  input {
+    width: 41rem;
+
+    &::placeholder {
+      text-align: left;
+      margin-left: 2.05rem;
+    }
+  }
 }
