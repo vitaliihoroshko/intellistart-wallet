@@ -1,10 +1,9 @@
 import { bool, func } from 'prop-types';
 import { useEffect } from 'react';
 
-import Switcher from 'components/Switcher';
-import RegularButton from 'components/Buttons/RegularButton';
 import CloseButton from 'components/Buttons/CloseButton';
 import styles from './styles.module.scss';
+import TransactionForm from 'components/Forms/TransactionForm';
 
 const ModalAddTransaction = ({ active, setActive }) => {
   useEffect(() => {
@@ -26,11 +25,7 @@ const ModalAddTransaction = ({ active, setActive }) => {
           <CloseButton clickHandler={() => setActive(false)} />
         </div>
         <h2 className={styles['modal_title']}>Add transaction</h2>
-        <Switcher />
-        <div className={styles.modal_btns}>
-          <RegularButton>Add</RegularButton>
-          <RegularButton isTransparent={true}>Cancel</RegularButton>
-        </div>
+        <TransactionForm />
       </div>
     </div>
   );
