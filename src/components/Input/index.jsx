@@ -7,12 +7,12 @@ import ProgressBar from 'components/ProgressBar';
 import styles from './styles.module.scss';
 
 const Input = ({ type, name, placeholder, icon, evaluationFunction }) => {
-  const [progress, setProgress] = useState({ progress: 0, tooltip: '' });
+  const [progressData, setProgressData] = useState({ progress: 0, tooltip: '' });
   const [progressBarIsVisible, setProgressBarIsVisible] = useState(false);
 
   const inputHandler = event => {
     const value = event.target.value;
-    evaluationFunction(value, setProgress, setProgressBarIsVisible);
+    evaluationFunction(value, setProgressData, setProgressBarIsVisible);
   };
 
   return (
@@ -27,7 +27,7 @@ const Input = ({ type, name, placeholder, icon, evaluationFunction }) => {
       </div>
       <ErrorMessage name={name} component={TextError} />
       {progressBarIsVisible && (
-        <ProgressBar progress={progress.progress} tooltip={progress.tooltip} />
+        <ProgressBar progress={progressData.progress} tooltip={progressData.tooltip} />
       )}
     </div>
   );

@@ -11,7 +11,7 @@ import LinkButton from 'components/Buttons/LinkButton';
 import postIcon from 'assets/images/post-icon.svg';
 import passwordIcon from 'assets/images/password-icon.svg';
 import userIcon from 'assets/images/user-icon.svg';
-import { evaluatePasswordProgress } from 'utils/evaluationFunctions/password';
+import { evaluatePasswordProgress } from 'utils/evaluationFunctions';
 import styles from './styles.module.scss';
 
 const RegistrationForm = () => {
