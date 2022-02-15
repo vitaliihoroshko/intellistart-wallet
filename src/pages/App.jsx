@@ -8,10 +8,22 @@ import DashboardPage from './Dashboard';
 const App = () => {
   return (
     <Routes>
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
-      <Route path="/home" element={<ProtectedRoute element={<DashboardPage />} />} />
-      <Route path="/diagram" element={<ProtectedRoute element={<DashboardPage />} />} />
+      <Route
+        path="/login"
+        element={<ProtectedRoute element={<LoginPage />} requiresAuth={false} />}
+      />
+      <Route
+        path="/register"
+        element={<ProtectedRoute element={<RegisterPage />} requiresAuth={false} />}
+      />
+      <Route
+        path="/home"
+        element={<ProtectedRoute element={<DashboardPage />} requiresAuth={true} />}
+      />
+      <Route
+        path="/diagram"
+        element={<ProtectedRoute element={<DashboardPage />} requiresAuth={true} />}
+      />
       <Route path="/" element={<Navigate to="/home" replace />} />
     </Routes>
   );
