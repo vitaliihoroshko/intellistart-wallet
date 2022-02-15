@@ -14,17 +14,8 @@
   transition: all 0.5s;
 
   &_active {
-    height: 100%;
-    width: 100%;
-    background-color: rgba($black-color, 0.25);
-    position: fixed;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     pointer-events: all;
     opacity: 1;
-    transition: all 0.5s;
   }
 }
 

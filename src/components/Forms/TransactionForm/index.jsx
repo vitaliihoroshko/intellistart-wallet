@@ -1,3 +1,6 @@
+import { useDispatch } from 'react-redux';
+
+import { setIsModalAddTransactionOpen } from 'store/slices/global';
 import styles from './styles.module.scss';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useState } from 'react';
@@ -7,6 +10,8 @@ import { ReactComponent as Calendar } from 'assets/images/calendar.svg';
 import RegularButton from 'components/Buttons/RegularButton';
 
 const TransactionForm = () => {
+  const dispatch = useDispatch();
+  const closeHandler = () => dispatch(setIsModalAddTransactionOpen(false));
   const [checked, setChecked] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
 
@@ -52,7 +57,9 @@ const TransactionForm = () => {
             </div>
             <div className={styles.modal_btns}>
               <RegularButton type="submit">Add</RegularButton>
-              <RegularButton isTransparent={true}>Cancel</RegularButton>
+              <RegularButton isTransparent={true} clickHandler={closeHandler}>
+                Cancel
+              </RegularButton>
             </div>
           </Form>
         </Formik>
