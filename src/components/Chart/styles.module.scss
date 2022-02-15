@@ -7,9 +7,6 @@
 	letter-spacing: 0.05rem;
 	color: #000000;
 	margin: 0 auto;
-	margin-left: 1.5rem;
-	margin-bottom: 2rem;
-	margin-top: 3rem;
 }
 
 .doughnut canvas {
@@ -20,18 +17,6 @@
 .chart {
 	max-width: 32rem;
 	margin-bottom: 3rem;
-}
-
-@media screen and (min-width: 76.8rem) {
-	.chart {
-		margin: 0 2.5rem;
-	}
-}
-
-@media screen and (max-width: 128rem) {
-	.title {
-		font-size: 2.4rem;
-	}
 }
 
 .containerChart {

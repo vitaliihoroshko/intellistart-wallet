@@ -5,17 +5,20 @@ body {
 }
 
 .dashboard {
-	width: 100%;
 	font-size: 1.6rem;
 	line-height: 2rem;
 	font-family: "Abel", sans-serif;
 }
+
 table {
 	max-width: 35rem;
-	padding: 0 3rem 0 2rem;
-	width: 100%;
+	min-width: 28rem;
+	margin-left: 3rem;
 }
+
 .dashboard__head {
+	max-width: 35rem;
+	min-width: 24rem;
 	padding: 1.6rem 3rem;
 	background-color: $white-color;
 	border-radius: 3rem;
@@ -24,7 +27,6 @@ table {
 }
 
 .dashboard__head h3 {
-	display: inline-block;
 	font-weight: 400;
 	font-size: 1.8rem;
 	line-height: 2.3rem;
@@ -37,7 +39,7 @@ table {
 	max-width: 35rem;
 	justify-content: space-between;
 	line-height: 2rem;
-	height: 2rem;
+	// height: 2rem;
 	border: 0.1rem 0 0.1rem 0 solid #dcdcdf;
 	box-shadow: 0 0.1rem 0 rgba(255, 255, 255, 0.6);
 
