@@ -1,26 +1,22 @@
 @import "../../styles/variables.scss";
 
 body {
-	background: url("../../assets/images/bg-dashboard.png") no-repeat;
-	background-size: cover;
+	background: $alto-color;
 }
 
-.bg {
-	height: 100vh;
-}
 .dashboard {
-	width: 350px;
+	width: 100%;
 	font-size: 1.6rem;
 	line-height: 2rem;
 	font-family: "Abel", sans-serif;
 }
 table {
 	max-width: 35rem;
-	padding: 0 30px 0 20px;
+	padding: 0 3rem 0 2rem;
 	width: 100%;
 }
 .dashboard__head {
-	padding: 16px 30px;
+	padding: 1.6rem 3rem;
 	background-color: $white-color;
 	border-radius: 3rem;
 	display: flex;
@@ -34,9 +30,6 @@ table {
 	line-height: 2.3rem;
 }
 
-// .dashboard__category {
-// }
-
 .dashboard__amount {
 	text-align: right;
 }
@@ -45,9 +38,8 @@ table {
 	justify-content: space-between;
 	line-height: 2rem;
 	height: 2rem;
-	border: 1px 0px 1px 0px solid #dcdcdf;
-	box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
-	// position: relative;
+	border: 0.1rem 0 0.1rem 0 solid #dcdcdf;
+	box-shadow: 0 0.1rem 0 rgba(255, 255, 255, 0.6);
 
 	td {
 		font-size: 1.6rem;

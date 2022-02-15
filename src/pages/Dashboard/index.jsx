@@ -1,12 +1,17 @@
 import React from 'react';
 import Chart from 'components/Chart';
+import styles from './styles.module.scss';
+import Dropdown from 'components/StatisticTable/Dropdown';
 import StatisticTable from 'components/StatisticTable';
 
 function Dashboard() {
   return (
-    <div>
+    <div className={styles.container}>
       <Chart />
-      <StatisticTable />
+      <div className={styles.statistic__side}>
+        <Dropdown />
+        <StatisticTable />
+      </div>
     </div>
   );
 }

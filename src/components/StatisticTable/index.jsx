@@ -2,7 +2,6 @@ import { useTable } from 'react-table';
 import React from 'react';
 import styles from './styles.module.scss';
 import StatisticTableTotal from './StatisticTableTotal';
-
 const StatisticTable = () => {
   const transactions = React.useMemo(() => [
     {
@@ -44,15 +43,6 @@ const StatisticTable = () => {
     // [],
   ]);
 
-  const data = [...transactions];
-  data.forEach(el => {
-    if (el.type === 'INCOME') {
-      el.type = '+';
-    } else if (el.type === 'OUTCOME') {
-      el.type = '-';
-    }
-  });
-
   const columns = React.useMemo(
     () => [
       {
@@ -69,7 +59,7 @@ const StatisticTable = () => {
     [],
   );
 
-  const tableInstance = useTable({ columns, data });
+  const tableInstance = useTable({ columns, data: transactions });
   const defaultPropGetter = () => ({});
   const {
     getTableProps,

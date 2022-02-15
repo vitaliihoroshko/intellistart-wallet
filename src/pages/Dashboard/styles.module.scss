@@ -1,0 +1,25 @@
+.container {
+	padding: 0 8.5rem 3rem;
+	display: flex;
+	
+	@media screen and (max-width: 76rem) {
+		background-color: red;
+		margin: 0;
+		padding: 0;
+		padding: 0 15px;
+		margin-bottom: 20px;
+	}
+	@media screen and (max-width: 32rem) {
+		background-color: #fff;
+		flex-direction: column;
+		margin: 0 auto;
+		margin: 0;
+		padding: 0;
+		padding: 0 15px;
+		margin-bottom: 20px;
+	}
+}
+.statistic__side {
+	margin-left: 3rem;
+	width: 35rem;
+}

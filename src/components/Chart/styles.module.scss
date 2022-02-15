@@ -1,40 +1,36 @@
 .title {
 	font-family: "Poppins", sans-serif;
 	font-weight: normal;
-	font-size: 30px;
-	line-height: 45px;
+	font-size: 3rem;
+	line-height: 4.5rem;
 	line-height: 1.5;
-	letter-spacing: 0.05em;
+	letter-spacing: 0.05rem;
 	color: #000000;
 	margin: 0 auto;
-	width: fit-content;
-	display: inline-block;
-	text-align: left;
-	margin-left: 15px;
-	margin-bottom: 20px;
-	margin-top: 30px;
+	margin-left: 1.5rem;
+	margin-bottom: 2rem;
+	margin-top: 3rem;
 }
 
 .doughnut canvas {
-	min-width: 320px;
-	min-height: 320px;
+	max-width: 32rem;
+	max-height: 32rem;
 }
 
 .chart {
-	max-width: 320px;
-	margin-bottom: 30px;
+	max-width: 32rem;
+	margin-bottom: 3rem;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 76.8rem) {
 	.chart {
-		margin-right: 25px;
-		margin-left: 25px;
+		margin: 0 2.5rem;
 	}
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 128rem) {
 	.title {
-		font-size: 24px;
+		font-size: 2.4rem;
 	}
 }
 
