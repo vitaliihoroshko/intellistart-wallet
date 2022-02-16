@@ -131,37 +131,33 @@
   }
 }
 
-.modal_btns {
+.form_wrapper {
   display: flex;
-  flex-direction: column;
-  max-width: 30rem;
-  margin: 5rem auto auto auto;
-
-  button {
-    margin-bottom: 2rem;
-  }
+  justify-content: center;
 }
 
 .amount_date_wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  margin-bottom: 4rem;
 
   input {
     width: 19rem;
   }
 
-  .date_wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    margin-left: 3rem;
-
-    .calendar_icon {
-      position: absolute;
-      left: 16rem;
-      cursor: pointer ;
-    }
+  .error {
+    position: absolute;
+    top: 5rem;
+    font-family: 'Abel', sans-serif;
+    font-size: 1.4rem;
+    color: $red-color;
   }
+}
+
+.amount_wrapper, .date_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .comment_input {
@@ -175,5 +171,35 @@
       text-align: left;
       margin-left: 2.05rem;
     }
+  }
+}
+
+.modal_btns {
+  display: flex;
+  flex-direction: column;
+  max-width: 30rem;
+  margin: 5rem auto auto auto;
+
+  button {
+    margin-bottom: 2rem;
+  }
+}
+
+.select_wrapper {
+  margin-bottom: 4rem;
+  
+  select {
+    margin: 0;
+    width: 100%;
+    padding-bottom: 1rem;
+    font-family: 'Abel', sans-serif;
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 2.3rem;
+    color: #bdbdbd;
+    border: none;
+    background: transparent;
+    border-bottom: 0.1rem solid #e0e0e0;
+    outline: none;
   }
 }
