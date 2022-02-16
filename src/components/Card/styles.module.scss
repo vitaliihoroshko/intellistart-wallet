@@ -6,9 +6,9 @@
   font-family: 'Abel', sans-serif;
   background-color: $white-color;
   border-radius: 1rem;
-  border-left: 0.5rem solid $pink-color;
   margin-bottom: 1rem;
 }
+
 .card {
   &__key {
     padding: 0.8rem 0 1.4rem 1.5rem;
@@ -26,6 +26,18 @@
     width: 14rem;
     border-bottom: 1px solid $grey-color;
     height: 4.7rem;
+  }
+  &__pinkline {
+    border-left: 0.5rem solid $pink-color;
+  }
+  &__greenline {
+    border-left: 0.5rem solid $green-color;
+  }
+  &__pinktext {
+    color: $pink-color;
+  }
+  &__greentext {
+    color: $green-color;
   }
 }
 

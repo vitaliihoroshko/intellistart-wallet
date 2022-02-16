@@ -29,6 +29,7 @@ const Dashboard = () => {
     },
     [],
   ]);
+  let amountClasses = [styles['dashboard__amount']];
 
   const columns = React.useMemo(
     () => [
@@ -55,7 +56,7 @@ const Dashboard = () => {
       {
         Header: 'Amount',
         accessor: 'amount',
-        className: styles['dashboard__amount'],
+        className: amountClasses.join(' '),
       },
       {
         Header: 'Balance',
@@ -86,6 +87,14 @@ const Dashboard = () => {
     getCellProps = defaultPropGetter,
   } = tableInstance;
 
+  rows.map(row => {
+    if (row.type === '+') {
+      amountClasses = [styles['dashboard__amount'], styles['dashboard__greentext']];
+    } else if (row.type === '-') {
+      amountClasses = [styles['dashboard__amount'], styles['dashboard__pinktext']];
+    }
+  });
+
   function StatTable() {
     return (
       // apply the table props
@@ -115,7 +124,6 @@ const Dashboard = () => {
                         {...cell.getCellProps(
                           {
                             className: cell.column.className,
-                            style: cell.column.style,
                           },
                           getColumnProps(cell.column),
                           getCellProps(cell),

@@ -1,6 +1,18 @@
+@import 'styles/variables';
+//@import 'styles/mixins';
+
 .background {
   background-image: url('../../assets/images/bg-dashboard.png');
   background-size: cover;
   height: 88.8vh;
   margin-top: 8rem;
+  // @include respond(phone) {
+  //   height: fit-content;
+  // }
+}
+
+@media screen and (max-width: $phone-max) {
+  .background {
+    height: fit-content;
+  }
 }

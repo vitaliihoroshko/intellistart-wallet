@@ -16,6 +16,12 @@ table {
 }
 
 .dashboard {
+  &__pinktext {
+    color: $pink-color;
+  }
+  &__greentext {
+    color: $green-color;
+  }
   &__head {
     display: block;
     height: 5.8rem;

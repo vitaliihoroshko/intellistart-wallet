@@ -27,7 +27,6 @@ const Card = () => {
       balanceAfter: '14900.00',
     },
   ]);
-
   const data = [...transactions];
   data.forEach(el => {
     if (el.type === 'INCOME') {
@@ -41,9 +40,18 @@ const Card = () => {
     return (
       <div>
         {transactions.map(item => {
+          let tableClasses;
+          let amountClasses;
+          if (item.type === '+') {
+            tableClasses = [styles.card, styles['card__greenline']];
+            amountClasses = [styles['card__value'], styles['card__greentext']];
+          } else if (item.type === '-') {
+            tableClasses = [styles.card, styles['card__pinkline']];
+            amountClasses = [styles['card__value'], styles['card__pinktext']];
+          }
           console.log(item);
           return (
-            <table key={item.id} className={styles['card']}>
+            <table key={item.id} className={tableClasses.join(' ')}>
               <tbody>
                 <tr key={item.transactionDate}>
                   <td className={styles['card__key']}>Date</td>
@@ -63,7 +71,7 @@ const Card = () => {
                 </tr>
                 <tr>
                   <td className={styles['card__key']}>Amount</td>
-                  <td className={styles['card__value']}>{item.amount}</td>
+                  <td className={amountClasses.join(' ')}>{item.amount}</td>
                 </tr>
                 <tr>
                   <td className={styles['card__key']}>Balance</td>
