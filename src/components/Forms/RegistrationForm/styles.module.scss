@@ -1,28 +1,80 @@
 @import 'styles/variables';
+@import 'styles/mixins.scss';
 
 .form {
   position: relative;
 
-  .logo {
-    position: absolute;
-    top: 4rem;
-    left: 17.9rem;
+  @media (min-width: 1280px) and (max-width: 1366px) {
+    left: 50.35%;
+    top: 5rem;
   }
+  @media (min-width: 1367px) and (max-width: 1440px) {
+    left: 55%;
+    top: 5rem;
+  }
+  @media screen and (min-width: 1440px) {
+    left: 56.5%;
+    top: 5rem;
+  }
+}
 
-  form {
-    background-color: $white-color;
-    width: 54rem;
-    height: 61.6rem;
-    border-radius: 2rem;
-    padding-top: 12rem;
-    padding-left: 6.55rem;
+.logo {
+  position: absolute;
+  top: 4rem;
+  left: 17.9rem;
+}
 
-    .buttons {
-      margin: 5rem 5.45rem;
+form {
+  background-color: $white-color;
+  width: 54rem;
+  height: 61.6rem;
+  border-radius: 2rem;
+  padding-top: 12rem;
+  padding-left: 6.55rem;
 
-      button {
-        margin-bottom: 2rem;
-      }
+  .buttons {
+    margin: 5rem 5.45rem;
+
+    button {
+      margin-bottom: 2rem;
     }
+  }
+}
+
+@include respond(79.9375em) {
+  .form {
+    top: 37rem;
+    left: 0;
+  }
+  form {
+    margin: 0 auto;
+  }
+  .logo {
+    left: 40%;
+  }
+}
+
+@include respond(47.9375em) {
+  .form {
+    top: 0rem;
+  }
+  form {
+    margin: 0 auto;
+  }
+  .logo {
+    left: 40%;
+  }
+}
+@include respond(35em) {
+  form {
+    max-width: 32rem;
+    margin: 0 auto;
+    padding: 12rem 2rem 4rem 2rem;
+    .buttons {
+      margin: 5rem 0;
+    }
+  }
+  .logo {
+    left: 32%;
   }
 }
