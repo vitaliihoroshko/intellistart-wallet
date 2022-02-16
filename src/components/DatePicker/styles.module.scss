@@ -1,0 +1,11 @@
+.date_input {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .calendar_icon {
+    position: absolute;
+    left: 16rem;
+    cursor: pointer ;
+  }
+}
