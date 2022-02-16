@@ -1,13 +1,16 @@
 import { useTable } from 'react-table';
 import React from 'react';
 import styles from './styles.module.scss';
+//import { getTransactions } from 'api/api-helper';
 
 const Dashboard = () => {
+  //const trans = getTransactions();
+  //const transactions = React.useMemo(() => [trans], []);
   const transactions = React.useMemo(() => [
     {
       id: '01',
       transactionDate: '24.01.2022',
-      type: 'INCOME',
+      type: 'OUTCOME',
       categoryId: 'Other',
       userId: 'string',
       comment: 'A gift for wife',
@@ -17,7 +20,7 @@ const Dashboard = () => {
     {
       id: '02',
       transactionDate: '26.01.2022',
-      type: 'OUTCOME',
+      type: 'INCOME',
       categoryId: 'Regular Income',
       userId: 'string',
       comment: 'Bonus for January',
@@ -26,15 +29,6 @@ const Dashboard = () => {
     },
     [],
   ]);
-
-  const data = [...transactions];
-  data.forEach(el => {
-    if (el.type === 'INCOME') {
-      el.type = '+';
-    } else if (el.type === 'OUTCOME') {
-      el.type = '-';
-    }
-  });
 
   const columns = React.useMemo(
     () => [
@@ -71,6 +65,15 @@ const Dashboard = () => {
     ],
     [],
   );
+
+  const data = [...transactions];
+  data.forEach(el => {
+    if (el.type === 'INCOME') {
+      el.type = '+';
+    } else if (el.type === 'OUTCOME') {
+      el.type = '-';
+    }
+  });
 
   const tableInstance = useTable({ columns, data });
   const defaultPropGetter = () => ({});

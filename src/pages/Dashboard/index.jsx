@@ -1,12 +1,10 @@
-import Currency from 'components/Currency';
-import Dashboard from 'components/Dashboard';
+import Card from 'components/Card';
 import styles from 'components/Dashboard/styles.module.scss';
 
 const DashboardPage = () => {
   return (
     <div className={styles['bg']}>
-      <Currency />
-      <Dashboard />
+      <Card />
     </div>
   );
 };
