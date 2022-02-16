@@ -3,30 +3,11 @@ import styles from './styles.module.scss';
 //import { getTransactions } from 'api/api-helper';
 
 const Card = () => {
-  //   respArr.forEach(item => {
-  //     element.insertAdjacentHTML("beforeEnd", `<div class="photo-card">
-  // <img src="${item.previewURL}" alt="${item.tags}" loading="lazy"/>
-  // <div class="info">
-  //   <p class="info-item">
-  //     <b>Likes - ${item.likes}</b>
-  //   </p>
-  //   <p class="info-item">
-  //     <b>Views - ${item.views}</b>
-  //   </p>
-  //   <p class="info-item">
-  //     <b>Comments - ${item.comments}</b>
-  //   </p>
-  //   <p class="info-item">
-  //     <b>Downloads - ${item.downloads}</b>
-  //   </p>
-  // </div>
-  // </div>`);
-  // });
   //const trans = getTransactions();
   //const transactions = React.useMemo(() => [trans], []);
   const transactions = React.useMemo(() => [
     {
-      id: '01',
+      id: 1,
       transactionDate: '24.01.2022',
       type: 'OUTCOME',
       categoryId: 'Other',
@@ -36,7 +17,7 @@ const Card = () => {
       balanceAfter: '6900.00',
     },
     {
-      id: '02',
+      id: 2,
       transactionDate: '26.01.2022',
       type: 'INCOME',
       categoryId: 'Regular Income',
@@ -45,24 +26,7 @@ const Card = () => {
       amount: '8000.00',
       balanceAfter: '14900.00',
     },
-    [],
   ]);
-
-  //const columns = React.useMemo(
-  //   () => [
-  //     {
-  //       Header: 'Key',
-  //       accessor: 'key',
-  //       className: styles['dashboard__date'],
-  //     },
-  //     {
-  //       Header: 'Value',
-  //       accessor: 'value',
-  //       className: styles['dashboard__type'],
-  //     },
-  //   ],
-  //   [],
-  // );
 
   const data = [...transactions];
   data.forEach(el => {
@@ -73,9 +37,45 @@ const Card = () => {
     }
   });
 
-  function CreateCard() {
-    return <div className={styles['card']}></div>;
-  }
+  const CreateCard = () => {
+    return (
+      <div>
+        {transactions.map(item => {
+          console.log(item);
+          return (
+            <table key={item.id} className={styles['card']}>
+              <tbody>
+                <tr key={item.transactionDate}>
+                  <td className={styles['card__key']}>Date</td>
+                  <td className={styles['card__value']}>{item.transactionDate}</td>
+                </tr>
+                <tr>
+                  <td className={styles['card__key']}>Type</td>
+                  <td className={styles['card__value']}>{item.type}</td>
+                </tr>
+                <tr>
+                  <td className={styles['card__key']}>Category</td>
+                  <td className={styles['card__value']}>{item.categoryId}</td>
+                </tr>
+                <tr>
+                  <td className={styles['card__key']}>Comments</td>
+                  <td className={styles['card__value']}>{item.comment}</td>
+                </tr>
+                <tr>
+                  <td className={styles['card__key']}>Amount</td>
+                  <td className={styles['card__value']}>{item.amount}</td>
+                </tr>
+                <tr>
+                  <td className={styles['card__key']}>Balance</td>
+                  <td className={styles['card__value']}>{item.balanceAfter}</td>
+                </tr>
+              </tbody>
+            </table>
+          );
+        })}
+      </div>
+    );
+  };
   return <div>{CreateCard()}</div>;
 };
 

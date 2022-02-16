@@ -9,8 +9,8 @@ const DashboardPage = () => {
   return (
     <div className={styles.background}>
       <ModalAddTransaction />
-      <Card />>
       <Currency />
+      <Card />
       <Dashboard />
       <AddTransactionsButton />
     </div>
