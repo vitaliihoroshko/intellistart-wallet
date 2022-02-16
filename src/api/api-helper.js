@@ -31,3 +31,23 @@ export const signUserOut = async token => {
     },
   });
 };
+
+export const getTransactionCategories = async token => {
+  const response = await axios.get(`${API_URL}/transaction-categories`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const transactionCategories = response.data;
+  return transactionCategories;
+};
+
+export const createTransaction = async (createTransactionDto, token) => {
+  const response = await axios.post(`${API_URL}/transactions`, createTransactionDto, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const transactionsData = response.data;
+  return transactionsData;
+};
