@@ -22,7 +22,7 @@ const ModalAddTransaction = () => {
           <CloseButton clickHandler={closeHandler} />
         </div>
         <h2 className={styles['modal_title']}>Add transaction</h2>
-        <TransactionForm />
+        <TransactionForm modalIsOpened={isOpened} />
       </div>
     </div>
   );
