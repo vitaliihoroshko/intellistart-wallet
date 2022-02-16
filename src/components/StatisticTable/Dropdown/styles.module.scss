@@ -20,6 +20,12 @@
 .form {
 	display: flex;
 	margin-bottom: 2rem;
+	
+	// @media (max-width: 780px) {
+	// 	display: flex;
+	// 	flex-direction: column;
+	// 	width: 100%;
+	// }
 }
 .form :first-child {
 	margin-right: 2rem;
