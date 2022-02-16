@@ -1,15 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from 'redux-persist';
 
-import sessionReducer from './slices/session';
-import globalReducer from './slices/global';
-import * as api from 'api/api-helper';
+import rootReducer from './rootReducer';
+import persistConfig from './persistConfig';
+import middleware from './middleware';
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
-  reducer: {
-    session: sessionReducer,
-    global: globalReducer,
-  },
-  middleware: getDefaultMiddleware => getDefaultMiddleware({ thunk: { extraArgument: api } }),
+  reducer: persistedReducer,
+  middleware,
 });
+
+export const persistor = persistStore(store);
 
 export default store;
