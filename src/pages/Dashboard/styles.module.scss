@@ -6,9 +6,22 @@
   background-size: cover;
   height: 88.8vh;
   margin-top: 8rem;
+  display: flex;
   // @include respond(phone) {
   //   height: fit-content;
   // }
+}
+.leftSide {
+  height: 88.8vh;
+  width: 36.3%;
+  border-right: 0.1rem solid #E7E5F2;
+  padding: 4rem 0 0 8.7rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.rightSide {
+  padding: 4rem 0 0 3rem;
 }
 
 @media screen and (max-width: $phone-max) {

@@ -1,0 +1,42 @@
+@import 'styles/variables';
+
+.balance {
+  height: 8rem;
+  width: 35rem;
+  background-color: $white-color;
+  margin: 3rem 3rem 3rem 0;
+  padding: 0.8rem 0 0 4rem;
+  border-radius: 3rem;
+}
+
+.balance {
+  &__num {
+    font-family: 'Poppins Bold';
+    font-size: 3rem;
+    line-height: 4.5rem;
+    color: $black-color;
+    margin-top: 0.3rem;
+  }
+  &__text {
+    color: $light-grey-color;
+    font-family: 'Abel', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+    text-transform: uppercase;
+    margin: 0;
+  }
+}
+
+@media screen and (min-width: $tablet-min) and (max-width: $tablet-max) {
+  .balance {
+    height: 8rem;
+    width: 33.4rem;
+  }
+}
+
+@media screen and (max-width: $phone-max) {
+  .balance {
+    height: 8rem;
+    width: 28rem;
+  }
+}
