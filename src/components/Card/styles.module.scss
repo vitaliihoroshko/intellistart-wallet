@@ -49,7 +49,7 @@ tr:last-child td{
   border: none;
 }
 
-@media screen and (min-width: $tablet-min) {
+@media screen and (min-width: $phone-max) {
   .card {
     display: none;
   }
