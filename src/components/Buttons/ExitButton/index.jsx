@@ -1,21 +1,28 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { singOutActionCreator } from 'store/slices/session/actionCreators';
+import { setIsModalLogoutOpen } from 'store/slices/global';
 import exitIcon from 'assets/images/exit-icon.svg';
 import styles from './styles.module.scss';
 
 const ExitButton = () => {
-  const token = useSelector(state => state.session.token);
   const dispatch = useDispatch();
 
-  const clickHandler = async () => dispatch(singOutActionCreator(token));
+  const clickHandler = () => dispatch(setIsModalLogoutOpen(true));
 
   return (
-    <button className={styles.button} onClick={clickHandler}>
-      <img src={exitIcon} alt="exit-icon" width={18} height={18} className={styles['exit-icon']} />
-      <span className={styles.exit}>Exit</span>
-      {/* &nbsp; */}
-    </button>
+    <>
+      <button className={styles.button} onClick={clickHandler}>
+        <img
+          src={exitIcon}
+          alt="exit-icon"
+          width={18}
+          height={18}
+          className={styles['exit-icon']}
+        />
+        <span className={styles.exit}>Exit</span>
+        &nbsp;
+      </button>
+    </>
   );
 };
 

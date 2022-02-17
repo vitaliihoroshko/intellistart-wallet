@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form } from 'formik';
 import { object, string, ref } from 'yup';
 
-import { signUpActionCreator } from 'store/slices/session/actionCreators';
+import { signUserUp } from 'store/slices/session/actions';
 import Logo from 'components/Logo';
 import Input from 'components/Input';
 import RegularButton from 'components/Buttons/RegularButton';
@@ -11,6 +11,7 @@ import LinkButton from 'components/Buttons/LinkButton';
 import postIcon from 'assets/images/post-icon.svg';
 import passwordIcon from 'assets/images/password-icon.svg';
 import userIcon from 'assets/images/user-icon.svg';
+import { evaluatePasswordProgress } from 'utils/evaluationFunctions';
 import styles from './styles.module.scss';
 
 const RegistrationForm = () => {
@@ -25,11 +26,11 @@ const RegistrationForm = () => {
     username: '',
   };
 
-  const submitHandler = async (values, actions) => {
+  const submitHandler = (values, actions) => {
     const { email, password, username } = values;
     setSubmittedEmail(email);
     const { validateForm } = actions;
-    dispatch(signUpActionCreator({ email, password, username }, validateForm));
+    dispatch(signUserUp({ email, password, username }, validateForm));
   };
 
   const validationSchema = object({
@@ -50,7 +51,7 @@ const RegistrationForm = () => {
   });
 
   return (
-    <div className={styles.form}>
+    <div className={styles.form_wrapper}>
       <div className={styles.logo}>
         <Logo />
       </div>
@@ -59,9 +60,15 @@ const RegistrationForm = () => {
         validationSchema={validationSchema}
         onSubmit={submitHandler}
       >
-        <Form>
+        <Form className={styles.form}>
           <Input type="email" name="email" placeholder="E-mail" icon={postIcon} />
-          <Input type="password" name="password" placeholder="Password" icon={passwordIcon} />
+          <Input
+            type="password"
+            name="password"
+            placeholder="Password"
+            icon={passwordIcon}
+            evaluationFunction={evaluatePasswordProgress}
+          />
           <Input
             type="password"
             name="confirmPassword"

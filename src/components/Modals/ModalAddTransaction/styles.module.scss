@@ -5,6 +5,8 @@
   width: 100%;
   background-color: rgba($black-color, 0.25);
   position: fixed;
+  top: 0;
+  left: 0;
   z-index: 100;
   display: flex;
   align-items: center;
@@ -14,17 +16,8 @@
   transition: all 0.5s;
 
   &_active {
-    height: 100%;
-    width: 100%;
-    background-color: rgba($black-color, 0.25);
-    position: fixed;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     pointer-events: all;
     opacity: 1;
-    transition: all 0.5s;
   }
 }
 
@@ -34,18 +27,13 @@
   background-color: $white-color;
   min-height: 54rem;
   width: 54rem;
+  position: relative;
 }
 
-.btn_close {
-  float: right;
-  cursor: pointer;
-  border: none;
-  background-color: $white-color;
-
-  &>svg {
-    width: 1.6rem;
-    height: 1.6rem;
-  }
+.close_button {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
 }
 
 .modal_title {
@@ -56,15 +44,4 @@
   font-weight: 400;
   font-size: 3rem;
   line-height: 4.5rem;
-}
-
-.modal_btns {
-  display: flex;
-  flex-direction: column;
-  max-width: 30rem;
-  margin: 5rem auto auto auto;
-
-  button {
-    margin-bottom: 2rem;
-  }
 }

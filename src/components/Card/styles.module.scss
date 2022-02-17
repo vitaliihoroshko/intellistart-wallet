@@ -1,0 +1,56 @@
+@import 'styles/variables';
+.card {
+  display: block;
+  width: 28rem;
+  height: 28.2rem;
+  font-family: 'Abel', sans-serif;
+  background-color: $white-color;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card {
+  &__key {
+    padding: 0.8rem 0 1.4rem 1.5rem;
+    font-size: 1.8rem;
+    line-height: 2.3rem;
+    width: 14rem;
+    border-bottom: 1px solid $grey-color;
+    height: 4.7rem;
+  }
+  &__value {
+    text-align: right;
+    padding: 0.5rem 1.9rem 0.8rem 0;
+    font-size: 1.6rem;
+    line-height: 2rem;
+    width: 14rem;
+    border-bottom: 1px solid $grey-color;
+    height: 4.7rem;
+  }
+  &__pinkline {
+    border-left: 0.5rem solid $pink-color;
+  }
+  &__greenline {
+    border-left: 0.5rem solid $green-color;
+  }
+  &__pinktext {
+    color: $pink-color;
+  }
+  &__greentext {
+    color: $green-color;
+  }
+}
+
+table {
+  border-collapse: collapse;
+}
+
+tr:last-child td{
+  border: none;
+}
+
+@media screen and (min-width: $phone-max) {
+  .card {
+    display: none;
+  }
+}

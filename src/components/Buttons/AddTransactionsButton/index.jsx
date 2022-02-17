@@ -1,18 +1,19 @@
-import styles from './styles.module.scss';
-import { func } from 'prop-types';
+import { useDispatch } from 'react-redux';
 
+import { setIsModalAddTransactionOpen } from 'store/slices/global';
+import styles from './styles.module.scss';
 import { ReactComponent as Plus } from 'assets/images/plus.svg';
 
-const AddTransactionsButton = ({ onClick }) => {
+const AddTransactionsButton = () => {
+  const dispatch = useDispatch();
+
+  const clickHandler = () => dispatch(setIsModalAddTransactionOpen(true));
+
   return (
-    <button onClick={onClick} className={styles.button}>
+    <button onClick={clickHandler} className={styles.button}>
       <Plus />
     </button>
   );
-};
-
-AddTransactionsButton.propTypes = {
-  onClick: func,
 };
 
 export default AddTransactionsButton;

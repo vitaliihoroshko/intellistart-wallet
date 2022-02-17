@@ -1,10 +1,9 @@
-import { signUserUp, signUserIn, signUserOut } from 'api/api-helper';
 import { signIn, signOut, setError } from '.';
 
-export const signUpActionCreator = (signUpDto, validationCallback) => {
-  return async dispatch => {
+export const signUserUp = (signUpDto, validationCallback) => {
+  return async (dispatch, _, api) => {
     try {
-      const { token, user } = await signUserUp(signUpDto);
+      const { token, user } = await api.signUserUp(signUpDto);
       dispatch(signIn({ token, user }));
     } catch (error) {
       if (error.response.status === 409) {
@@ -17,10 +16,10 @@ export const signUpActionCreator = (signUpDto, validationCallback) => {
   };
 };
 
-export const signInActionCreator = (signInDto, validationCallback) => {
-  return async dispatch => {
+export const signUserIn = (signInDto, validationCallback) => {
+  return async (dispatch, _, api) => {
     try {
-      const { token, user } = await signUserIn(signInDto);
+      const { token, user } = await api.signUserIn(signInDto);
       dispatch(signIn({ token, user }));
     } catch (error) {
       if (error.response.status === 404) {
@@ -35,10 +34,10 @@ export const signInActionCreator = (signInDto, validationCallback) => {
   };
 };
 
-export const singOutActionCreator = token => {
-  return async dispatch => {
+export const signUserOut = token => {
+  return async (dispatch, _, api) => {
     try {
-      await signUserOut(token);
+      await api.signUserOut(token);
       dispatch(signOut());
     } catch (error) {
       dispatch(setError('Bearer auth failed'));

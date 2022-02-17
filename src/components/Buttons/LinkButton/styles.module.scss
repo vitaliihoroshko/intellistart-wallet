@@ -1,4 +1,6 @@
 @import 'styles/variables';
+@import 'styles/mixins.scss';
+
 
 .link {
   font-family: 'Abel', sans-serif;
@@ -24,5 +26,8 @@
 
   &:focus {
     outline: none;
+  }
+  @include respond(35em) {
+    width: 100%;
   }
 }

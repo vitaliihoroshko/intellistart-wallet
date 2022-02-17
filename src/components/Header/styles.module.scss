@@ -1,13 +1,30 @@
 @import 'styles/variables';
+@import 'styles/mixins';
 
 .header {
-  position: relative;
+  background-color: $white-color;
+  position: fixed;
+  top: 0;
+  width: 100%;
   height: 8rem;
+  z-index: 10;
 
   .logo {
     position: absolute;
     top: 2rem;
     left: 8.5rem;
+
+    @include respond(tablet) {
+      left: 4rem;
+    }
+
+    @include respond(30em) {
+      left: 2rem;
+    }
+
+    @include respond(phone) {
+      top: 1.5rem;
+    }
   }
 
   .user-name {
@@ -17,11 +34,35 @@
     top: 2.8rem;
     right: 19.5rem;
     color: $silver-color;
+
+    @include respond(tablet) {
+      right: 14.9rem;
+    }
+
+    @include respond(30em) {
+      right: 4.8rem;
+    }
+
+    @include respond(phone) {
+      top: 1.8rem;
+    }
   }
 
   .divider {
     position: absolute;
     top: 2.5rem;
     right: 18rem;
+
+    @include respond(tablet) {
+      right: 13.45rem;
+    }
+
+    @include respond(30em) {
+      display: none;
+    }
+  }
+
+  @include respond(phone) {
+    height: 6rem;
   }
 }

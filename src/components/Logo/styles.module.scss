@@ -1,3 +1,5 @@
+@import 'styles/mixins';
+
 .logo {
   position: relative;
 
@@ -5,6 +7,11 @@
     position: absolute;
     top: 0;
     left: 0;
+
+    @include respond(phone) {
+      width: 3rem;
+      height: 3rem;
+    }
   }
 
   .name {
@@ -13,5 +20,14 @@
     position: absolute;
     top: 0;
     left: 6rem;
+
+    @include respond(30em) {
+      left: 4.8rem;
+    }
+
+    @include respond(phone) {
+      font-size: 2.2rem;
+      left: 4.56rem;
+    }
   }
 }
