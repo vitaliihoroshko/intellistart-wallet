@@ -1,11 +1,20 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
+import { autoSignIn } from 'store/slices/session/actions';
 import LoginPage from './Login';
 import RegisterPage from './Register';
 import ProtectedRoute from 'components/ProtectedRoute';
 import DashboardPage from './Dashboard';
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(autoSignIn());
+  }, []);
+
   return (
     <Routes>
       <Route
