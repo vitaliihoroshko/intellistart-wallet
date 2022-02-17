@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import styles from './styles.module.scss';
-import Balance from './Balance';
+import Balance from '../Balance';
 import { getChartData } from '../../api/api-helper';
 import { useSelector } from 'react-redux';
 // import Currency from '../Currency';

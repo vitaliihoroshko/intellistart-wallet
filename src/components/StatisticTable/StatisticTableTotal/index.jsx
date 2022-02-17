@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './styles.module.scss';
 
-function StatisticTableTotal() {
+const StatisticTableTotal = () => {
   return (
     <div>
       <div className={styles.wrapper}>
@@ -14,6 +14,6 @@ function StatisticTableTotal() {
       </div>
     </div>
   );
-}
+};
 
 export default StatisticTableTotal;

@@ -82,7 +82,7 @@ const StatisticTable = () => {
   //   '#00AD84',
   // ];
 
-  function StatTable() {
+  const StatTable = () => {
     return (
       <div className={styles['dashboard']}>
         <div className={styles['dashboard__head']}>
@@ -123,7 +123,7 @@ const StatisticTable = () => {
         </table>
       </div>
     );
-  }
+  };
   return (
     <div>
       {StatTable()}
