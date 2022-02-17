@@ -51,7 +51,7 @@ const RegistrationForm = () => {
   });
 
   return (
-    <div className={styles.form}>
+    <div className={styles.form_wrapper}>
       <div className={styles.logo}>
         <Logo />
       </div>
@@ -60,7 +60,7 @@ const RegistrationForm = () => {
         validationSchema={validationSchema}
         onSubmit={submitHandler}
       >
-        <Form>
+        <Form className={styles.form}>
           <Input type="email" name="email" placeholder="E-mail" icon={postIcon} />
           <Input
             type="password"

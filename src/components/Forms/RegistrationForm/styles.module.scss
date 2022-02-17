@@ -1,7 +1,7 @@
 @import 'styles/variables';
 @import 'styles/mixins.scss';
 
-.form {
+.form_wrapper {
   position: relative;
 
   @media (min-width: 1280px) and (max-width: 1366px) {
@@ -24,7 +24,7 @@
   left: 17.9rem;
 }
 
-form {
+.form {
   background-color: $white-color;
   width: 54rem;
   height: 61.6rem;
@@ -42,11 +42,11 @@ form {
 }
 
 @include respond(79.9375em) {
-  .form {
+  .form_wrapper {
     top: 37rem;
     left: 0;
   }
-  form {
+  .form {
     margin: 0 auto;
   }
   .logo {
@@ -55,10 +55,10 @@ form {
 }
 
 @include respond(47.9375em) {
-  .form {
+  .form_wrapper {
     top: 0rem;
   }
-  form {
+  .form {
     margin: 0 auto;
   }
   .logo {
@@ -66,7 +66,7 @@ form {
   }
 }
 @include respond(35em) {
-  form {
+  .form {
     max-width: 32rem;
     margin: 0 auto;
     padding: 12rem 2rem 4rem 2rem;
