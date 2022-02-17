@@ -2,6 +2,7 @@
 .bg {
   background-image: url('../../assets/images/bg-dashboard.png');
   height:100vh;
+  background-size: cover;
 }
 .dashboard {
   width: 70rem;
@@ -13,51 +14,75 @@
 table {
   border-collapse: collapse;
 }
-.dashboard__head {
-  display: block;
-  height: 5.8rem;
-  width: 70rem;
-  background-color: $white-color;
-  border-radius: 3rem;
-  padding-top: 1.6rem;
-  padding-bottom: 1.9rem;
+
+.dashboard {
+  &__pinktext {
+    color: $pink-color;
+  }
+  &__greentext {
+    color: $green-color;
+  }
+  &__head {
+    display: block;
+    height: 5.8rem;
+    width: 70rem;
+    background-color: $white-color;
+    border-radius: 3rem;
+    padding-top: 1.6rem;
+    padding-bottom: 1.9rem;
+  }
+  &__head h3 {
+    display: inline-block;
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 2.3rem;
+  }
+  &__row {
+    display: inline-block;
+    height: 5.4rem;
+    padding: 1.5rem 0 1.9rem 0;
+  }
+  &__date {
+    width: 11.6rem;
+    padding-left: 2rem;
+  }
+  &__type {
+    width: 8.8rem;
+  }
+  &__category {
+    width: 14.2rem;
+  }
+  &__comment {
+    width: 17rem;
+  }
+  &__amount {
+    width: 11rem;
+  }
+  &__balance {
+    width: 5.3rem;
+    text-align: right;
+  }
 }
 
-.dashboard__head h3 {
-  display: inline-block;
-  font-weight: 400;
-  font-size: 1.8rem;
-  line-height: 2.3rem;
+@media screen and (max-width: $phone-max) {
+  .dashboard {
+    display: none;
+  }
 }
 
-.dashboard__row {
-  display: inline-block;
-  height: 5.4rem;
-  padding: 1.5rem 0 1.9rem 0;
-}
-
-.dashboard__date {
-  width: 11.6rem;
-  padding-left: 2rem;
-}
-
-.dashboard__type {
-  width: 8.8rem;
-}
-
-.dashboard__category {
-  width: 14.2rem;
-}
-
-.dashboard__comment {
-  width: 17rem;
-}
-
-.dashboard__amount {
-  width: 11rem;
-}
-
-.dashboard__balance {
-  width: 5.3rem;
-  text-align: right;
+@media screen and (min-width: $tablet-min) and (max-width: $tablet-max) {
+  .dashboard {
+    width: 68.8rem;
+  }
+  .dashboard {
+    &__type {
+      width: 8.5rem;
+    }
+    &__comment {
+      width: 16.9rem;
+    }
+    &__amount {
+      width: 11.1rem;
+    }
+  }
 }
