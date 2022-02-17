@@ -30,10 +30,12 @@ const sessionSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(autoSignIn.fulfilled, (state, action) => {
-      state.token = action.payload.token;
-      state.user = action.payload.user;
-      state.isAuth = true;
-      if (state.error) state.error = null;
+      if (action.payload) {
+        state.token = action.payload.token;
+        state.user = action.payload.user;
+        state.isAuth = true;
+        if (state.error) state.error = null;
+      }
     });
 
     builder.addCase(autoSignIn.rejected, (state, action) => {
