@@ -5,6 +5,9 @@
   position: fixed;
   right: 8.5rem;
   bottom: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 95;
   width: 4.4rem;
   height: 4.4rem;
@@ -12,7 +15,6 @@
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 62.5%;
   box-shadow: 0rem 0.6rem 1.5rem $forest-shadow-color;
   transition: all 0.5s;
 
