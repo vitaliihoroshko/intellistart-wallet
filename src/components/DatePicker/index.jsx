@@ -4,7 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { string } from 'prop-types';
 
 import styles from './styles.module.scss';
-import { ReactComponent as Calendar } from '../../assets/images/calendar.svg';
+import calendar from 'assets/images/calendar.svg';
 
 const DatePicker = ({ name }) => {
   return (
@@ -24,7 +24,7 @@ const DatePicker = ({ name }) => {
           );
         }}
       </Field>
-      <Calendar className={styles.calendar_icon} />
+      <img src={calendar} className={styles.calendar_icon} alt="Calendar" />
     </div>
   );
 };

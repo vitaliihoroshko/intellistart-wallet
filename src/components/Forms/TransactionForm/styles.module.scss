@@ -1,4 +1,5 @@
 @import 'styles/variables';
+@import 'styles/mixins';
 
 .check_box {
   display: flex;
@@ -134,72 +135,174 @@
 .form_wrapper {
   display: flex;
   justify-content: center;
-}
 
-.amount_date_wrapper {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 4rem;
+  .amount_date_wrapper {
+    display: flex;
+    justify-content: space-between;
+  
+    input {
+      width: 19rem;
 
-  input {
-    width: 19rem;
+      @include respond(30em) {
+        width: 28rem;
+      }
+    }
+  
+    // .error {
+    //   position: absolute;
+    //   top: 5rem;
+    //   font-family: 'Abel', sans-serif;
+    //   font-size: 1.4rem;
+    //   color: $red-color;
+
+    //   // @include respond(30em) {
+    //   //   position: inherit;
+    //   //   margin-top: 6px;
+    //   // }
+    // }
+  
+    .amount_wrapper input {
+      text-align: center;
+    }
+    
+    .amount_wrapper, .date_wrapper {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      @include respond(30em) {
+        margin-bottom: 4rem;
+      }
+
+      .error {
+        position: absolute;
+        top: 5rem;
+        font-family: 'Abel', sans-serif;
+        font-size: 1.4rem;
+        color: $red-color;
+      }
+    }
+
+    @include respond(30em) {
+      flex-direction: column;
+    }
+  }
+  
+  .comment_input {
+    display: flex;
+    justify-content: center;
+  
+    input {
+      width: 41rem;
+      padding-left: 2rem;
+
+      @include respond(30em) {
+        width: 28rem;
+      }
+  
+      &::placeholder {
+        text-align: left;
+        margin-left: 2.05rem;
+      }
+    }
   }
 
-  .error {
-    position: absolute;
-    top: 5rem;
-    font-family: 'Abel', sans-serif;
-    font-size: 1.4rem;
-    color: $red-color;
-  }
-}
-
-.amount_wrapper, .date_wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.comment_input {
-  display: flex;
-  justify-content: center;
-
-  input {
-    width: 41rem;
-
-    &::placeholder {
-      text-align: left;
-      margin-left: 2.05rem;
+  .modal_btns {
+    display: flex;
+    flex-direction: column;
+    max-width: 30rem;
+    margin: 5rem auto auto auto;
+  
+    button {
+      margin-bottom: 2rem;
     }
   }
 }
 
-.modal_btns {
-  display: flex;
-  flex-direction: column;
-  max-width: 30rem;
-  margin: 5rem auto auto auto;
+.select_wrapper {
+  position: relative;
 
-  button {
-    margin-bottom: 2rem;
+    .error {
+      position: absolute;
+      top: 4rem;
+      left: 37%;
+      font-family: 'Abel', sans-serif;
+      font-size: 1.4rem;
+      color: $red-color;
+    }
+}
+
+.dropdown__button {
+  position: relative;
+  margin-bottom: 4rem;
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding-left: 2rem;
+
+  border: none;
+  caret-color: transparent;
+  background-color: transparent;
+  padding-bottom: 1rem;
+  font-family: 'Abel', sans-serif;
+  font-weight: 400;
+  font-size: 1.8rem;
+  line-height: 2.3rem;
+  border-bottom: 0.1rem solid $alto-color;
+  padding-left: 2rem;
+  cursor: pointer;
+
+  &:placeholder {
+    color: $silver-color;
+  }
+
+  &:focus {
+    outline: none;
   }
 }
 
-.select_wrapper {
-  margin-bottom: 4rem;
-  
-  select {
-    margin: 0;
+.dropdown__icon {
+  position: absolute;
+  top: 0;
+  right: 0.85rem;
+  transform: translateY(50%);
+  pointer-events: none;
+}
+
+.dropdown__list_hiden {
+  display: none;
+}
+
+.dropdown__list {
+  position: absolute;
+  left: 0;
+  top: 4rem;
+  z-index: 100;
+  list-style-type: none;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0rem 0.6rem 1.5rem rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5rem);
+  border-radius: 2rem;
+  overflow: hidden;
+  width: 100%;
+
+  .dropdown__list_item {
     width: 100%;
-    padding-bottom: 1rem;
-    font-family: 'Abel', sans-serif;
-    font-weight: 400;
-    font-size: 1.8rem;
-    line-height: 2.3rem;
-    color: #bdbdbd;
-    border: none;
-    background: transparent;
-    border-bottom: 0.1rem solid #e0e0e0;
-    outline: none;
+    height: 4.4rem;
+    padding: 2rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $white-color;
+      color: $pink-color;
+    }
+
+    p {
+      font-family: 'Abel', sans-serif;
+      font-size: 1.8rem;
+      line-height: 2.3rem;
+      transform: translateY(-50%);
+    }
   }
 }
