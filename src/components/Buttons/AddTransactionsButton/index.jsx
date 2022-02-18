@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 
 import { setIsModalAddTransactionOpen } from 'store/slices/global';
 import styles from './styles.module.scss';
-import { ReactComponent as Plus } from 'assets/images/plus.svg';
+import plus from 'assets/images/plus.svg';
 
 const AddTransactionsButton = () => {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ const AddTransactionsButton = () => {
 
   return (
     <button onClick={clickHandler} className={styles.button}>
-      <Plus />
+      <img src={plus} alt="Plus" />
     </button>
   );
 };

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { object, number, date } from 'yup';
@@ -9,12 +9,16 @@ import moment from 'moment';
 import { setIsModalAddTransactionOpen } from 'store/slices/global';
 import RegularButton from 'components/Buttons/RegularButton';
 import { getTransactionCategories, createTransaction } from 'api/api-helper';
+import dropdownArrow from 'assets/images/dropdown-arrow.svg';
 import styles from './styles.module.scss';
 
 const TransactionForm = ({ modalIsOpened }) => {
   const [checked, setChecked] = useState(false);
   const [incomeCategory, setIncomeCategory] = useState({});
   const [expensesCategories, setExpensesCategories] = useState([]);
+  const [showCategories, setShowCategories] = useState(false);
+  const [selected, setSelected] = useState('');
+  const dropdownList = useRef(null);
   const token = useSelector(state => state.session.token);
   const dispatch = useDispatch();
   const closeHandler = () => dispatch(setIsModalAddTransactionOpen(false));
@@ -29,11 +33,29 @@ const TransactionForm = ({ modalIsOpened }) => {
     })();
   }, [modalIsOpened]);
 
+  const handleShowCategories = () => {
+    setShowCategories(!showCategories);
+  };
+
+  const handleClickOutside = event => {
+    if (dropdownList.current && !dropdownList.current.contains(event.target)) {
+      setShowCategories(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside, true);
+    return () => {
+      document.removeEventListener('click', handleClickOutside, true);
+    };
+  }, []);
+
   const initialValues = {
     amount: '',
-    transactionDate: '',
+    transactionDate: new Date(),
     categoryId: '',
     comment: '',
+    type: '',
   };
 
   const validationSchema = object({
@@ -41,23 +63,28 @@ const TransactionForm = ({ modalIsOpened }) => {
     transactionDate: date()
       .required('This field is required')
       .typeError('Date must be a dd.mm.yyyy format'),
+    // categoryId: string().required('This field is required'),
   });
 
-  const submitHandler = async values => {
-    const { amount, transactionDate, categoryId, comment } = values;
+  const submitHandler = async (values, actions) => {
+    const { amount, transactionDate, comment } = values;
     const transformedDate = moment(transactionDate).format();
+
+    const category = expensesCategories.find(value => value.name === selected);
 
     const transaction = await createTransaction(
       {
         amount: checked ? +`-${amount}` : +amount,
         transactionDate: transformedDate,
-        categoryId: checked ? categoryId : incomeCategory.id,
+        categoryId: checked ? category.id : incomeCategory.id,
         comment,
         type: checked ? 'EXPENSE' : 'INCOME',
       },
       token,
     );
     console.log(transaction);
+    actions.resetForm();
+    closeHandler();
   };
 
   return (
@@ -91,16 +118,41 @@ const TransactionForm = ({ modalIsOpened }) => {
             </div>
             {checked && (
               <div className={styles.select_wrapper}>
-                <Field as="select" name="categoryId">
-                  <option value="" disabled hidden>
-                    Select a category
-                  </option>
-                  {expensesCategories.map(category => (
-                    <option key={category.id} value={category.id}>
-                      {category.name}
-                    </option>
-                  ))}
-                </Field>
+                <Field
+                  name="categoryId"
+                  placeholder="Select a category"
+                  value={selected}
+                  className={styles.dropdown__button}
+                  onClick={handleShowCategories}
+                />
+                <img src={dropdownArrow} className={styles.dropdown__icon} alt="Dropdown arrow" />
+                <p className={styles.error}>
+                  <ErrorMessage name="categoryId" />
+                </p>
+                <div
+                  ref={dropdownList}
+                  onClick={handleClickOutside}
+                  className={styles.dropdown__list_wrapper}
+                >
+                  <ul
+                    onClick={e => setSelected(e.target.textContent)}
+                    className={`${styles.dropdown__list} ${
+                      !showCategories ? [styles.dropdown__list_hiden] : ''
+                    }`}
+                  >
+                    {expensesCategories.map(category => (
+                      <li
+                        name="categoryId"
+                        key={category.id}
+                        className={styles.dropdown__list_item}
+                        value={category.id}
+                        onClick={handleShowCategories}
+                      >
+                        <p>{category.name}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             )}
             <div className={`${styles.input} ${styles.amount_date_wrapper}`}>

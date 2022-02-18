@@ -1,4 +1,5 @@
 @import 'styles/variables';
+@import 'styles/mixins';
 
 .modal {
   height: 100%;
@@ -18,6 +19,16 @@
   &_active {
     pointer-events: all;
     opacity: 1;
+
+    @include respond(tablet) {
+      margin-top: 8rem;
+      overflow-y: scroll;
+      overflow-x: hidden;
+    }
+
+    @include respond(phone) {
+      margin-top: 6rem;
+    }
   }
 }
 
@@ -26,14 +37,25 @@
   border-radius: 2rem;
   background-color: $white-color;
   min-height: 54rem;
-  width: 54rem;
+  min-width: 54rem;
   position: relative;
+  
+  @include respond(tablet) {
+    padding-top: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
+  }
 }
 
 .close_button {
   position: absolute;
   top: 2rem;
   right: 2rem;
+
+  @include respond(tablet) {
+    display: none;
+  }
 }
 
 .modal_title {
@@ -44,4 +66,9 @@
   font-weight: 400;
   font-size: 3rem;
   line-height: 4.5rem;
+
+  @include respond(phone) {
+    font-size: 2.4rem;
+    line-height: 3.6rem;
+  }
 }
