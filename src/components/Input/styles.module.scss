@@ -1,4 +1,6 @@
 @import 'styles/variables';
+@import 'styles/mixins.scss';
+
 
 .input {
   position: relative;
@@ -38,6 +40,9 @@
         -webkit-box-shadow: 0 0 0 3rem $white-color inset !important;
         box-shadow: 0 0 0 3rem $white-color inset !important;
       }
+    }
+    @include respond(35em){
+      width: 100%;
     }
   }
 }

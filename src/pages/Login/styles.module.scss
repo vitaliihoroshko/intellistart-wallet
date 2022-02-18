@@ -1,0 +1,52 @@
+@import 'styles/variables';
+@import 'styles/mixins.scss';
+
+.page_wrapper {
+  position: relative;
+  background-color: $mystic-color;
+  max-width: 144rem;
+  margin: 0 auto;
+  overflow: hidden;
+  background-repeat: no-repeat;
+
+  @media screen and (min-width: 1280px) {
+    height: 72rem;
+    background-image: url(../../assets/images/login-frame-desktop.png),
+      url(../../assets/images/ellipse-down.svg), url(../../assets/images/under-form-bg.png);
+    background-position: top 15.3rem left 6.6rem, bottom 0 left 0, top 0 right 0;
+  }
+
+  @include respond(79.9375em) {
+    height: 102.4rem;
+    background-image: url(../../assets/images/ellipse-down.svg),
+      url(../../assets/images/ellipse-top.svg), url(../../assets/images/login-frame-bg.svg);
+    background-position: bottom 0 left 0, top 0 right 0, top 6rem left 11.4rem;
+  }
+
+  @include respond(47.9375em) {
+    height: 56.8rem;
+    background-color: $white-color;
+    background-image: none;
+  }
+}
+
+.app_name {
+  position: absolute;
+  font-family: Poppins;
+  font-weight: 400;
+  font-size: 3rem;
+  line-height: 4.5rem;
+  display: inline-block;
+
+  @media screen and (min-width: 1280px) {
+    top: 59.7rem;
+    left: 20rem;
+  }
+  @include respond(79.9375em) {
+    top: 16.3rem;
+    right: 20rem;
+  }
+  @include respond(47.9375em) {
+    display: none;
+  }
+}

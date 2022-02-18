@@ -1,3 +1,6 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
+
+import { getCurrentUser } from 'api/api-helper';
 import { signIn, signOut, setError } from '.';
 
 export const signUserUp = (signUpDto, validationCallback) => {
@@ -44,3 +47,16 @@ export const signUserOut = token => {
     }
   };
 };
+
+export const autoSignIn = createAsyncThunk('session/autoSignIn', async () => {
+  const { session } = JSON.parse(localStorage.getItem('persist:root'));
+  const { token } = JSON.parse(session);
+  if (token) {
+    try {
+      const user = await getCurrentUser(token);
+      return { token, user };
+    } catch (error) {
+      return { error: 'Bearer auth failed' };
+    }
+  }
+});

@@ -32,6 +32,11 @@ export const signUserOut = async token => {
   });
 };
 
+export const getTransactions = async () => {
+  const response = await axios.get(`${API_URL}/transactions`);
+  return response.data;
+};
+
 export const getTransactionCategories = async token => {
   const response = await axios.get(`${API_URL}/transaction-categories`, {
     headers: {
