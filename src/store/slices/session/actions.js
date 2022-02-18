@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { getCurrentUser } from 'api/api-helper';
 import { signIn, signOut, setError } from '.';
+import { setIsLoading } from '../global';
 
 export const signUserUp = (signUpDto, validationCallback) => {
   return async (dispatch, _, api) => {
@@ -48,15 +49,20 @@ export const signUserOut = token => {
   };
 };
 
-export const autoSignIn = createAsyncThunk('session/autoSignIn', async () => {
-  const { session } = JSON.parse(localStorage.getItem('persist:root'));
-  const { token } = JSON.parse(session);
-  if (token) {
-    try {
-      const user = await getCurrentUser(token);
-      return { token, user };
-    } catch (error) {
-      return { error: 'Bearer auth failed' };
+export const autoSignIn = createAsyncThunk(
+  'session/autoSignIn',
+  async (_, { getState, dispatch }) => {
+    const { token } = getState().session;
+    if (token) {
+      dispatch(setIsLoading(true));
+      try {
+        const user = await getCurrentUser(token);
+        return { token, user };
+      } catch (error) {
+        return { error: 'Bearer auth failed' };
+      } finally {
+        dispatch(setIsLoading(false));
+      }
     }
-  }
-});
+  },
+);
