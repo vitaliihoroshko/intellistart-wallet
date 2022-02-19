@@ -12,16 +12,15 @@ const Card = () => {
   useEffect(() => {
     (async () => {
       const userTransactions = await getTransactions(token);
-      const categories = getTransactionCategories(token);
-      setTransactions(userTransactions);
+      const categories = await getTransactionCategories(token);
       setTransactionsCat(categories);
+      setTransactions(userTransactions);
     })();
   }, []);
 
-  console.log(transactionsCat);
   const data = [...transactions];
   data.map(el => {
-    //el.categoryName = transactionsCat.find(cat => cat.id === el.categoryId).name;
+    el.categoryName = transactionsCat.find(cat => cat.id === el.categoryId).name;
     if (el.type === 'INCOME') {
       el.type = '+';
     } else if (el.type === 'EXPENSE') {

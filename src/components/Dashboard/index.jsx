@@ -8,16 +8,37 @@ import styles from './styles.module.scss';
 const Dashboard = () => {
   const [transactions, setTransactions] = useState([]);
   const [transactionsCat, setTransactionsCat] = useState([]);
+  let [currentPage, setCurrentPage] = useState(1);
   const token = useSelector(state => state.session.token);
 
   useEffect(() => {
     (async () => {
       const userTransactions = await getTransactions(token);
       const categories = await getTransactionCategories(token);
-      setTransactions(userTransactions);
       setTransactionsCat(categories);
+      setTransactions(userTransactions.reverse());
     })();
-  }, []);
+  }, [currentPage]);
+
+  const data = transactions.slice(currentPage * 5 - 5, currentPage * 5).map(value => {
+    return {
+      ...value,
+      categoryName: transactionsCat.find(category => category.id === value.categoryId).name,
+      type: value.type === 'INCOME' ? '+' : '-',
+    };
+  });
+
+  const handleClickBack = () => setCurrentPage(prevValue => prevValue - 1);
+  const handleClickNext = () => setCurrentPage(prevValue => prevValue + 1);
+
+  let buttonBackClasses = [styles['pagination__buttons']];
+  let buttonNextClasses = [styles['pagination__buttons']];
+
+  if (currentPage === 1) {
+    buttonBackClasses = [styles['pagination__buttons'], styles['pagination__back']];
+  } else if (currentPage === Math.ceil(transactions.length / 5)) {
+    buttonNextClasses = [styles['pagination__buttons'], styles['pagination__next']];
+  }
 
   let amountClasses = [styles['dashboard__amount']];
 
@@ -56,17 +77,6 @@ const Dashboard = () => {
     ],
     [],
   );
-  console.log(transactionsCat);
-  const data = [...transactions];
-  data.map(el => {
-    //el.categoryName = transactionsCat.find(cat => cat.id === el.categoryId).name;
-    if (el.type === 'INCOME') {
-      el.type = '+';
-    } else if (el.type === 'EXPENSE') {
-      el.type = '-';
-    }
-    return el;
-  });
 
   const tableInstance = useTable({ columns, data });
   const defaultPropGetter = () => ({});
@@ -79,17 +89,16 @@ const Dashboard = () => {
     getCellProps = defaultPropGetter,
   } = tableInstance;
 
-  rows.map(row => {
-    if (row.type === '+') {
-      amountClasses = [styles['dashboard__amount'], styles['dashboard__greentext']];
-    } else if (row.type === '-') {
-      amountClasses = [styles['dashboard__amount'], styles['dashboard__pinktext']];
-    }
-  });
+  // rows.map(row => {
+  //   if (row.type === '+') {
+  //     amountClasses = [styles['dashboard__amount'], styles['dashboard__greentext']];
+  //   } else if (row.type === '-') {
+  //     amountClasses = [styles['dashboard__amount'], styles['dashboard__pinktext']];
+  //   }
+  // });
 
   function StatTable() {
     return (
-      // apply the table props
       <div className={styles['dashboard']}>
         <div className={styles['dashboard__head']}>
           <h3 className={styles['dashboard__date']}>Date</h3>
@@ -130,6 +139,12 @@ const Dashboard = () => {
             })}
           </tbody>
         </table>
+        <button name="prevPage" onClick={handleClickBack} className={buttonBackClasses.join(' ')}>
+          prevPage
+        </button>
+        <button name="nextPage" onClick={handleClickNext} className={buttonNextClasses.join(' ')}>
+          nextPage
+        </button>
       </div>
     );
   }
