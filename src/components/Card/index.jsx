@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { getTransactions, getTransactionCategories } from 'api/api-helper';
+import { translateCatRuToEng } from 'utils/evaluationFunctions';
 import styles from './styles.module.scss';
 
 const Card = () => {
@@ -19,11 +20,14 @@ const Card = () => {
     })();
   }, [currentPage]);
 
+  translateCatRuToEng(transactionsCat);
+
   const data = transactions.slice(currentPage * 5 - 5, currentPage * 5).map(value => {
     return {
       ...value,
       categoryName: transactionsCat.find(category => category.id === value.categoryId).name,
       type: value.type === 'INCOME' ? '+' : '-',
+      amount: Math.abs(value.amount),
     };
   });
 
@@ -38,10 +42,14 @@ const Card = () => {
 
   let buttonBackClasses = [styles['pagination__buttons']];
   let buttonNextClasses = [styles['pagination__buttons']];
+  let disabledBack = false;
+  let disabledNext = false;
 
   if (currentPage === 1) {
+    disabledBack = true;
     buttonBackClasses = [styles['pagination__buttons'], styles['pagination__back']];
   } else if (currentPage === Math.ceil(transactions.length / 5)) {
+    disabledNext = true;
     buttonNextClasses = [styles['pagination__buttons'], styles['pagination__next']];
   }
 
@@ -89,10 +97,20 @@ const Card = () => {
             </table>
           );
         })}
-        <button name="prevPage" onClick={handleClickBack} className={buttonBackClasses.join(' ')}>
+        <button
+          name="prevPage"
+          disabled={disabledBack}
+          onClick={handleClickBack}
+          className={buttonBackClasses.join(' ')}
+        >
           Back
         </button>
-        <button name="nextPage" onClick={handleClickNext} className={buttonNextClasses.join(' ')}>
+        <button
+          name="prevPage"
+          disabled={disabledNext}
+          onClick={handleClickNext}
+          className={buttonNextClasses.join(' ')}
+        >
           Next
         </button>
       </div>

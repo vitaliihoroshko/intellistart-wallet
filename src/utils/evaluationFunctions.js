@@ -17,3 +17,31 @@ export const evaluatePasswordProgress = (value, dataCallback, visibilityCallback
   if (value.length >= 6 && value.length <= 12) visibilityCallback(true);
   else visibilityCallback(false);
 };
+
+export const translateCatRuToEng = arr => {
+  arr.map(value => {
+    if (value.name === 'Доход') {
+      value.name = 'Income';
+    } else if (value.name === 'Основные расходы') {
+      value.name = 'Basic expenses';
+    } else if (value.name === 'Продукты') {
+      value.name = 'Products';
+    } else if (value.name === 'Машина') {
+      value.name = 'Car';
+    } else if (value.name === 'Забота о себе') {
+      value.name = 'Self care';
+    } else if (value.name === 'Забота о детях') {
+      value.name = 'Child care';
+    } else if (value.name === 'Товары для дома') {
+      value.name = 'Household';
+    } else if (value.name === 'Образование') {
+      value.name = 'Education';
+    } else if (value.name === 'Досуг') {
+      value.name = 'Leisure';
+    } else if (value.name === 'Другие расходы') {
+      value.name = 'Other';
+    } else if (value.name === 'Развлечения') {
+      value.name = 'Entertainment';
+    }
+  });
+};

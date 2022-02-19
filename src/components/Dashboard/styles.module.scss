@@ -76,11 +76,13 @@ table {
 }
 
 .pagination__back {
-  display: none;
+  background: $grey-color;
+  border: none;
 }
 
 .pagination__next {
-  display: none;
+  background: $grey-color;
+  border: none;
 }
 
 @media screen and (max-width: $phone-max) {
