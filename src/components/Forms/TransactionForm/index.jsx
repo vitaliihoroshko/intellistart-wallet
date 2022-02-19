@@ -5,6 +5,8 @@ import { object, number, date } from 'yup';
 import DatePicker from 'components/DatePicker';
 import { bool } from 'prop-types';
 import moment from 'moment';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { setIsModalAddTransactionOpen } from 'store/slices/global';
 import RegularButton from 'components/Buttons/RegularButton';
@@ -63,7 +65,6 @@ const TransactionForm = ({ modalIsOpened }) => {
     transactionDate: date()
       .required('This field is required')
       .typeError('Date must be a dd.mm.yyyy format'),
-    // categoryId: string().required('This field is required'),
   });
 
   const submitHandler = async (values, actions) => {
@@ -72,19 +73,23 @@ const TransactionForm = ({ modalIsOpened }) => {
 
     const category = expensesCategories.find(value => value.name === selected);
 
-    const transaction = await createTransaction(
-      {
-        amount: checked ? +`-${amount}` : +amount,
-        transactionDate: transformedDate,
-        categoryId: checked ? category.id : incomeCategory.id,
-        comment,
-        type: checked ? 'EXPENSE' : 'INCOME',
-      },
-      token,
-    );
-    console.log(transaction);
-    actions.resetForm();
-    closeHandler();
+    try {
+      const transaction = await createTransaction(
+        {
+          amount: checked ? +`-${amount}` : +amount,
+          transactionDate: transformedDate,
+          categoryId: checked ? category.id : incomeCategory.id,
+          comment,
+          type: checked ? 'EXPENSE' : 'INCOME',
+        },
+        token,
+      );
+      console.log(transaction);
+      actions.resetForm();
+      closeHandler();
+    } catch {
+      toast.error('Something went wrong...', { theme: 'colored' });
+    }
   };
 
   return (
@@ -177,6 +182,12 @@ const TransactionForm = ({ modalIsOpened }) => {
               <RegularButton isTransparent={true} clickHandler={closeHandler}>
                 Cancel
               </RegularButton>
+              <ToastContainer
+                position="bottom-right"
+                closeButton={false}
+                hideProgressBar
+                autoClose={3000}
+              />
             </div>
           </Form>
         </Formik>
