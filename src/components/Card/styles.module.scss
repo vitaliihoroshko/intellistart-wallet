@@ -62,11 +62,13 @@ tr:last-child td{
 }
 
 .pagination__back {
-  display: none;
+  background: $grey-color;
+  border: none;
 }
 
 .pagination__next {
-  display: none;
+  background: $grey-color;
+  border: none;
 }
 
 @media screen and (min-width: $phone-max) {
