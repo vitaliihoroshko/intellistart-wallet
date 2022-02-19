@@ -1,55 +1,63 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+
+import { getTransactions, getTransactionCategories } from 'api/api-helper';
 import styles from './styles.module.scss';
-//import { getTransactions } from 'api/api-helper';
 
 const Card = () => {
-  //const trans = getTransactions();
-  //const transactions = React.useMemo(() => [trans], []);
-  const transactions = React.useMemo(() => [
-    {
-      id: 1,
-      transactionDate: '24.01.2022',
-      type: 'OUTCOME',
-      categoryId: 'Other',
-      userId: 'string',
-      comment: 'A gift for wife',
-      amount: '300.00',
-      balanceAfter: '6900.00',
-    },
-    {
-      id: 2,
-      transactionDate: '26.01.2022',
-      type: 'INCOME',
-      categoryId: 'Regular Income',
-      userId: 'string',
-      comment: 'Bonus for January',
-      amount: '8000.00',
-      balanceAfter: '14900.00',
-    },
-  ]);
-  const data = [...transactions];
-  data.forEach(el => {
-    if (el.type === 'INCOME') {
-      el.type = '+';
-    } else if (el.type === 'OUTCOME') {
-      el.type = '-';
-    }
+  const [transactions, setTransactions] = useState([]);
+  const [transactionsCat, setTransactionsCat] = useState([]);
+  let [currentPage, setCurrentPage] = useState(1);
+  const token = useSelector(state => state.session.token);
+
+  useEffect(() => {
+    (async () => {
+      const userTransactions = await getTransactions(token);
+      const categories = await getTransactionCategories(token);
+      setTransactionsCat(categories);
+      setTransactions(userTransactions.reverse());
+    })();
+  }, [currentPage]);
+
+  const data = transactions.slice(currentPage * 5 - 5, currentPage * 5).map(value => {
+    return {
+      ...value,
+      categoryName: transactionsCat.find(category => category.id === value.categoryId).name,
+      type: value.type === 'INCOME' ? '+' : '-',
+    };
   });
+
+  const handleClickBack = () => {
+    setCurrentPage(prevValue => prevValue - 1);
+    window.scrollTo(0, 0);
+  };
+  const handleClickNext = () => {
+    window.scrollTo(0, 0);
+    setCurrentPage(prevValue => prevValue + 1);
+  };
+
+  let buttonBackClasses = [styles['pagination__buttons']];
+  let buttonNextClasses = [styles['pagination__buttons']];
+
+  if (currentPage === 1) {
+    buttonBackClasses = [styles['pagination__buttons'], styles['pagination__back']];
+  } else if (currentPage === Math.ceil(transactions.length / 5)) {
+    buttonNextClasses = [styles['pagination__buttons'], styles['pagination__next']];
+  }
 
   const CreateCard = () => {
     return (
-      <div>
-        {transactions.map(item => {
+      <div className={styles['card__container']}>
+        {data.map(item => {
           let tableClasses;
           let amountClasses;
           if (item.type === '+') {
             tableClasses = [styles.card, styles['card__greenline']];
             amountClasses = [styles['card__value'], styles['card__greentext']];
           } else if (item.type === '-') {
-            tableClasses = [styles.card, styles['card__pinkline']];
+            tableClasses = [styles['card'], styles['card__pinkline']];
             amountClasses = [styles['card__value'], styles['card__pinktext']];
           }
-          console.log(item);
           return (
             <table key={item.id} className={tableClasses.join(' ')}>
               <tbody>
@@ -63,7 +71,7 @@ const Card = () => {
                 </tr>
                 <tr>
                   <td className={styles['card__key']}>Category</td>
-                  <td className={styles['card__value']}>{item.categoryId}</td>
+                  <td className={styles['card__value']}>{item.categoryName}</td>
                 </tr>
                 <tr>
                   <td className={styles['card__key']}>Comments</td>
@@ -81,6 +89,12 @@ const Card = () => {
             </table>
           );
         })}
+        <button name="prevPage" onClick={handleClickBack} className={buttonBackClasses.join(' ')}>
+          Back
+        </button>
+        <button name="nextPage" onClick={handleClickNext} className={buttonNextClasses.join(' ')}>
+          Next
+        </button>
       </div>
     );
   };
