@@ -18,3 +18,13 @@ html {
 body {
   box-sizing: border-box;
 }
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+  background-color: $alto-color;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $light-grey-color;
+  border-radius: 0.5rem;
+}

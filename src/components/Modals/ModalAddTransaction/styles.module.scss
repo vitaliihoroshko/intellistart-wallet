@@ -8,7 +8,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 100;
+  z-index: 9;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,7 +22,11 @@
 
     @include respond(tablet) {
       margin-top: 8rem;
-      overflow-y: scroll;
+      background-color: $white-color;
+    }
+
+    @include respond(30em) {
+      position: absolute;
       overflow-x: hidden;
     }
 
@@ -30,45 +34,46 @@
       margin-top: 6rem;
     }
   }
-}
-
-.modal_content {
-  padding: 2rem;
-  border-radius: 2rem;
-  background-color: $white-color;
-  min-height: 54rem;
-  min-width: 54rem;
-  position: relative;
   
-  @include respond(tablet) {
-    padding-top: 0;
-    height: 100%;
-    width: 100%;
-    border-radius: 0;
-  }
-}
-
-.close_button {
-  position: absolute;
-  top: 2rem;
-  right: 2rem;
-
-  @include respond(tablet) {
-    display: none;
-  }
-}
-
-.modal_title {
-  font-family: 'Poppins', sans-serif;
-  margin-top: 2rem;
-  margin-bottom: 4rem;
-  text-align: center;
-  font-weight: 400;
-  font-size: 3rem;
-  line-height: 4.5rem;
-
-  @include respond(phone) {
-    font-size: 2.4rem;
-    line-height: 3.6rem;
-  }
+  .modal_content {
+    padding: 2rem;
+    border-radius: 2rem;
+    background-color: $white-color;
+    min-height: 54rem;
+    min-width: 54rem;
+    position: relative;
+    
+    @include respond(tablet) {
+      position: relative;
+      padding-top: 0;
+      height: 100%;
+      width: 100%;
+      border-radius: 0;
+    }
+  
+    .close_button {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+    
+      @include respond(tablet) {
+        display: none;
+      }
+    }
+  
+    .modal_title {
+      font-family: 'Poppins', sans-serif;
+      margin-top: 2rem;
+      margin-bottom: 4rem;
+      text-align: center;
+      font-weight: 400;
+      font-size: 3rem;
+      line-height: 4.5rem;
+    
+      @include respond(phone) {
+        font-size: 2.4rem;
+        line-height: 3.6rem;
+      }
+    }
+  }  
 }
