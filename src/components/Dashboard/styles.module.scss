@@ -64,6 +64,18 @@ table {
   }
 }
 
+.pagination__buttons {
+
+}
+
+.pagination__back {
+  display: none;
+}
+
+.pagination__next {
+  display: none;
+}
+
 @media screen and (max-width: $phone-max) {
   .dashboard {
     display: none;

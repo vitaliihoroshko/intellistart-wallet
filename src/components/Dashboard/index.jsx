@@ -1,37 +1,48 @@
+import { useMemo, useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useTable } from 'react-table';
-import React from 'react';
+
+import { getTransactions, getTransactionCategories } from 'api/api-helper';
 import styles from './styles.module.scss';
-//import { getTransactions } from 'api/api-helper';
 
 const Dashboard = () => {
-  //const trans = getTransactions();
-  //const transactions = React.useMemo(() => [trans], []);
-  const transactions = React.useMemo(() => [
-    {
-      id: '01',
-      transactionDate: '24.01.2022',
-      type: 'OUTCOME',
-      categoryId: 'Other',
-      userId: 'string',
-      comment: 'A gift for wife',
-      amount: '300.00',
-      balanceAfter: '6900.00',
-    },
-    {
-      id: '02',
-      transactionDate: '26.01.2022',
-      type: 'INCOME',
-      categoryId: 'Regular Income',
-      userId: 'string',
-      comment: 'Bonus for January',
-      amount: '8000.00',
-      balanceAfter: '14900.00',
-    },
-    [],
-  ]);
+  const [transactions, setTransactions] = useState([]);
+  const [transactionsCat, setTransactionsCat] = useState([]);
+  let [currentPage, setCurrentPage] = useState(1);
+  const token = useSelector(state => state.session.token);
+
+  useEffect(() => {
+    (async () => {
+      const userTransactions = await getTransactions(token);
+      const categories = await getTransactionCategories(token);
+      setTransactionsCat(categories);
+      setTransactions(userTransactions.reverse());
+    })();
+  }, [currentPage]);
+
+  const data = transactions.slice(currentPage * 5 - 5, currentPage * 5).map(value => {
+    return {
+      ...value,
+      categoryName: transactionsCat.find(category => category.id === value.categoryId).name,
+      type: value.type === 'INCOME' ? '+' : '-',
+    };
+  });
+
+  const handleClickBack = () => setCurrentPage(prevValue => prevValue - 1);
+  const handleClickNext = () => setCurrentPage(prevValue => prevValue + 1);
+
+  let buttonBackClasses = [styles['pagination__buttons']];
+  let buttonNextClasses = [styles['pagination__buttons']];
+
+  if (currentPage === 1) {
+    buttonBackClasses = [styles['pagination__buttons'], styles['pagination__back']];
+  } else if (currentPage === Math.ceil(transactions.length / 5)) {
+    buttonNextClasses = [styles['pagination__buttons'], styles['pagination__next']];
+  }
+
   let amountClasses = [styles['dashboard__amount']];
 
-  const columns = React.useMemo(
+  const columns = useMemo(
     () => [
       {
         Header: 'Date',
@@ -45,7 +56,7 @@ const Dashboard = () => {
       },
       {
         Header: 'Category',
-        accessor: 'categoryId',
+        accessor: 'categoryName',
         className: styles['dashboard__category'],
       },
       {
@@ -67,15 +78,6 @@ const Dashboard = () => {
     [],
   );
 
-  const data = [...transactions];
-  data.forEach(el => {
-    if (el.type === 'INCOME') {
-      el.type = '+';
-    } else if (el.type === 'OUTCOME') {
-      el.type = '-';
-    }
-  });
-
   const tableInstance = useTable({ columns, data });
   const defaultPropGetter = () => ({});
   const {
@@ -87,17 +89,16 @@ const Dashboard = () => {
     getCellProps = defaultPropGetter,
   } = tableInstance;
 
-  rows.map(row => {
-    if (row.type === '+') {
-      amountClasses = [styles['dashboard__amount'], styles['dashboard__greentext']];
-    } else if (row.type === '-') {
-      amountClasses = [styles['dashboard__amount'], styles['dashboard__pinktext']];
-    }
-  });
+  // rows.map(row => {
+  //   if (row.type === '+') {
+  //     amountClasses = [styles['dashboard__amount'], styles['dashboard__greentext']];
+  //   } else if (row.type === '-') {
+  //     amountClasses = [styles['dashboard__amount'], styles['dashboard__pinktext']];
+  //   }
+  // });
 
   function StatTable() {
     return (
-      // apply the table props
       <div className={styles['dashboard']}>
         <div className={styles['dashboard__head']}>
           <h3 className={styles['dashboard__date']}>Date</h3>
@@ -138,9 +139,16 @@ const Dashboard = () => {
             })}
           </tbody>
         </table>
+        <button name="prevPage" onClick={handleClickBack} className={buttonBackClasses.join(' ')}>
+          prevPage
+        </button>
+        <button name="nextPage" onClick={handleClickNext} className={buttonNextClasses.join(' ')}>
+          nextPage
+        </button>
       </div>
     );
   }
+
   return <div>{StatTable()}</div>;
 };
 
