@@ -1,0 +1,88 @@
+@import 'styles/variables';
+@import 'styles/mixins';
+
+.dashboard {
+  &__wrapper {
+    font-family: 'Abel', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 23px;
+    letter-spacing: 0em;
+    margin-top: 55px;
+  }
+
+  &__input__group {
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+  }
+
+  &__table {
+    &__head {
+      background-color: $white-color;
+      padding: 16px 30px 19px;
+      display: flex;
+      align-items: center;
+      gap: 177px;
+      border-radius: 30px;
+    }
+
+    &__item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 15px 30px;
+      border-bottom: 1px solid $grey-color;
+      box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
+      font-size: 16px;
+
+      &__left {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      &__square {
+        width: 24px;
+        height: 24px;
+        background: transparent;
+        border-radius: 2px;
+      }
+    }
+  }
+
+  &__bottom {
+    padding: 0 30px;
+    font-size: 16px;
+
+    &__item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 15px;
+
+      &__red {
+        color: $pink-color;
+      }
+      &__green {
+        color: $green-color;
+      }
+    }
+  }
+
+  @include respond(tablet) {
+    &__wrapper {
+      margin-top: 0;
+    }
+  }
+
+  @include respond(24em) {
+    &__table {
+      &__head {
+        gap: 0;
+        justify-content: space-between;
+      }
+    }
+  }
+}

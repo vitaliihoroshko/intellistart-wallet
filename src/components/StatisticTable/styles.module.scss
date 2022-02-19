@@ -1,0 +1,56 @@
+@import "../../styles/variables.scss";
+
+body {
+	background: $alto-color;
+}
+
+.dashboard {
+	font-size: 1.6rem;
+	line-height: 2rem;
+	font-family: "Abel", sans-serif;
+}
+
+table {
+	max-width: 35rem;
+	min-width: 28rem;
+	margin-left: 3rem;
+	// @media (max-width: 780px) {
+	// 	margin-left: 0;
+	// }
+}
+
+.dashboard__head {
+	max-width: 35rem;
+	min-width: 24rem;
+	padding: 1.6rem 3rem;
+	background-color: $white-color;
+	border-radius: 3rem;
+	display: flex;
+	justify-content: space-between;
+	// @media (max-width: 780px) {
+	// 	margin-left: 0;
+	// }
+}
+
+.dashboard__head h3 {
+	font-weight: 400;
+	font-size: 1.8rem;
+	line-height: 2.3rem;
+}
+
+.dashboard__amount {
+	text-align: right;
+}
+.dashboard__row {
+	max-width: 35rem;
+	justify-content: space-between;
+	line-height: 2rem;
+	border: 0.1rem 0 0.1rem 0 solid #dcdcdf;
+	box-shadow: 0 0.1rem 0 rgba(255, 255, 255, 0.6);
+
+	td {
+		font-size: 1.6rem;
+		line-height: 2rem;
+		padding: 1.7rem 0;
+	}
+}

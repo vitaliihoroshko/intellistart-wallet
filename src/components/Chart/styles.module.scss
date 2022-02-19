@@ -1,0 +1,53 @@
+.title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: normal;
+  font-size: 3rem;
+  line-height: 4.5rem;
+  line-height: 1.5;
+  letter-spacing: 0.05rem;
+  color: #000000;
+  margin: 0 auto;
+}
+
+.doughnut {
+  position: relative;
+}
+
+.total {
+  position: absolute;
+  font-family: 'Abel', sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 23px;
+  letter-spacing: 0em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.doughnut canvas {
+  max-width: 32rem;
+  max-height: 32rem;
+}
+
+// .chart {
+//    max-width: 32rem;
+// }
+
+.containerChart {
+  position: relative;
+}
+
+@media screen and (max-width: 768px) {
+  .chart {
+    width: max-content;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .chart {
+    width: calc(100vw - 40px);
+  }
+}
