@@ -7,7 +7,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 100;
+  z-index: 11;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,14 +21,11 @@
   }
 }
 
-.modal_content {
-  padding: 2rem;
-  border-radius: 2rem;
-  background-color: $white-color;
-  min-height: 54rem;
-  width: 54rem;
-  position: relative;
-}
+    @include respond(tablet) {
+      z-index: 9;
+      margin-top: 8rem;
+      background-color: $white-color;
+    }
 
 .close_button {
   position: absolute;

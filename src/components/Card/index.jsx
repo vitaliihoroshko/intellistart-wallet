@@ -7,6 +7,7 @@ import styles from './styles.module.scss';
 const Card = () => {
   const [transactions, setTransactions] = useState([]);
   const [transactionsCat, setTransactionsCat] = useState([]);
+  let [currentPage, setCurrentPage] = useState(1);
   const token = useSelector(state => state.session.token);
 
   useEffect(() => {
@@ -14,23 +15,39 @@ const Card = () => {
       const userTransactions = await getTransactions(token);
       const categories = await getTransactionCategories(token);
       setTransactionsCat(categories);
-      setTransactions(userTransactions);
+      setTransactions(userTransactions.reverse());
     })();
-  }, []);
+  }, [currentPage]);
 
-  const data = [...transactions];
-  data.map(el => {
-    el.categoryName = transactionsCat.find(cat => cat.id === el.categoryId).name;
-    if (el.type === 'INCOME') {
-      el.type = '+';
-    } else if (el.type === 'EXPENSE') {
-      el.type = '-';
-    }
+  const data = transactions.slice(currentPage * 5 - 5, currentPage * 5).map(value => {
+    return {
+      ...value,
+      categoryName: transactionsCat.find(category => category.id === value.categoryId).name,
+      type: value.type === 'INCOME' ? '+' : '-',
+    };
   });
+
+  const handleClickBack = () => {
+    setCurrentPage(prevValue => prevValue - 1);
+    window.scrollTo(0, 0);
+  };
+  const handleClickNext = () => {
+    window.scrollTo(0, 0);
+    setCurrentPage(prevValue => prevValue + 1);
+  };
+
+  let buttonBackClasses = [styles['pagination__buttons']];
+  let buttonNextClasses = [styles['pagination__buttons']];
+
+  if (currentPage === 1) {
+    buttonBackClasses = [styles['pagination__buttons'], styles['pagination__back']];
+  } else if (currentPage === Math.ceil(transactions.length / 5)) {
+    buttonNextClasses = [styles['pagination__buttons'], styles['pagination__next']];
+  }
 
   const CreateCard = () => {
     return (
-      <div>
+      <div className={styles['card__container']}>
         {data.map(item => {
           let tableClasses;
           let amountClasses;
@@ -38,7 +55,7 @@ const Card = () => {
             tableClasses = [styles.card, styles['card__greenline']];
             amountClasses = [styles['card__value'], styles['card__greentext']];
           } else if (item.type === '-') {
-            tableClasses = [styles.card, styles['card__pinkline']];
+            tableClasses = [styles['card'], styles['card__pinkline']];
             amountClasses = [styles['card__value'], styles['card__pinktext']];
           }
           return (
@@ -72,6 +89,12 @@ const Card = () => {
             </table>
           );
         })}
+        <button name="prevPage" onClick={handleClickBack} className={buttonBackClasses.join(' ')}>
+          Back
+        </button>
+        <button name="nextPage" onClick={handleClickNext} className={buttonNextClasses.join(' ')}>
+          Next
+        </button>
       </div>
     );
   };
