@@ -49,8 +49,28 @@ tr:last-child td{
   border: none;
 }
 
+.pagination__buttons {
+  margin-right: 0.8rem;
+  margin-bottom: 2rem;
+  font-size: 1.6rem;
+  line-height: 2rem;
+  font-family: 'Abel', sans-serif;
+  border: 0.1rem solid $purple-color;
+  background: $white-color;
+  border-radius: 1rem;
+  padding: 0.5rem 2rem;
+}
+
+.pagination__back {
+  display: none;
+}
+
+.pagination__next {
+  display: none;
+}
+
 @media screen and (min-width: $phone-max) {
-  .card {
+  .card__container {
     display: none;
   }
 }
