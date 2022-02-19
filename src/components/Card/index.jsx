@@ -49,7 +49,7 @@ const Card = () => {
             tableClasses = [styles.card, styles['card__pinkline']];
             amountClasses = [styles['card__value'], styles['card__pinktext']];
           }
-          console.log(item);
+
           return (
             <table key={item.id} className={tableClasses.join(' ')}>
               <tbody>

@@ -32,8 +32,12 @@ export const signUserOut = async token => {
   });
 };
 
-export const getTransactions = async () => {
-  const response = await axios.get(`${API_URL}/transactions`);
+export const getTransactions = async token => {
+  const response = await axios.get(`${API_URL}/transactions`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return response.data;
 };
 
@@ -57,8 +61,13 @@ export const createTransaction = async (createTransactionDto, token) => {
   return transactionsData;
 };
 
-export const getChartData = async (token, year, month) => {
-  const response = await axios.get(`${API_URL}/transactions-summary?year=${year}&month=${month}`, {
+export const getChartData = async ({ token, year = '', month = '' }) => {
+  let url = `${API_URL}/transactions-summary`;
+  if (year && month) {
+    url = `${API_URL}/transactions-summary?year=${year}&month=${month}`;
+  }
+
+  const response = await axios.get(url, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

@@ -1,0 +1,43 @@
+.select {
+  &__wrapper {
+    position: relative;
+  }
+
+  &__head {
+    cursor: pointer;
+    border: 1px solid #000000;
+    border-radius: 30px;
+    padding: 12px 20px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    p {
+      text-transform: capitalize;
+    }
+  }
+
+  &__context {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    transform: translateY(calc(100% + 6px));
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(50px);
+    border-radius: 20px;
+
+    &__item {
+      padding: 12px 20px;
+      cursor: pointer;
+      transition: 0.25s linear;
+
+      &:hover {
+        background-color: #fff;
+        color: #ff6596;
+      }
+    }
+  }
+}

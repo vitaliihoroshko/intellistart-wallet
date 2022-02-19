@@ -1,21 +1,20 @@
 @import 'styles/variables';
-//@import 'styles/mixins';
+@import 'styles/mixins';
 
 .background {
   background-image: url('../../assets/images/bg-dashboard.png');
   background-size: cover;
-  height: 88.8vh;
+  min-height: calc(100vh - 80px);
   margin-top: 8rem;
+  padding-bottom: 2rem;
   display: flex;
   flex-direction: row;
-  // @include respond(phone) {
-  //   height: fit-content;
-  // }
 }
+
 .leftSide {
   height: 88.8vh;
   width: 36.3%;
-  border-right: 0.1rem solid #E7E5F2;
+  border-right: 0.1rem solid #e7e5f2;
   padding: 4rem 0 0 8.7rem;
   display: flex;
   flex-direction: column;
@@ -23,12 +22,14 @@
 
 .rightSide {
   padding: 4rem 0 0 3rem;
+  display: flex;
+  gap: 30px;
 }
 
 @media screen and (max-width: $phone-max) {
   .background {
     flex-direction: column;
-    height: fit-content;
+    min-height: calc(100vh - 80px);
   }
   .leftSide {
     border: none;
@@ -39,7 +40,7 @@
     height: fit-content;
     justify-content: center;
   }
-  .leftSide>div:nth-child(2){
+  .leftSide > div:nth-child(2) {
     display: none;
   }
   .rightSide {
@@ -50,25 +51,9 @@
   }
 }
 
-@media screen and (min-width: $tablet-min) and (max-width: $tablet-max) {
-  .background {
-    background-image: url('../../assets/images/bg-dashboard-tablet.png');
-    flex-direction: column;
-    height: 94.4rem;
-  }
-  .leftSide {
-    border: none;
-    padding: 0;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-    margin: 2rem 0 0 0;
-    height: fit-content;
-  }
+@include respond(tablet) {
   .rightSide {
-    margin-top: 4rem;
+    flex-direction: column;
     padding: 0;
-    display: flex;
-    align-self: center;
   }
 }

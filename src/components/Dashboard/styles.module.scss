@@ -1,16 +1,18 @@
-@import 'styles/variables';
+@import "styles/variables";
+
 .bg {
-  background-image: url('../../assets/images/bg-dashboard.png');
-  height:100vh;
+  background-image: url("../../assets/images/bg-dashboard.png");
+  height: 100vh;
   background-size: cover;
 }
+
 .dashboard {
-  width: 70rem;
   border-collapse: collapse;
   font-size: 1.6rem;
   line-height: 2rem;
-  font-family: 'Abel', sans-serif;
+  font-family: "Abel", sans-serif;
 }
+
 table {
   border-collapse: collapse;
 }
@@ -25,11 +27,10 @@ table {
   &__head {
     display: block;
     height: 5.8rem;
-    width: 70rem;
+    width: max-content;
     background-color: $white-color;
     border-radius: 3rem;
-    padding-top: 1.6rem;
-    padding-bottom: 1.9rem;
+    padding: 16px 0 19px 30px;
   }
   &__head h3 {
     display: inline-block;

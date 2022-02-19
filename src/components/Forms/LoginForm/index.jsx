@@ -63,7 +63,6 @@ const LoginForm = () => {
           <div className={styles.form__btns}>
             <RegularButton type="submit">Log in</RegularButton>
             <LinkButton to="/register">Registration</LinkButton>
-            <LinkButton to="/chart">Registration</LinkButton>
           </div>
         </Form>
       </Formik>
