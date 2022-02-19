@@ -38,7 +38,8 @@ export const getTransactions = async token => {
       Authorization: `Bearer ${token}`,
     },
   });
-  return response.data;
+  const transactions = response.data;
+  return transactions;
 };
 
 export const getTransactionCategories = async token => {
@@ -59,19 +60,4 @@ export const createTransaction = async (createTransactionDto, token) => {
   });
   const transactionsData = response.data;
   return transactionsData;
-};
-
-export const getChartData = async ({ token, year = '', month = '' }) => {
-  let url = `${API_URL}/transactions-summary`;
-  if (year && month) {
-    url = `${API_URL}/transactions-summary?year=${year}&month=${month}`;
-  }
-
-  const response = await axios.get(url, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  const chartData = response.data;
-  return chartData;
 };

@@ -1,37 +1,29 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+
+import { getTransactions, getTransactionCategories } from 'api/api-helper';
 import styles from './styles.module.scss';
-//import { getTransactions } from 'api/api-helper';
 
 const Card = () => {
-  //const trans = getTransactions();
-  //const transactions = React.useMemo(() => [trans], []);
-  const transactions = React.useMemo(() => [
-    {
-      id: 1,
-      transactionDate: '24.01.2022',
-      type: 'OUTCOME',
-      categoryId: 'Other',
-      userId: 'string',
-      comment: 'A gift for wife',
-      amount: '300.00',
-      balanceAfter: '6900.00',
-    },
-    {
-      id: 2,
-      transactionDate: '26.01.2022',
-      type: 'INCOME',
-      categoryId: 'Regular Income',
-      userId: 'string',
-      comment: 'Bonus for January',
-      amount: '8000.00',
-      balanceAfter: '14900.00',
-    },
-  ]);
+  const [transactions, setTransactions] = useState([]);
+  const [transactionsCat, setTransactionsCat] = useState([]);
+  const token = useSelector(state => state.session.token);
+
+  useEffect(() => {
+    (async () => {
+      const userTransactions = await getTransactions(token);
+      const categories = await getTransactionCategories(token);
+      setTransactionsCat(categories);
+      setTransactions(userTransactions);
+    })();
+  }, []);
+
   const data = [...transactions];
-  data.forEach(el => {
+  data.map(el => {
+    el.categoryName = transactionsCat.find(cat => cat.id === el.categoryId).name;
     if (el.type === 'INCOME') {
       el.type = '+';
-    } else if (el.type === 'OUTCOME') {
+    } else if (el.type === 'EXPENSE') {
       el.type = '-';
     }
   });
@@ -39,7 +31,7 @@ const Card = () => {
   const CreateCard = () => {
     return (
       <div>
-        {transactions.map(item => {
+        {data.map(item => {
           let tableClasses;
           let amountClasses;
           if (item.type === '+') {
@@ -49,7 +41,6 @@ const Card = () => {
             tableClasses = [styles.card, styles['card__pinkline']];
             amountClasses = [styles['card__value'], styles['card__pinktext']];
           }
-
           return (
             <table key={item.id} className={tableClasses.join(' ')}>
               <tbody>
@@ -63,7 +54,7 @@ const Card = () => {
                 </tr>
                 <tr>
                   <td className={styles['card__key']}>Category</td>
-                  <td className={styles['card__value']}>{item.categoryId}</td>
+                  <td className={styles['card__value']}>{item.categoryName}</td>
                 </tr>
                 <tr>
                   <td className={styles['card__key']}>Comments</td>

@@ -20,7 +20,8 @@
     width: 40.95rem;
     border: none;
     border-bottom: 1px solid $alto-color;
-    padding: 1rem 5.45rem;
+    padding: 1rem;
+    padding-left: 5.45rem;
 
     &:focus {
       outline: none;
