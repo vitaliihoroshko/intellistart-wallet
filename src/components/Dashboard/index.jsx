@@ -1,37 +1,27 @@
+import { useMemo, useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useTable } from 'react-table';
-import React from 'react';
+
+import { getTransactions, getTransactionCategories } from 'api/api-helper';
 import styles from './styles.module.scss';
-//import { getTransactions } from 'api/api-helper';
 
 const Dashboard = () => {
-  //const trans = getTransactions();
-  //const transactions = React.useMemo(() => [trans], []);
-  const transactions = React.useMemo(() => [
-    {
-      id: '01',
-      transactionDate: '24.01.2022',
-      type: 'OUTCOME',
-      categoryId: 'Other',
-      userId: 'string',
-      comment: 'A gift for wife',
-      amount: '300.00',
-      balanceAfter: '6900.00',
-    },
-    {
-      id: '02',
-      transactionDate: '26.01.2022',
-      type: 'INCOME',
-      categoryId: 'Regular Income',
-      userId: 'string',
-      comment: 'Bonus for January',
-      amount: '8000.00',
-      balanceAfter: '14900.00',
-    },
-    [],
-  ]);
+  const [transactions, setTransactions] = useState([]);
+  const [transactionsCat, setTransactionsCat] = useState([]);
+  const token = useSelector(state => state.session.token);
+
+  useEffect(() => {
+    (async () => {
+      const userTransactions = await getTransactions(token);
+      const categories = await getTransactionCategories(token);
+      setTransactions(userTransactions);
+      setTransactionsCat(categories);
+    })();
+  }, []);
+
   let amountClasses = [styles['dashboard__amount']];
 
-  const columns = React.useMemo(
+  const columns = useMemo(
     () => [
       {
         Header: 'Date',
@@ -45,7 +35,7 @@ const Dashboard = () => {
       },
       {
         Header: 'Category',
-        accessor: 'categoryId',
+        accessor: 'categoryName',
         className: styles['dashboard__category'],
       },
       {
@@ -66,14 +56,16 @@ const Dashboard = () => {
     ],
     [],
   );
-
+  console.log(transactionsCat);
   const data = [...transactions];
-  data.forEach(el => {
+  data.map(el => {
+    //el.categoryName = transactionsCat.find(cat => cat.id === el.categoryId).name;
     if (el.type === 'INCOME') {
       el.type = '+';
-    } else if (el.type === 'OUTCOME') {
+    } else if (el.type === 'EXPENSE') {
       el.type = '-';
     }
+    return el;
   });
 
   const tableInstance = useTable({ columns, data });
@@ -141,6 +133,7 @@ const Dashboard = () => {
       </div>
     );
   }
+
   return <div>{StatTable()}</div>;
 };
 
