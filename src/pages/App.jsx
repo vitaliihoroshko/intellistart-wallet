@@ -6,6 +6,7 @@ import { autoSignIn } from 'store/slices/session/actions';
 import LoginPage from './Login';
 import RegisterPage from './Register';
 import DashboardPage from './Dashboard';
+import NotFoundPage from './NotFound';
 import ProtectedRoute from 'components/ProtectedRoute';
 import LoadingSpinner from 'components/LoadingSpinner';
 
@@ -42,6 +43,7 @@ const App = () => {
           element={<ProtectedRoute element={<DashboardPage />} requiresAuth={true} />}
         />
         <Route path="/" element={<Navigate to="/home" replace />} />
+        {!isLoading && <Route path="*" element={<NotFoundPage />} />}
       </Routes>
     </>
   );
