@@ -1,0 +1,59 @@
+@import 'styles/variables';
+@import 'styles/mixins';
+
+.background {
+  background-image: url('../../assets/images/bg-dashboard.png');
+  background-size: cover;
+  min-height: calc(100vh - 80px);
+  margin-top: 8rem;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.leftSide {
+  height: 88.8vh;
+  width: 36.3%;
+  border-right: 0.1rem solid #e7e5f2;
+  padding: 4rem 0 0 8.7rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.rightSide {
+  padding: 4rem 0 0 3rem;
+  display: flex;
+  gap: 30px;
+}
+
+@media screen and (max-width: $phone-max) {
+  .background {
+    flex-direction: column;
+    min-height: calc(100vh - 80px);
+  }
+  .leftSide {
+    border: none;
+    padding: 0;
+    flex-direction: row;
+    width: 100%;
+    margin: 0;
+    height: fit-content;
+    justify-content: center;
+  }
+  .leftSide > div:nth-child(2) {
+    display: none;
+  }
+  .rightSide {
+    margin-top: 3rem;
+    padding: 0;
+    display: flex;
+    align-self: center;
+  }
+}
+
+@include respond(tablet) {
+  .rightSide {
+    flex-direction: column;
+    padding: 0;
+  }
+}

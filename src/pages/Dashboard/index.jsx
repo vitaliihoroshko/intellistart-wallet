@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import Currency from 'components/Currency';
 import Dashboard from 'components/Dashboard';
 import Card from 'components/Card';
+import Navigation from 'components/Navigation';
 import Balance from 'components/Balance';
 import AddTransactionsButton from 'components/Buttons/AddTransactionsButton';
 import ModalAddTransaction from 'components/Modals/ModalAddTransaction';
@@ -20,7 +21,10 @@ const DashboardPage = () => {
         }`}
       >
         <div className={styles['leftSide']}>
-          <Balance />
+          <div>
+            <Navigation />
+            <Balance />
+          </div>
           <Currency />
         </div>
         <div className={styles['rightSide']}>

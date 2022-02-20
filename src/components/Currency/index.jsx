@@ -13,6 +13,7 @@ const Currency = () => {
   const [eurSale, setEurSale] = useState();
   const [rurPurchase, setRurPurchase] = useState();
   const [rurSale, setRurSale] = useState();
+
   useEffect(() => {
     (async () => {
       const data = await apiCall();
@@ -30,7 +31,8 @@ const Currency = () => {
       }
     })();
   });
-  function DenseTable() {
+
+  const DenseTable = () => {
     return (
       <table className={styles['currency__box']}>
         <thead className={styles['currency__head']}>
@@ -59,7 +61,7 @@ const Currency = () => {
         </tbody>
       </table>
     );
-  }
+  };
   return <div className={styles['currency__container']}>{DenseTable()}</div>;
 };
 export default Currency;
