@@ -26,24 +26,29 @@ const Dashboard = () => {
         .toFixed(2)
         .toString()
         .replace(/\B(?=(\d{3})+(?!\d))/g, ' '),
+      balanceAfter: value.balanceAfter.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '),
     };
   });
   console.log(data);
-
   const handleClickBack = () => setCurrentPage(prevValue => prevValue - 1);
   const handleClickNext = () => setCurrentPage(prevValue => prevValue + 1);
 
-  let buttonBackClasses = [styles['pagination__buttons']];
-  let buttonNextClasses = [styles['pagination__buttons']];
+  let buttonBackClasses = [];
+  let buttonNextClasses = [];
   let disabledBack = false;
   let disabledNext = false;
 
-  if (currentPage === 1) {
+  if (currentPage === 1 && transactions.length <= 5) {
+    buttonBackClasses = [styles['pagination__displaynone']];
+    buttonNextClasses = [styles['pagination__displaynone']];
+  } else if (currentPage === 1 && transactions.length > 5) {
     disabledBack = true;
+    buttonNextClasses = [styles['pagination__buttons'], styles['pagination__next']];
     buttonBackClasses = [styles['pagination__buttons'], styles['pagination__back']];
   } else if (currentPage === Math.ceil(transactions.length / 5)) {
     disabledNext = true;
     buttonNextClasses = [styles['pagination__buttons'], styles['pagination__next']];
+    buttonBackClasses = [styles['pagination__buttons']];
   }
 
   const columns = useMemo(
