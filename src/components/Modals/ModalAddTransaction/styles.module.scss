@@ -1,5 +1,6 @@
 @import 'styles/variables';
 @import 'styles/mixins';
+
 .modal {
   height: 100%;
   width: 100%;
@@ -14,18 +15,22 @@
   opacity: 0;
   pointer-events: none;
   transition: all 0.5s;
+
   &_active {
     pointer-events: all;
     opacity: 1;
+
     @include respond(tablet) {
       z-index: 9;
       margin-top: 8rem;
       background-color: $white-color;
     }
+
     @include respond(30em) {
       position: absolute;
       overflow-x: hidden;
     }
+    
     @include respond(phone) {
       margin-top: 6rem;
     }

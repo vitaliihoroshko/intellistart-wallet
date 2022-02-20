@@ -37,7 +37,6 @@
         background-color: $white-color;
         border: 0.1rem solid $alto-color;
         opacity: 1;
-    
         transition: background-color 200ms ease-in-out;
     
         .indicator {
@@ -73,6 +72,7 @@
         height: 0.1rem;
     
         &:checked {
+          
           &~.back {
             background-color: ($white-color, 0.1);
     
@@ -103,11 +103,16 @@
 
   .select_wrapper {
     position: relative;
+
+    @include respond(30em) {
+      width: 28rem;
+      margin-left: 1rem;
+    }
   
     .error {
       position: absolute;
       top: 4rem;
-      left: 37%;
+      padding-left: calc(50% - 5.35rem);
       font-family: 'Abel', sans-serif;
       font-size: 1.4rem;
       color: $red-color;
@@ -119,8 +124,6 @@
       display: block;
       width: 100%;
       text-align: left;
-      padding-left: 2rem;
-    
       border: none;
       caret-color: transparent;
       background-color: transparent;
