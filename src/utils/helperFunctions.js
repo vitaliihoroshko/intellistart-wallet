@@ -49,7 +49,7 @@ export const getYears = () => {
   const year = time.getFullYear();
   const array = [];
 
-  for (let i = 2020; i <= year; i++) {
+  for (let i = 2015; i <= year; i++) {
     const object = { title: i, value: i };
     array.push(object);
   }
