@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useTable } from 'react-table';
 
 import { getTransactions, getTransactionCategories } from 'api/api-helper';
+import { translateCatRuToEng } from 'utils/evaluationFunctions';
 import styles from './styles.module.scss';
 
 const Dashboard = () => {
@@ -20,27 +21,33 @@ const Dashboard = () => {
     })();
   }, [currentPage]);
 
+  translateCatRuToEng(transactionsCat);
+
   const data = transactions.slice(currentPage * 5 - 5, currentPage * 5).map(value => {
     return {
       ...value,
       categoryName: transactionsCat.find(category => category.id === value.categoryId).name,
       type: value.type === 'INCOME' ? '+' : '-',
+      amount: Math.abs(value.amount),
     };
   });
+  console.log(data);
 
   const handleClickBack = () => setCurrentPage(prevValue => prevValue - 1);
   const handleClickNext = () => setCurrentPage(prevValue => prevValue + 1);
 
   let buttonBackClasses = [styles['pagination__buttons']];
   let buttonNextClasses = [styles['pagination__buttons']];
+  let disabledBack = false;
+  let disabledNext = false;
 
   if (currentPage === 1) {
+    disabledBack = true;
     buttonBackClasses = [styles['pagination__buttons'], styles['pagination__back']];
   } else if (currentPage === Math.ceil(transactions.length / 5)) {
+    disabledNext = true;
     buttonNextClasses = [styles['pagination__buttons'], styles['pagination__next']];
   }
-
-  let amountClasses = [styles['dashboard__amount']];
 
   const columns = useMemo(
     () => [
@@ -67,7 +74,7 @@ const Dashboard = () => {
       {
         Header: 'Amount',
         accessor: 'amount',
-        className: amountClasses.join(' '),
+        className: [styles['dashboard__amount']],
       },
       {
         Header: 'Balance',
@@ -88,14 +95,6 @@ const Dashboard = () => {
     getColumnProps = defaultPropGetter,
     getCellProps = defaultPropGetter,
   } = tableInstance;
-
-  // rows.map(row => {
-  //   if (row.type === '+') {
-  //     amountClasses = [styles['dashboard__amount'], styles['dashboard__greentext']];
-  //   } else if (row.type === '-') {
-  //     amountClasses = [styles['dashboard__amount'], styles['dashboard__pinktext']];
-  //   }
-  // });
 
   function StatTable() {
     return (
@@ -125,12 +124,23 @@ const Dashboard = () => {
                         {...cell.getCellProps(
                           {
                             className: cell.column.className,
+                            style: {
+                              color:
+                                row.original.type === '-' &&
+                                cell.column.className == styles['dashboard__amount']
+                                  ? '#ff6596'
+                                  : row.original.type === '+' &&
+                                    cell.column.className == styles['dashboard__amount']
+                                  ? '#24cca7'
+                                  : 'black',
+                            },
                           },
                           getColumnProps(cell.column),
                           getCellProps(cell),
                         )}
                       >
-                        {cell.render('Cell')}
+                        {cell.column == 'amount' && Math.abs(cell.render('Cell'))}
+                        {cell.column != 'amount' && cell.render('Cell')}
                       </td>
                     );
                   })}
@@ -139,11 +149,21 @@ const Dashboard = () => {
             })}
           </tbody>
         </table>
-        <button name="prevPage" onClick={handleClickBack} className={buttonBackClasses.join(' ')}>
-          prevPage
+        <button
+          name="prevPage"
+          disabled={disabledBack}
+          onClick={handleClickBack}
+          className={buttonBackClasses.join(' ')}
+        >
+          Back
         </button>
-        <button name="nextPage" onClick={handleClickNext} className={buttonNextClasses.join(' ')}>
-          nextPage
+        <button
+          name="nextPage"
+          disabled={disabledNext}
+          onClick={handleClickNext}
+          className={buttonNextClasses.join(' ')}
+        >
+          Next
         </button>
       </div>
     );

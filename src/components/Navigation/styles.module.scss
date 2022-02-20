@@ -1,0 +1,70 @@
+@import 'styles/variables';
+@import 'styles/mixins';
+
+.navigation {
+  list-style: none;
+
+  .item {
+    margin-bottom: 1.9rem;
+
+    .link {
+      &:link,
+      &:visited {
+        display: flex;
+        color: $black-color;
+        text-decoration: none;
+      }
+
+      &:hover {
+        color: $purple-color;
+      }
+
+      img {
+        @include respond($phone-max) {
+          width: 3.8rem;
+          height: 3.8rem;
+          border-radius: 0.6rem;
+        }
+      }
+
+      p {
+        font-family: 'Poppins Regular', sans-serif;
+        font-size: 1.8rem;
+        margin-left: 2.3rem;
+        line-height: 1;
+
+        @include respond($phone-max) {
+          display: none;
+        }
+      }
+    }
+
+    .link-active {
+      img {
+        box-shadow: 0 0.3rem 1rem rgba($purple-color, 0.5);
+      }
+
+      p {
+        font-family: 'Poppins Bold', sans-serif;
+      }
+
+      &:hover {
+        color: $black-color;
+      }
+    }
+  }
+
+  .currency {
+    display: none;
+
+    @include respond($phone-max) {
+      display: block;
+    }
+  }
+
+  @include respond($phone-max) {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 1.3rem;
+  }
+}
