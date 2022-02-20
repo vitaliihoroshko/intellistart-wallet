@@ -88,6 +88,10 @@ table {
   cursor: default;
 }
 
+.pagination__displaynone {
+  display: none;
+}
+
 @media screen and (max-width: $phone-max) {
   .dashboard {
     display: none;
