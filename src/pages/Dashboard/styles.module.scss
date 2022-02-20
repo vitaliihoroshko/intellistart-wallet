@@ -4,7 +4,7 @@
 .background {
   background-image: url('../../assets/images/bg-dashboard.png');
   background-size: cover;
-  height: fit-content;
+  height: 100vh;
   margin-top: 8rem;
   display: flex;
   flex-direction: row;
@@ -61,7 +61,6 @@
   .background {
     background-image: url('../../assets/images/bg-dashboard-tablet.png');
     flex-direction: column;
-    height: 94.4rem;
   }
   .leftSide {
     border: none;

@@ -71,7 +71,7 @@ tr:last-child td{
   border: none;
 }
 
-@media screen and (min-width: $phone-max) {
+@media screen and (min-width: $tablet-min) {
   .card__container {
     display: none;
   }

@@ -4,16 +4,16 @@
 .form-wrapper {
   position: relative;
 
-  @media (min-width: 1280px) and (max-width: 1366px) {
+  @media (min-width: 1280px) and (max-width: 1365px) {
     left: 51.3%;
-    top: 11.2rem;
+    top: 12.2rem;
   }
-  @media (min-width: 1367px) and (max-width: 1440px) {
+  @media (min-width: 1366px) and (max-width: 1440px) {
     left: 54%;
     top: 11.2rem;
   }
   @media screen and (min-width: 1440px) {
-    left: 57%;
+    left: 56%;
     top: 11.2rem;
   }
 }

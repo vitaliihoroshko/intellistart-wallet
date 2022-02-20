@@ -17,7 +17,7 @@
   }
 
   @include respond(79.9375em) {
-    height: 102.4rem;
+    height: 100vh;
     background-image: url(../../assets/images/ellipse-down.svg),
       url(../../assets/images/ellipse-top.svg), url(../../assets/images/login-frame-bg.svg);
     background-position: bottom 0 left 0, top 0 right 0, top 6rem left 11.4rem;
@@ -32,7 +32,7 @@
 
 .app_name {
   position: absolute;
-  font-family: Poppins;
+  font-family: 'Poppins Regular', sans-serif;
   font-weight: 400;
   font-size: 3rem;
   line-height: 4.5rem;
@@ -44,7 +44,7 @@
   }
   @include respond(79.9375em) {
     top: 16.3rem;
-    right: 20rem;
+    right: 17rem;
   }
   @include respond(47.9375em) {
     display: none;
