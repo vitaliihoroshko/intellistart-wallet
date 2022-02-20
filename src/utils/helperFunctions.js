@@ -26,3 +26,49 @@ export const transformTransactionsSummary = data => {
   };
   return transformedData;
 };
+
+export const getMonths = () => {
+  return [
+    { title: 'January', value: '1' },
+    { title: 'February', value: '2' },
+    { title: 'March', value: '3' },
+    { title: 'April', value: '4' },
+    { title: 'May', value: '5' },
+    { title: 'June', value: '6' },
+    { title: 'July', value: '7' },
+    { title: 'August', value: '8' },
+    { title: 'September', value: '9' },
+    { title: 'October', value: '10' },
+    { title: 'November', value: '11' },
+    { title: 'December', value: '12' },
+  ];
+};
+
+export const getYears = () => {
+  const time = new Date();
+  const year = time.getFullYear();
+  const array = [];
+
+  for (let i = 2020; i <= year; i++) {
+    const object = { title: i, value: i };
+    array.push(object);
+  }
+
+  return array;
+};
+
+export const getСategoryColors = () => {
+  return {
+    income: '#00AD84',
+    education: '#81E1FF',
+    household: '#4A56E2',
+    products: '#FFD8D0',
+    entertainment: '#DA0606',
+    car: '#FD9498',
+    other: '#112277',
+    'child care': '#6E78E8',
+    'self care': '#C5BAFF',
+    leisure: '#24CCA7',
+    'basic expenses': '#FED057',
+  };
+};
