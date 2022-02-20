@@ -1,13 +1,11 @@
-import React from 'react';
+import { getMonths, getYears, getСategoryColors } from 'utils/helperFunctions';
 import Select from 'components/Select';
 import styles from './styles.module.scss';
-import { categoryColor } from 'utils/categoriesColors';
-import { months, years } from 'utils/getDates';
 
 const Main = ({ categories, month, year, changeMonth, changeYear }) => {
   function getBgColor(name) {
     name = name.toLowerCase();
-    let color = categoryColor()[name];
+    let color = getСategoryColors()[name];
 
     return color || '#000';
   }
@@ -17,7 +15,7 @@ const Main = ({ categories, month, year, changeMonth, changeYear }) => {
       <div className={styles['dashboard__input__group']}>
         <div className={styles['dashboard__input__group__select']}>
           <Select
-            options={[{ title: 'Month', value: '' }, ...months()]}
+            options={[{ title: 'Month', value: '' }, ...getMonths()]}
             placeholder="Month"
             value={month}
             onChange={v => changeMonth(v)}
@@ -25,7 +23,7 @@ const Main = ({ categories, month, year, changeMonth, changeYear }) => {
         </div>
         <div className={styles['dashboard__input__group__select']}>
           <Select
-            options={[{ title: 'Year', value: '' }, ...years()]}
+            options={[{ title: 'Year', value: '' }, ...getYears()]}
             placeholder="Year"
             value={year}
             onChange={v => changeYear(v)}
