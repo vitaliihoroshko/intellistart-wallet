@@ -1,8 +1,8 @@
-@import 'styles/variables';
-@import 'styles/mixins';
+@import "styles/variables";
+@import "styles/mixins";
 
 .background {
-  background-image: url('../../assets/images/bg-dashboard.png');
+  background-image: url("../../assets/images/bg-dashboard.png");
   background-size: cover;
   min-height: calc(100vh - 80px);
   margin-top: 8rem;
@@ -26,10 +26,31 @@
   gap: 30px;
 }
 
+@media screen and (min-width: $tablet-min) and (max-width: $tablet-max) {
+  .background {
+    background-image: url("../../assets/images/bg-dashboard-tablet.png");
+    flex-direction: column;
+  }
+  .leftSide {
+    border: none;
+    padding: 0;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    margin: 2rem 0 0 0;
+    height: fit-content;
+  }
+  .rightSide {
+    justify-content: center;
+  }
+}
+
 @media screen and (max-width: $phone-max) {
   .background {
+    background-image: none;
+    background-color: $mobile-bg-color;
     flex-direction: column;
-    min-height: calc(100vh - 80px);
+    height: fit-content;
   }
   .leftSide {
     border: none;
@@ -47,13 +68,7 @@
     margin-top: 3rem;
     padding: 0;
     display: flex;
-    align-self: center;
-  }
-}
-
-@include respond(tablet) {
-  .rightSide {
     flex-direction: column;
-    padding: 0;
+    align-self: center;
   }
 }

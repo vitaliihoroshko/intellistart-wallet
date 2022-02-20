@@ -1,3 +1,6 @@
+@import "styles/variables";
+@import "styles/mixins";
+
 .select {
   &__wrapper {
     position: relative;
@@ -6,8 +9,8 @@
   &__head {
     cursor: pointer;
     border: 1px solid #000000;
-    border-radius: 30px;
-    padding: 12px 20px 18px;
+    border-radius: 3rem;
+    padding: 1.2rem 2rem 1.8rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -23,20 +26,32 @@
     left: 0;
     width: 100%;
     transform: translateY(calc(100% + 6px));
-    overflow: hidden;
     background: rgba(255, 255, 255, 0.7);
     box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(50px);
-    border-radius: 20px;
+    border-radius: 1rem;
+    height: 30rem;
+    overflow-y: auto;
+    text-align: justify;
+    &::-webkit-scrollbar {
+      width: 1rem;
+      background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $light-grey-color;
+      max-height: 5rem;
+      border-radius: 1rem;
+    }
 
     &__item {
-      padding: 12px 20px;
+      padding: 1.2rem 2rem;
       cursor: pointer;
       transition: 0.25s linear;
 
       &:hover {
-        background-color: #fff;
-        color: #ff6596;
+        background-color: $white-color;
+        color: $pink-color;
       }
     }
   }

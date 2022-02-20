@@ -1,7 +1,7 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 
-import { categoryColor } from 'utils/categoriesColors';
+import { getСategoryColors } from 'utils/helperFunctions';
 import styles from './styles.module.scss';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -31,7 +31,7 @@ const Chart = ({ categories }) => {
     ];
 
     if (categories && categories?.categoriesSummary.length) {
-      data = categories?.categoriesSummary?.map(i => categoryColor()[i.name.toLowerCase()]);
+      data = categories?.categoriesSummary?.map(i => getСategoryColors()[i.name.toLowerCase()]);
     } else {
       data = ['#00AD84'];
     }
