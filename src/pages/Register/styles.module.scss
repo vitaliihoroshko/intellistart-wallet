@@ -4,16 +4,16 @@
 .page_wrapper {
   position: relative;
   background-color: $mystic-color;
-  max-width: 144rem;
+  width: 100%;
   margin: 0 auto;
   overflow: hidden;
   background-repeat: no-repeat;
 
   @media screen and (min-width: 1280px) {
-    height: 72rem;
-    background-image: url(../../assets/images/register-frame-desktop.svg),
-      url(../../assets/images/ellipse-down.svg), url(../../assets/images/under-form-bg.png);
-    background-position: top 15.3rem left 6.6rem, bottom 0 left 0, top 0 right 0;
+    height: 100vh;
+    background-image: url(../../assets/images/frame-desktop-register.png);
+    background-size: cover;
+    background-position: center;
   }
 
   @include respond(79.9375em) {
@@ -41,6 +41,13 @@
   @media screen and (min-width: 1280px) {
     top: 59.7rem;
     left: 20rem;
+  }
+  @media screen and (min-width: 1366px) {
+    top: 55.7rem;
+    left: 20rem;
+  }
+  @media screen and (min-width: 1440px) {
+    top: 62.7rem;
   }
   @include respond(79.9375em) {
     top: 16.3rem;
