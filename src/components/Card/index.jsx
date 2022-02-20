@@ -27,7 +27,10 @@ const Card = () => {
       ...value,
       categoryName: transactionsCat.find(category => category.id === value.categoryId).name,
       type: value.type === 'INCOME' ? '+' : '-',
-      amount: Math.abs(value.amount),
+      amount: Math.round((Math.abs(value.amount) * 100) / 100)
+        .toFixed(2)
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ' '),
     };
   });
 
