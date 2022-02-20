@@ -1,12 +1,13 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
-import styles from './styles.module.scss';
+
 import { categoryColor } from 'utils/categoriesColors';
+import styles from './styles.module.scss';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Chart = ({ categories }) => {
-  function getData() {
+  const getData = () => {
     let data = [];
     if (categories && categories?.categoriesSummary.length) {
       data = categories?.categoriesSummary?.map(i => i.total);
@@ -14,9 +15,9 @@ const Chart = ({ categories }) => {
       data = [1];
     }
     return data;
-  }
+  };
 
-  function getColor() {
+  const getColor = () => {
     let data = [
       '#FED057',
       '#FFD8D0',
@@ -36,7 +37,7 @@ const Chart = ({ categories }) => {
     }
 
     return data;
-  }
+  };
 
   return (
     <>
@@ -61,7 +62,9 @@ const Chart = ({ categories }) => {
               height={320}
               width={320}
             />
-            <div className={styles.total}>₴ {Math.abs(categories?.periodTotal)}</div>
+            <div className={styles.total}>
+              ₴ {categories?.periodTotal ? Math.abs(categories.periodTotal) : '0'}
+            </div>
           </div>
         </div>
       </div>

@@ -1,32 +1,26 @@
 import { useMemo, useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useTable } from 'react-table';
 
-import { getTransactions, getTransactionCategories } from 'api/api-helper';
-import { translateCatRuToEng } from 'utils/evaluationFunctions';
+import { getTransactions, getTransactionCategories } from 'store/slices/finance/actions';
 import styles from './styles.module.scss';
 
 const Dashboard = () => {
-  const [transactions, setTransactions] = useState([]);
-  const [transactionsCat, setTransactionsCat] = useState([]);
-  let [currentPage, setCurrentPage] = useState(1);
-  const token = useSelector(state => state.session.token);
+  const [currentPage, setCurrentPage] = useState(1);
+  const { token } = useSelector(state => state.session);
+  const { transactions } = useSelector(state => state.finance);
+  const { transactionCategories } = useSelector(state => state.finance);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    (async () => {
-      const userTransactions = await getTransactions(token);
-      const categories = await getTransactionCategories(token);
-      setTransactionsCat(categories);
-      setTransactions(userTransactions.reverse());
-    })();
-  }, [currentPage]);
-
-  translateCatRuToEng(transactionsCat);
+    dispatch(getTransactionCategories(token));
+    dispatch(getTransactions(token));
+  }, []);
 
   const data = transactions.slice(currentPage * 5 - 5, currentPage * 5).map(value => {
     return {
       ...value,
-      categoryName: transactionsCat.find(category => category.id === value.categoryId).name,
+      categoryName: transactionCategories.find(category => category.id === value.categoryId)?.name,
       type: value.type === 'INCOME' ? '+' : '-',
       amount: Math.round((Math.abs(value.amount) * 100) / 100)
         .toFixed(2)
