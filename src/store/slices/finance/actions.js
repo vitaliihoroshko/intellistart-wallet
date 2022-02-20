@@ -1,9 +1,9 @@
 import {
   setTransactions,
-  setError,
   addTransaction,
   setTransactionCategories,
   setTransactionsSummary,
+  setError,
 } from '.';
 import { setError as setSessionError } from 'store/slices/session';
 import { translateCategoryNames } from 'utils/translationFunctions';
@@ -63,7 +63,9 @@ export const getTransactionsSummary = (token, period) => {
       dispatch(setTransactionsSummary(transformedTransactionsSummary));
     } catch (error) {
       if (error.response.status === 400) dispatch(setError('Validation error'));
-      else if (error.response.status === 401) dispatch('Bearer authorization failed');
+      else if (error.response.status === 401) {
+        dispatch(setSessionError('Bearer authorization failed'));
+      }
     }
   };
 };
