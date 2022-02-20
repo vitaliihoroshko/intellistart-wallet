@@ -4,20 +4,20 @@
 .page_wrapper {
   position: relative;
   background-color: $mystic-color;
-  width: 100%;
+  max-width: 144rem;
   margin: 0 auto;
   overflow: hidden;
   background-repeat: no-repeat;
 
   @media screen and (min-width: 1280px) {
-    height: 100vh;
-    background-image: url(../../assets/images/frame-desktop-login.png);
-    background-size: cover;
-    background-position: center;
+    height: 72rem;
+    background-image: url(../../assets/images/login-frame-desktop.png),
+      url(../../assets/images/ellipse-down.svg), url(../../assets/images/under-form-bg.png);
+    background-position: top 15.3rem left 6.6rem, bottom 0 left 0, top 0 right 0;
   }
 
   @include respond(79.9375em) {
-    height: 102.4rem;
+    height: 100vh;
     background-image: url(../../assets/images/ellipse-down.svg),
       url(../../assets/images/ellipse-top.svg), url(../../assets/images/login-frame-bg.svg);
     background-position: bottom 0 left 0, top 0 right 0, top 6rem left 11.4rem;
@@ -32,7 +32,7 @@
 
 .app_name {
   position: absolute;
-  font-family: Poppins;
+  font-family: 'Poppins Regular', sans-serif;
   font-weight: 400;
   font-size: 3rem;
   line-height: 4.5rem;
@@ -42,16 +42,9 @@
     top: 59.7rem;
     left: 20rem;
   }
-  @media screen and (min-width: 1366px) {
-    top: 55.7rem;
-    left: 20rem;
-  }
-  @media screen and (min-width: 1440px) {
-    top: 62.7rem;
-  }
   @include respond(79.9375em) {
     top: 16.3rem;
-    right: 20rem;
+    right: 17rem;
   }
   @include respond(47.9375em) {
     display: none;
