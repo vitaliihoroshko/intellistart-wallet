@@ -1,7 +1,6 @@
 @import 'styles/variables';
 @import 'styles/mixins.scss';
 
-
 .button {
   font-family: 'Abel', sans-serif;
   font-size: 1.8rem;
@@ -26,6 +25,7 @@
   &:focus {
     outline: none;
   }
+
   @include respond(35em) {
     width: 100%;
   }

@@ -53,13 +53,14 @@ table {
     width: 14.2rem;
   }
   &__comment {
-    width: 17rem;
+    width: 12rem;
   }
   &__amount {
-    width: 11rem;
+    width: 10rem;
+    text-align: right;
   }
   &__balance {
-    width: 5.3rem;
+    width: 11.3rem;
     text-align: right;
   }
 }
@@ -73,16 +74,18 @@ table {
   background: $white-color;
   border-radius: 1rem;
   padding: 0.5rem 2rem;
+  cursor: pointer;
+
+  &:not(:disabled):hover {
+    background-color: $purple-color;
+    color: $white-color
+  }
 }
 
-.pagination__back {
+.pagination__back, .pagination__next {
   background: $grey-color;
   border: none;
-}
-
-.pagination__next {
-  background: $grey-color;
-  border: none;
+  cursor: default;
 }
 
 @media screen and (max-width: $phone-max) {
@@ -100,10 +103,14 @@ table {
       width: 8.5rem;
     }
     &__comment {
-      width: 16.9rem;
+      width: 11.9rem;
     }
     &__amount {
-      width: 11.1rem;
+      width: 10.1rem;
+    }
+    &__balance {
+      width: 11.3rem;
+      text-align: right;
     }
   }
 }
