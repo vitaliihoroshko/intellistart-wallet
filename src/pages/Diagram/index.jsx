@@ -5,7 +5,6 @@ import { getTransactionsSummary } from 'store/slices/finance/actions';
 import Currency from 'components/Currency';
 import MainDashboard from 'components/Dashboard/MainDashboard';
 import Balance from 'components/Balance';
-import AddTransactionsButton from 'components/Buttons/AddTransactionsButton';
 import ModalAddTransaction from 'components/Modals/ModalAddTransaction';
 import Chart from 'components/Chart';
 import Navigation from 'components/Navigation';
@@ -53,7 +52,6 @@ const DashboardPage = () => {
           changeYear={changeYear}
         />
       </div>
-      <AddTransactionsButton />
     </div>
   );
 };
