@@ -1,47 +1,35 @@
 import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
+import { getTransactionsSummary } from 'store/slices/finance/actions';
 import Currency from 'components/Currency';
 import MainDashboard from 'components/Dashboard/MainDashboard';
 import Balance from 'components/Balance';
 import AddTransactionsButton from 'components/Buttons/AddTransactionsButton';
 import ModalAddTransaction from 'components/Modals/ModalAddTransaction';
 import Chart from 'components/Chart';
-import { getChartData } from 'api/api-helper';
-import { useSelector } from 'react-redux';
-
-import styles from './styles.module.scss';
 import Header from 'components/Header';
+import styles from './styles.module.scss';
 
 const DashboardPage = () => {
-  const token = useSelector(state => state.session.token);
-  const [categories, setCategories] = useState(null);
   const [year, setYear] = useState('');
   const [month, setMonth] = useState('');
+  const { token } = useSelector(state => state.session);
+  const { transactionsSummary } = useSelector(state => state.finance);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    let params = { token };
-
-    if (year && month) {
-      params = { ...params, year: year.value, month: month.value };
-    }
-
-    getChartData(params).then(res => {
-      res = {
-        ...res,
-        expenseSummary: Math.abs(res?.expenseSummary),
-        categoriesSummary: res?.categoriesSummary?.map(i => ({ ...i, total: Math.abs(i.total) })),
-      };
-      setCategories(res);
-    });
+    dispatch(
+      getTransactionsSummary(token, {
+        year: year.value,
+        month: month.value,
+      }),
+    );
   }, [year, month]);
 
-  function changeMonth(month) {
-    setMonth(month);
-  }
+  const changeMonth = month => setMonth(month);
 
-  function changeYear(year) {
-    setYear(year);
-  }
+  const changeYear = year => setYear(year);
 
   return (
     <div className={styles.background}>
@@ -52,9 +40,9 @@ const DashboardPage = () => {
         <Currency />
       </div>
       <div className={styles['rightSide']}>
-        <Chart categories={categories} />
+        <Chart categories={transactionsSummary} />
         <MainDashboard
-          categories={categories}
+          categories={transactionsSummary}
           month={month}
           year={year}
           changeMonth={changeMonth}

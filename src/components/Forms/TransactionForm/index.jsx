@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { setIsModalAddTransactionOpen } from 'store/slices/global';
 import RegularButton from 'components/Buttons/RegularButton';
-import { getTransactionCategories, createTransaction } from 'api/api-helper';
+import { createTransaction } from 'store/slices/finance/actions';
 import dropdownArrow from 'assets/images/dropdown-arrow.svg';
 import styles from './styles.module.scss';
 
@@ -21,16 +21,16 @@ const TransactionForm = ({ modalIsOpened }) => {
   const [showCategories, setShowCategories] = useState(false);
   const [selected, setSelected] = useState('');
   const dropdownList = useRef(null);
-  const token = useSelector(state => state.session.token);
+  const { token } = useSelector(state => state.session);
+  const { transactionCategories } = useSelector(state => state.finance);
   const dispatch = useDispatch();
   const closeHandler = () => dispatch(setIsModalAddTransactionOpen(false));
 
   useEffect(() => {
     (async () => {
       if (modalIsOpened) {
-        const categories = await getTransactionCategories(token);
-        setIncomeCategory(categories.find(value => value.name === 'Доход'));
-        setExpensesCategories(categories.filter(value => value.name !== 'Доход'));
+        setIncomeCategory(transactionCategories.find(value => value.name === 'Income'));
+        setExpensesCategories(transactionCategories.filter(value => value.name !== 'Income'));
       }
     })();
   }, [modalIsOpened]);
@@ -70,26 +70,24 @@ const TransactionForm = ({ modalIsOpened }) => {
 
   const submitHandler = async (values, actions) => {
     const { amount, transactionDate, comment } = values;
-    const transformedDate = moment(transactionDate).format();
+    const transformedDate = moment(transactionDate).format().split('T')[0];
 
     const category = expensesCategories.find(value => value.name === selected);
 
+    const createTransactionDto = {
+      amount: checked ? +`-${amount}` : +amount,
+      transactionDate: transformedDate,
+      categoryId: checked ? category.id : incomeCategory.id,
+      comment,
+      type: checked ? 'EXPENSE' : 'INCOME',
+    };
+
     try {
-      const transaction = await createTransaction(
-        {
-          amount: checked ? +`-${amount}` : +amount,
-          transactionDate: transformedDate,
-          categoryId: checked ? category.id : incomeCategory.id,
-          comment,
-          type: checked ? 'EXPENSE' : 'INCOME',
-        },
-        token,
-      );
-      console.log(transaction);
+      dispatch(createTransaction(createTransactionDto, token));
       actions.resetForm();
       setSelected('');
       closeHandler();
-    } catch {
+    } catch (error) {
       toast.error('Something went wrong...', { theme: 'colored' });
     }
   };
