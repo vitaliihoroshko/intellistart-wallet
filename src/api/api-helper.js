@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { makeQueryParams } from 'utils/helperFunctions';
+
 const API_URL = 'https://wallet.goit.ua/api';
 
 export const signUserUp = async signUpDto => {
@@ -60,4 +62,15 @@ export const createTransaction = async (createTransactionDto, token) => {
   });
   const transactionsData = response.data;
   return transactionsData;
+};
+
+export const getTransactionsSummary = async (token, parameters) => {
+  const queryParams = makeQueryParams(parameters);
+  const response = await axios.get(`${API_URL}/transactions-summary${queryParams}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const transactionsSummary = response.data;
+  return transactionsSummary;
 };
