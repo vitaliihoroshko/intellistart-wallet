@@ -36,6 +36,7 @@
     background-color: $mobile-bg-color;
     flex-direction: column;
     height: fit-content;
+    min-height: 100vh;
   }
   .leftSide {
     border: none;
