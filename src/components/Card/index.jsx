@@ -42,7 +42,10 @@ const Card = () => {
   let disabledBack = false;
   let disabledNext = false;
 
-  if (currentPage === 1) {
+  if (currentPage === 1 && transactions.length <= 5) {
+    buttonBackClasses = [styles['pagination__displaynone']];
+    buttonNextClasses = [styles['pagination__displaynone']];
+  } else if (currentPage === 1 && transactions.length > 5) {
     disabledBack = true;
     buttonBackClasses = [styles['pagination__buttons'], styles['pagination__back']];
   } else if (currentPage === Math.ceil(transactions.length / 5)) {
