@@ -29,7 +29,6 @@ const Dashboard = () => {
       balanceAfter: value.balanceAfter.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '),
     };
   });
-  console.log(data);
   const handleClickBack = () => setCurrentPage(prevValue => prevValue - 1);
   const handleClickNext = () => setCurrentPage(prevValue => prevValue + 1);
 

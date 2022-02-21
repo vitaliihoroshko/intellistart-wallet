@@ -122,7 +122,7 @@ const TransactionForm = ({ modalIsOpened }) => {
                 <Field
                   name="categoryId"
                   placeholder="Select a category"
-                  autocomplete="off"
+                  autoComplete="off"
                   value={selected}
                   className={styles.dropdown__button}
                   onClick={handleShowCategories}
