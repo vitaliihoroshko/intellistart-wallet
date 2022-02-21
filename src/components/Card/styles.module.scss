@@ -59,16 +59,21 @@ tr:last-child td{
   background: $white-color;
   border-radius: 1rem;
   padding: 0.5rem 2rem;
+
+  &:not(:disabled):hover {
+    background-color: $purple-color;
+    color: $white-color
+  }
 }
 
-.pagination__back {
+.pagination__back, .pagination__next {
   background: $grey-color;
   border: none;
+  cursor: default;
 }
 
-.pagination__next {
-  background: $grey-color;
-  border: none;
+.pagination__displaynone {
+  display: none;
 }
 
 @media screen and (min-width: $tablet-min) {
