@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import {
   setTransactions,
   addTransaction,
@@ -39,6 +40,7 @@ export const createTransaction = (createTransactionDto, token) => {
       } else if (error.response.status === 409) {
         dispatch(setError('Transaction category type does not match transaction type'));
       }
+      toast.error('Something went wrong...', { theme: 'colored' });
     }
   };
 };

@@ -1,4 +1,6 @@
 import { useSelector } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Currency from 'components/Currency';
 import Dashboard from 'components/Dashboard';
 import Card from 'components/Card';
@@ -32,6 +34,12 @@ const DashboardPage = () => {
           <Dashboard />
         </div>
         <AddTransactionsButton />
+        <ToastContainer
+          position="bottom-right"
+          closeButton={false}
+          hideProgressBar
+          autoClose={3000}
+        />
       </div>
     </>
   );
