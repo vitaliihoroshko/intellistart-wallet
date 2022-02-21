@@ -14,28 +14,8 @@
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transition: all 0.5s;
+  transition: all 0.3s;
 
-  &_active {
-    pointer-events: all;
-    opacity: 1;
-
-    @include respond(tablet) {
-      z-index: 9;
-      margin-top: 8rem;
-      background-color: $white-color;
-    }
-
-    @include respond(30em) {
-      position: absolute;
-      overflow-x: hidden;
-    }
-    
-    @include respond(phone) {
-      margin-top: 6rem;
-    }
-  }
-  
   .modal_content {
     padding: 2rem;
     border-radius: 2rem;
@@ -43,25 +23,29 @@
     min-height: 54rem;
     min-width: 54rem;
     position: relative;
-    
+    transform: scale(0);
+    opacity: 0;
+    transition: all 0.5s 0.2s;
+
     @include respond(tablet) {
       position: relative;
       padding-top: 0;
       height: 100%;
       width: 100%;
       border-radius: 0;
+      transition: all 0.5s;
     }
-  
+
     .close_button {
       position: absolute;
       top: 2rem;
       right: 2rem;
-    
+
       @include respond(tablet) {
         display: none;
       }
     }
-  
+
     .modal_title {
       font-family: 'Poppins', sans-serif;
       margin-top: 2rem;
@@ -70,11 +54,40 @@
       font-weight: 400;
       font-size: 3rem;
       line-height: 4.5rem;
-    
+
       @include respond(phone) {
         font-size: 2.4rem;
         line-height: 3.6rem;
       }
     }
-  }  
+  }
+
+  @include respond(tablet) {
+    transition: all 0s;
+  }
+}
+
+.modal_active {
+  pointer-events: all;
+  opacity: 1;
+
+  .modal_content {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  @include respond(tablet) {
+    z-index: 9;
+    margin-top: 8rem;
+    background-color: $white-color;
+  }
+
+  @include respond(30em) {
+    position: absolute;
+    overflow-x: hidden;
+  }
+
+  @include respond(phone) {
+    margin-top: 6rem;
+  }
 }
