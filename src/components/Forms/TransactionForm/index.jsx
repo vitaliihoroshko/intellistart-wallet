@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { object, number, date } from 'yup';
+import { object, number, date, string } from 'yup';
 import DatePicker from 'components/DatePicker';
 import { bool } from 'prop-types';
 import moment from 'moment';
@@ -63,7 +63,7 @@ const TransactionForm = ({ modalIsOpened }) => {
     transactionDate: date()
       .required('This field is required')
       .typeError('Date must be a dd.mm.yyyy format'),
-    // categoryId: string().test('Required', 'This field is required', () => selected),
+    categoryId: checked ? string().test('Required', 'This field is required', () => selected) : '',
   });
 
   const submitHandler = async (values, actions) => {
