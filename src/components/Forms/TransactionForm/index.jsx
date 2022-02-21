@@ -5,8 +5,6 @@ import { object, number, date } from 'yup';
 import DatePicker from 'components/DatePicker';
 import { bool } from 'prop-types';
 import moment from 'moment';
-// import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 import { setIsModalAddTransactionOpen } from 'store/slices/global';
 import RegularButton from 'components/Buttons/RegularButton';
@@ -179,12 +177,6 @@ const TransactionForm = ({ modalIsOpened }) => {
               <RegularButton isTransparent={true} clickHandler={closeHandler}>
                 Cancel
               </RegularButton>
-              {/* <ToastContainer
-                position="bottom-right"
-                closeButton={false}
-                hideProgressBar
-                autoClose={3000}
-              /> */}
             </div>
           </Form>
         </Formik>
