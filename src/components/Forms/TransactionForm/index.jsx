@@ -1,11 +1,11 @@
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { object, number, date, string } from 'yup';
+import { object, number, date } from 'yup';
 import DatePicker from 'components/DatePicker';
 import { bool } from 'prop-types';
 import moment from 'moment';
-import { ToastContainer, toast } from 'react-toastify';
+// import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { setIsModalAddTransactionOpen } from 'store/slices/global';
@@ -65,7 +65,7 @@ const TransactionForm = ({ modalIsOpened }) => {
     transactionDate: date()
       .required('This field is required')
       .typeError('Date must be a dd.mm.yyyy format'),
-    categoryId: string().test('Required', 'This field is required', () => selected),
+    // categoryId: string().test('Required', 'This field is required', () => selected),
   });
 
   const submitHandler = async (values, actions) => {
@@ -81,15 +81,11 @@ const TransactionForm = ({ modalIsOpened }) => {
       comment,
       type: checked ? 'EXPENSE' : 'INCOME',
     };
-
-    try {
-      dispatch(createTransaction(createTransactionDto, token));
-      actions.resetForm();
-      setSelected('');
-      closeHandler();
-    } catch (error) {
-      toast.error('Something went wrong...', { theme: 'colored' });
-    }
+    dispatch(createTransaction(createTransactionDto, token));
+    actions.resetForm();
+    setSelected('');
+    closeHandler();
+    setChecked(false);
   };
 
   return (
@@ -183,12 +179,12 @@ const TransactionForm = ({ modalIsOpened }) => {
               <RegularButton isTransparent={true} clickHandler={closeHandler}>
                 Cancel
               </RegularButton>
-              <ToastContainer
+              {/* <ToastContainer
                 position="bottom-right"
                 closeButton={false}
                 hideProgressBar
                 autoClose={3000}
-              />
+              /> */}
             </div>
           </Form>
         </Formik>
