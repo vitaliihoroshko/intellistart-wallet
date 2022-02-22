@@ -52,6 +52,10 @@
         color: $black-color;
       }
     }
+
+    @include respond($phone-max) {
+      margin-bottom: 1.3rem;
+    }
   }
 
   .currency {
@@ -64,7 +68,7 @@
 
   @include respond($phone-max) {
     display: flex;
-    justify-content: space-evenly;
+    gap: 3.6rem;
     margin-top: 1.3rem;
   }
 }

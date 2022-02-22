@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 
+import { setIsCurrencyDisplayed } from 'store/slices/global';
 import useWindowWidth from 'hooks/useWindowWidth';
 import homeIcon from 'assets/images/home.svg';
 import homeActiveIcon from 'assets/images/home-active.svg';
@@ -11,22 +13,26 @@ import currencyActiveIcon from 'assets/images/currency-active.svg';
 import styles from './styles.module.scss';
 
 const Navigation = () => {
-  const [currencyIsActive, setCurrencyIsActive] = useState(false);
+  const { isCurrencyDisplayed } = useSelector(state => state.global);
+  const dispatch = useDispatch();
   const { pathname } = useLocation();
   const windowWidth = useWindowWidth();
 
   useEffect(() => {
-    if (windowWidth > 766 && currencyActiveIcon) setCurrencyIsActive(false);
+    if (windowWidth > 766 && isCurrencyDisplayed) dispatch(setIsCurrencyDisplayed(false));
   }, [windowWidth]);
 
   const icons = {
-    home: pathname === '/home' && !currencyIsActive ? homeActiveIcon : homeIcon,
-    diagram: pathname === '/diagram' && !currencyIsActive ? diagramActiveIcon : diagramIcon,
-    currency: currencyIsActive ? currencyActiveIcon : currencyIcon,
+    home: pathname === '/home' && !isCurrencyDisplayed ? homeActiveIcon : homeIcon,
+    diagram: pathname === '/diagram' && !isCurrencyDisplayed ? diagramActiveIcon : diagramIcon,
+    currency: isCurrencyDisplayed ? currencyActiveIcon : currencyIcon,
   };
 
   const clickHandler = value => {
-    if (currencyIsActive !== value) setCurrencyIsActive(value);
+    if (isCurrencyDisplayed !== value) {
+      dispatch(setIsCurrencyDisplayed(value));
+      console.log('inside', value);
+    }
   };
 
   const activeLinkClassNames = [styles.link, styles['link-active']];
@@ -38,7 +44,7 @@ const Navigation = () => {
         <NavLink
           to="/home"
           className={({ isActive }) => {
-            return isActive && !currencyIsActive ? activeLinkClassNames.join(' ') : styles.link;
+            return isActive && !isCurrencyDisplayed ? activeLinkClassNames.join(' ') : styles.link;
           }}
         >
           <img src={icons.home} alt="Home icon" width={18} height={18} />
@@ -49,7 +55,7 @@ const Navigation = () => {
         <NavLink
           to="/diagram"
           className={({ isActive }) => {
-            return isActive && !currencyIsActive ? activeLinkClassNames.join(' ') : styles.link;
+            return isActive && !isCurrencyDisplayed ? activeLinkClassNames.join(' ') : styles.link;
           }}
         >
           <img src={icons.diagram} alt="Diagram icon" width={18} height={18} />
@@ -59,7 +65,7 @@ const Navigation = () => {
       <li className={currencyItemClassNames.join(' ')} onClick={() => clickHandler(true)}>
         <NavLink
           to={pathname}
-          className={currencyIsActive ? activeLinkClassNames.join(' ') : styles.link}
+          className={isCurrencyDisplayed ? activeLinkClassNames.join(' ') : styles.link}
         >
           <img src={icons.currency} alt="Currency icon" width={38} height={38} />
         </NavLink>
