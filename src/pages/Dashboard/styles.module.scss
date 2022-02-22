@@ -1,32 +1,6 @@
 @import 'styles/variables';
 @import 'styles/mixins';
 
-.background {
-  background-image: url('../../assets/images/bg-dashboard.png');
-  background-size: cover;
-  height: 100vh;
-  margin-top: 8rem;
-  display: flex;
-  flex-direction: row;
-
-  @include respond(tablet-max) {
-    background-image: url('../../assets/images/bg-dashboard-tablet.png');
-    flex-direction: column;
-  }
-
-  @include respond(phone-max) {
-    background-image: none;
-    background-color: $mobile-bg-color;
-    flex-direction: column;
-    height: fit-content;
-    min-height: 100vh;
-  }
-}
-
-.hide_content {
-  display: none;
-}
-
 .content {
   padding: 4rem 0 0 3rem;
 

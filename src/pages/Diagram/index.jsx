@@ -28,20 +28,18 @@ const DashboardPage = () => {
   const changeYear = year => setYear(year);
 
   return (
-    <div className={styles.background}>
-      <DashboardPageLayout>
-        <div className={styles.content}>
-          <Chart categories={transactionsSummary} />
-          <MainDashboard
-            categories={transactionsSummary}
-            month={month}
-            year={year}
-            changeMonth={changeMonth}
-            changeYear={changeYear}
-          />
-        </div>
-      </DashboardPageLayout>
-    </div>
+    <DashboardPageLayout>
+      <div className={styles.content}>
+        <Chart categories={transactionsSummary} />
+        <MainDashboard
+          categories={transactionsSummary}
+          month={month}
+          year={year}
+          changeMonth={changeMonth}
+          changeYear={changeYear}
+        />
+      </div>
+    </DashboardPageLayout>
   );
 };
 
