@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
-import styles from './styles.module.scss';
-import { usd, eur, rur, apiCall } from '../../api/privat-api.js';
 
-function Round(num) {
-  return (Math.round(num * 100) / 100).toFixed(2);
-}
+import { usd, eur, rur, apiCall } from 'api/privat-api.js';
+import { roundNumber } from 'utils/helperFunctions';
+import styles from './styles.module.scss';
 
 const Currency = () => {
   const [usdPurchase, setUsdPurchase] = useState();
@@ -19,18 +17,18 @@ const Currency = () => {
       const data = await apiCall();
       for (const element of data) {
         if (element.ccy == 'RUR') {
-          setRurPurchase(Round(element.buy));
-          setRurSale(Round(element.sale));
+          setRurPurchase(roundNumber(element.buy));
+          setRurSale(roundNumber(element.sale));
         } else if (element.ccy == 'EUR') {
-          setEurPurchase(Round(element.buy));
-          setEurSale(Round(element.sale));
+          setEurPurchase(roundNumber(element.buy));
+          setEurSale(roundNumber(element.sale));
         } else if (element.ccy == 'USD') {
-          setUsdPurchase(Round(element.buy));
-          setUsdSale(Round(element.sale));
+          setUsdPurchase(roundNumber(element.buy));
+          setUsdSale(roundNumber(element.sale));
         }
       }
     })();
-  });
+  }, []);
 
   const DenseTable = () => {
     return (
@@ -64,4 +62,5 @@ const Currency = () => {
   };
   return <div className={styles['currency__container']}>{DenseTable()}</div>;
 };
+
 export default Currency;

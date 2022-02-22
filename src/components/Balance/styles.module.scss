@@ -4,7 +4,7 @@
   height: 8rem;
   width: 35rem;
   background-color: $white-color;
-  margin: 3rem 3rem 3rem 0;
+  margin: 1.1rem 3rem 3rem 0;
   padding: 0.8rem 0 0 4rem;
   border-radius: 3rem;
 }
@@ -17,6 +17,7 @@
     color: $black-color;
     margin-top: 0.3rem;
   }
+
   &__text {
     color: $light-grey-color;
     font-family: 'Abel', sans-serif;
@@ -38,6 +39,6 @@
   .balance {
     height: 8rem;
     width: 28rem;
-    margin: 1.3rem 0 0 0;
+    margin: 0;
   }
 }

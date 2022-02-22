@@ -1,18 +1,18 @@
 import { useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Currency from 'components/Currency';
+
+import useWindowWidth from 'hooks/useWindowWidth';
+import DashboardPageLayout from 'components/DashboardPageLayout';
 import Dashboard from 'components/Dashboard';
 import Card from 'components/Card';
-import Navigation from 'components/Navigation';
-import Balance from 'components/Balance';
 import AddTransactionsButton from 'components/Buttons/AddTransactionsButton';
 import ModalAddTransaction from 'components/Modals/ModalAddTransaction';
 import styles from './styles.module.scss';
 
 const DashboardPage = () => {
   const modalStatus = useSelector(state => state.global.isModalAddTransactionOpen);
-  const windowWidth = document.documentElement.clientWidth;
+  const windowWidth = useWindowWidth();
 
   return (
     <>
@@ -22,17 +22,12 @@ const DashboardPage = () => {
           modalStatus && windowWidth <= 480 ? styles.hide_content : ''
         }`}
       >
-        <div className={styles['leftSide']}>
-          <div>
-            <Navigation />
-            <Balance />
+        <DashboardPageLayout>
+          <div className={styles.content}>
+            <Card />
+            <Dashboard />
           </div>
-          <Currency />
-        </div>
-        <div className={styles['rightSide']}>
-          <Card />
-          <Dashboard />
-        </div>
+        </DashboardPageLayout>
         <AddTransactionsButton />
         <ToastContainer
           position="bottom-right"

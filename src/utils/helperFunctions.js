@@ -72,3 +72,5 @@ export const getСategoryColors = () => {
     'basic expenses': '#FED057',
   };
 };
+
+export const roundNumber = number => (Math.round(number * 100) / 100).toFixed(2);

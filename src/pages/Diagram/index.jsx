@@ -2,13 +2,9 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getTransactionsSummary } from 'store/slices/finance/actions';
-import Currency from 'components/Currency';
+import DashboardPageLayout from 'components/DashboardPageLayout';
 import MainDashboard from 'components/Dashboard/MainDashboard';
-import Balance from 'components/Balance';
-import ModalAddTransaction from 'components/Modals/ModalAddTransaction';
 import Chart from 'components/Chart';
-import Navigation from 'components/Navigation';
-import Header from 'components/Header';
 import styles from './styles.module.scss';
 
 const DashboardPage = () => {
@@ -33,25 +29,18 @@ const DashboardPage = () => {
 
   return (
     <div className={styles.background}>
-      <Header />
-      <ModalAddTransaction />
-      <div className={styles['leftSide']}>
-        <div>
-          <Navigation />
-          <Balance />
+      <DashboardPageLayout>
+        <div className={styles.content}>
+          <Chart categories={transactionsSummary} />
+          <MainDashboard
+            categories={transactionsSummary}
+            month={month}
+            year={year}
+            changeMonth={changeMonth}
+            changeYear={changeYear}
+          />
         </div>
-        <Currency />
-      </div>
-      <div className={styles['rightSide']}>
-        <Chart categories={transactionsSummary} />
-        <MainDashboard
-          categories={transactionsSummary}
-          month={month}
-          year={year}
-          changeMonth={changeMonth}
-          changeYear={changeYear}
-        />
-      </div>
+      </DashboardPageLayout>
     </div>
   );
 };
