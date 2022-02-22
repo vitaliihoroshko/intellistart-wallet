@@ -144,6 +144,10 @@
         outline: none;
       }
     }
+
+    .error_message::placeholder {
+      color: $red-color;
+    }
     
     .dropdown__icon {
       position: absolute;
