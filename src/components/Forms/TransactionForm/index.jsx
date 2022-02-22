@@ -13,11 +13,12 @@ import dropdownArrow from 'assets/images/dropdown-arrow.svg';
 import styles from './styles.module.scss';
 
 const TransactionForm = ({ modalIsOpened }) => {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(true);
   const [incomeCategory, setIncomeCategory] = useState({});
   const [expensesCategories, setExpensesCategories] = useState([]);
   const [showCategories, setShowCategories] = useState(false);
   const [selected, setSelected] = useState('');
+  const [submitted, setSubmitted] = useState(false);
   const dropdownList = useRef(null);
   const { token } = useSelector(state => state.session);
   const { transactionCategories } = useSelector(state => state.finance);
@@ -43,6 +44,10 @@ const TransactionForm = ({ modalIsOpened }) => {
     }
   };
 
+  const handleShowError = () => {
+    setSubmitted(true);
+  };
+
   useEffect(() => {
     document.addEventListener('click', handleClickOutside, true);
     return () => {
@@ -63,7 +68,7 @@ const TransactionForm = ({ modalIsOpened }) => {
     transactionDate: date()
       .required('This field is required')
       .typeError('Date must be a dd.mm.yyyy format'),
-    categoryId: checked ? string().test('Required', 'This field is required', () => selected) : '',
+    categoryId: checked ? string().test(() => selected) : '',
   });
 
   const submitHandler = async (values, actions) => {
@@ -83,8 +88,11 @@ const TransactionForm = ({ modalIsOpened }) => {
     actions.resetForm();
     setSelected('');
     closeHandler();
-    setChecked(false);
+    setChecked(true);
+    setSubmitted(false);
   };
+
+  const classNames = [styles.dropdown__button, !selected && submitted ? styles.error_message : ''];
 
   return (
     <>
@@ -122,13 +130,10 @@ const TransactionForm = ({ modalIsOpened }) => {
                   placeholder="Select a category"
                   autoComplete="off"
                   value={selected}
-                  className={styles.dropdown__button}
+                  className={classNames.join(' ')}
                   onClick={handleShowCategories}
                 />
                 <img src={dropdownArrow} className={styles.dropdown__icon} alt="Dropdown arrow" />
-                <p className={styles.error}>
-                  <ErrorMessage name="categoryId" />
-                </p>
                 <div
                   ref={dropdownList}
                   onClick={handleClickOutside}
@@ -137,7 +142,7 @@ const TransactionForm = ({ modalIsOpened }) => {
                   <ul
                     onClick={e => setSelected(e.target.textContent)}
                     className={`${styles.dropdown__list} ${
-                      !showCategories ? [styles.dropdown__list_hiden] : ''
+                      !showCategories ? styles.dropdown__list_hiden : ''
                     }`}
                   >
                     {expensesCategories.map(category => (
@@ -173,7 +178,9 @@ const TransactionForm = ({ modalIsOpened }) => {
               <Field type="textarea" name="comment" placeholder="Comments" />
             </div>
             <div className={styles.modal_btns}>
-              <RegularButton type="submit">Add</RegularButton>
+              <RegularButton clickHandler={handleShowError} type="submit">
+                Add
+              </RegularButton>
               <RegularButton isTransparent={true} clickHandler={closeHandler}>
                 Cancel
               </RegularButton>
