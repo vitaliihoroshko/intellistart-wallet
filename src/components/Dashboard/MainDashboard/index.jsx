@@ -52,16 +52,31 @@ const Main = ({ categories, month, year, changeMonth, changeYear }) => {
               ))}
             </div>
           </div>
-          <div className={styles['dashboard__bottom']}>
-            <div className={styles['dashboard__bottom__item']}>
-              <div>Expenses:</div>
-              <p className={styles['dashboard__bottom__item__red']}>{categories.expenseSummary}</p>
+          {categories.expenseSummary !== 0 && categories.incomeSummary !== 0 ? (
+            <div className={styles['dashboard__bottom']}>
+              <div className={styles['dashboard__bottom__item']}>
+                <div>Expenses:</div>
+                <p className={styles['dashboard__bottom__item__red']}>
+                  {categories.expenseSummary}
+                </p>
+              </div>
+              <div className={styles['dashboard__bottom__item']}>
+                <div>Incomes:</div>
+                <p className={styles['dashboard__bottom__item__green']}>
+                  {categories.incomeSummary}
+                </p>
+              </div>
             </div>
-            <div className={styles['dashboard__bottom__item']}>
-              <div>Incomes:</div>
-              <p className={styles['dashboard__bottom__item__green']}>{categories.incomeSummary}</p>
+          ) : (
+            <div className={styles['dashboard__bottom']}>
+              <div className={styles['dashboard__bottom__item']}>
+                At this moment not transactions yet
+              </div>
+              <div className={styles['dashboard__bottom__item']}>
+                Please try to choose another month or year
+              </div>
             </div>
-          </div>
+          )}
         </>
       )}
     </div>
