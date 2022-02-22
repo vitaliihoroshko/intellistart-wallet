@@ -52,6 +52,7 @@ table {
     display: inline-block;
     height: 5.4rem;
     padding: 1.5rem 0 1.9rem 0;
+    border-bottom: 1px solid $grey-color;
   }
   &__date {
     width: 11.6rem;
@@ -107,6 +108,11 @@ table {
   &:not(:disabled):hover {
     background-color: $purple-color;
     color: $white-color
+  }
+
+  @include respond(phone-max) {
+    margin-right: 0.8rem;
+    margin-bottom: 2rem;
   }
 }
 

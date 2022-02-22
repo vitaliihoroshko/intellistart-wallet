@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getTransactions, getTransactionCategories } from 'store/slices/finance/actions';
+import { createDataToShow, chooseButtonsStyle } from 'utils/dashboardFunctions';
 import styles from './styles.module.scss';
 
 const Card = () => {
@@ -16,17 +17,7 @@ const Card = () => {
     dispatch(getTransactions(token));
   }, []);
 
-  const data = transactions.slice(currentPage * 5 - 5, currentPage * 5).map(value => {
-    return {
-      ...value,
-      categoryName: transactionCategories.find(category => category.id === value.categoryId)?.name,
-      type: value.type === 'INCOME' ? '+' : '-',
-      amount: Math.round((Math.abs(value.amount) * 100) / 100)
-        .toFixed(2)
-        .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ' '),
-    };
-  });
+  const data = createDataToShow(transactions, transactionCategories, currentPage);
 
   const handleClickBack = () => {
     setCurrentPage(prevValue => prevValue - 1);
@@ -37,21 +28,7 @@ const Card = () => {
     setCurrentPage(prevValue => prevValue + 1);
   };
 
-  let buttonBackClasses = [styles['pagination__buttons']];
-  let buttonNextClasses = [styles['pagination__buttons']];
-  let disabledBack = false;
-  let disabledNext = false;
-
-  if (currentPage === 1 && transactions.length <= 5) {
-    buttonBackClasses = [styles['pagination__displaynone']];
-    buttonNextClasses = [styles['pagination__displaynone']];
-  } else if (currentPage === 1 && transactions.length > 5) {
-    disabledBack = true;
-    buttonBackClasses = [styles['pagination__buttons'], styles['pagination__back']];
-  } else if (currentPage === Math.ceil(transactions.length / 5)) {
-    disabledNext = true;
-    buttonNextClasses = [styles['pagination__buttons'], styles['pagination__next']];
-  }
+  const buttonsOptions = chooseButtonsStyle(currentPage, transactions);
 
   const CreateCard = () => {
     return (
@@ -99,17 +76,17 @@ const Card = () => {
         })}
         <button
           name="prevPage"
-          disabled={disabledBack}
+          disabled={buttonsOptions.disabledBack}
           onClick={handleClickBack}
-          className={buttonBackClasses.join(' ')}
+          className={buttonsOptions.buttonBackClasses.join(' ')}
         >
           Back
         </button>
         <button
           name="prevPage"
-          disabled={disabledNext}
+          disabled={buttonsOptions.disabledNext}
           onClick={handleClickNext}
-          className={buttonNextClasses.join(' ')}
+          className={buttonsOptions.buttonNextClasses.join(' ')}
         >
           Next
         </button>

@@ -9,17 +9,23 @@ import useWindowWidth from 'hooks/useWindowWidth';
 import styles from './styles.module.scss';
 
 const DashboardPageLayout = ({ children }) => {
-  const width = useWindowWidth();
+  const windowWidth = useWindowWidth();
   const { isCurrencyDisplayed } = useSelector(state => state.global);
+  const { isModalAddTransactionOpen } = useSelector(state => state.global);
   const { pathname } = useLocation();
 
-  const isMobile = width <= 767;
+  const isMobile = windowWidth <= 767;
   const balanceIsShown = (isMobile && !isCurrencyDisplayed && pathname === '/home') || !isMobile;
   const contentIsShown = (isMobile && !isCurrencyDisplayed) || !isMobile;
   const currencyIsShown = !contentIsShown || !isMobile;
 
+  const classNames = [
+    styles.background,
+    isModalAddTransactionOpen && windowWidth <= 480 ? styles['hide-content'] : '',
+  ];
+
   return (
-    <>
+    <div className={classNames.join(' ')}>
       <div className={styles.layout}>
         <div>
           <Navigation />
@@ -28,7 +34,7 @@ const DashboardPageLayout = ({ children }) => {
         {currencyIsShown && <Currency />}
       </div>
       {contentIsShown && <>{children}</>}
-    </>
+    </div>
   );
 };
 
