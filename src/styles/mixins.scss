@@ -8,7 +8,7 @@
   } @else if $breakpoint == phone-max {
     @media only screen and (max-width: 47.9375em) { @content; }
   } @else if $breakpoint == tablet-min {
-    @media only screen and (min-width: 48rem) { @content; }
+    @media only screen and (min-width: 48em) { @content; }
   } @else {
     @media only screen and (max-width: $breakpoint) { @content; }
   }
