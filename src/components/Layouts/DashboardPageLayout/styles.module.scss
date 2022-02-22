@@ -1,6 +1,32 @@
 @import 'styles/variables';
 @import 'styles/mixins';
 
+.background {
+  background-image: url('../../../assets/images/bg-dashboard.png');
+  background-size: cover;
+  min-height: calc(100vh - 8rem);
+  margin-top: 8rem;
+  display: flex;
+  flex-direction: row;
+
+  @include respond(tablet-max) {
+    background-image: url('../../../assets/images/bg-dashboard-tablet.png');
+    flex-direction: column;
+  }
+
+  @include respond(phone-max) {
+    background-image: none;
+    background-color: $mobile-bg-color;
+    flex-direction: column;
+    height: fit-content;
+    min-height: 100vh;
+  }
+}
+
+.hide-content {
+  display: none;
+}
+
 .layout {
   height: 88.8vh;
   width: 36.3%;

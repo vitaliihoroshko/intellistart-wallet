@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { node, bool } from 'prop-types';
 
-import Layout from 'components/Layout';
+import Layout from 'components/Layouts/MainLayout';
 
 const ProtectedRoute = ({ element, requiresAuth }) => {
   const isAuth = useSelector(state => state.session.isAuth);
