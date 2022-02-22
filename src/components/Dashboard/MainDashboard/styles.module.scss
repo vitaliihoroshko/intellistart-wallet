@@ -1,5 +1,5 @@
-@import 'styles/variables';
-@import 'styles/mixins';
+@import "styles/variables";
+@import "styles/mixins";
 
 .dashboard {
   &__wrapper {
@@ -44,8 +44,8 @@
       }
 
       &__square {
-        width: 2.4rem;
-        height: 2.4rem;
+        width: 2rem;
+        height: 2rem;
         background: transparent;
         border-radius: 2px;
       }
@@ -66,6 +66,7 @@
       &__red {
         color: $pink-color;
       }
+
       &__green {
         color: $green-color;
       }

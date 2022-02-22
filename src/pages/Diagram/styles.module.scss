@@ -1,0 +1,43 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.background {
+  background-image: url("../../assets/images/bg-dashboard.png");
+  background-size: cover;
+  min-height: calc(100vh - 80px);
+  margin-top: 8rem;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: row;
+
+  @include respond(tablet-max) {
+    background-image: url("../../assets/images/bg-dashboard-tablet.png");
+    flex-direction: column;
+  }
+
+  @include respond(phone-max) {
+    background-image: none;
+    background-color: $mobile-bg-color;
+    flex-direction: column;
+    min-height: 100vh;
+    height: auto;
+  }
+}
+
+.content {
+  padding: 4rem 0 0 3rem;
+  display: flex;
+  gap: 30px;
+
+  @include respond(tablet-max) {
+    justify-content: center;
+  }
+
+  @include respond(phone-max) {
+    margin-top: 3rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+  }
+}
