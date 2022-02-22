@@ -1,7 +1,7 @@
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import DashboardPageLayout from 'components/DashboardPageLayout';
+import DashboardPageLayout from 'components/Layouts/DashboardPageLayout';
 import Dashboard from 'components/Dashboard';
 import Card from 'components/Card';
 import AddTransactionsButton from 'components/Buttons/AddTransactionsButton';

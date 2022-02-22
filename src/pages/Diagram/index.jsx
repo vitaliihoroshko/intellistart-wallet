@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getTransactionsSummary } from 'store/slices/finance/actions';
-import DashboardPageLayout from 'components/DashboardPageLayout';
+import DashboardPageLayout from 'components/Layouts/DashboardPageLayout';
 import MainDashboard from 'components/Dashboard/MainDashboard';
 import Chart from 'components/Chart';
 import styles from './styles.module.scss';

@@ -2,7 +2,7 @@
 @import 'styles/mixins';
 
 .background {
-  background-image: url('../../assets/images/bg-dashboard.png');
+  background-image: url('../../../assets/images/bg-dashboard.png');
   background-size: cover;
   min-height: calc(100vh - 8rem);
   margin-top: 8rem;
@@ -10,7 +10,7 @@
   flex-direction: row;
 
   @include respond(tablet-max) {
-    background-image: url('../../assets/images/bg-dashboard-tablet.png');
+    background-image: url('../../../assets/images/bg-dashboard-tablet.png');
     flex-direction: column;
   }
 
