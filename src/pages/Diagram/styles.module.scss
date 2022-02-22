@@ -9,6 +9,18 @@
   padding-bottom: 2rem;
   display: flex;
   flex-direction: row;
+
+  @include respond(tablet-max) {
+    background-image: url("../../assets/images/bg-dashboard-tablet.png");
+    flex-direction: column;
+  }
+
+  @include respond(phone-max) {
+    background-image: none;
+    background-color: $mobile-bg-color;
+    flex-direction: column;
+    height: fit-content;
+  }
 }
 
 .leftSide {
@@ -18,20 +30,8 @@
   padding: 4rem 0 0 8.7rem;
   display: flex;
   flex-direction: column;
-}
 
-.rightSide {
-  padding: 4rem 0 0 3rem;
-  display: flex;
-  gap: 30px;
-}
-
-@media screen and (min-width: $tablet-min) and (max-width: $tablet-max) {
-  .background {
-    background-image: url("../../assets/images/bg-dashboard-tablet.png");
-    flex-direction: column;
-  }
-  .leftSide {
+  @include respond(tablet-max) {
     border: none;
     padding: 0;
     flex-direction: row;
@@ -40,19 +40,8 @@
     margin: 2rem 0 0 0;
     height: fit-content;
   }
-  .rightSide {
-    justify-content: center;
-  }
-}
 
-@media screen and (max-width: $phone-max) {
-  .background {
-    background-image: none;
-    background-color: $mobile-bg-color;
-    flex-direction: column;
-    height: fit-content;
-  }
-  .leftSide {
+  @include respond(phone-max) {
     border: none;
     padding: 0;
     flex-direction: row;
@@ -61,14 +50,28 @@
     height: fit-content;
     justify-content: center;
   }
-  .leftSide > div:nth-child(2) {
-    display: none;
+}
+
+.rightSide {
+  padding: 4rem 0 0 3rem;
+  display: flex;
+  gap: 30px;
+
+  @include respond(tablet-max) {
+    justify-content: center;
   }
-  .rightSide {
+
+  @include respond(phone-max) {
     margin-top: 3rem;
     padding: 0;
     display: flex;
     flex-direction: column;
     align-self: center;
+  }
+}
+
+.leftSide > div:nth-child(2) {
+  @include respond(phone-max) {
+    display: none;
   }
 }
