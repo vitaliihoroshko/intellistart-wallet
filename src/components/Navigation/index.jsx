@@ -29,10 +29,7 @@ const Navigation = () => {
   };
 
   const clickHandler = value => {
-    if (isCurrencyDisplayed !== value) {
-      dispatch(setIsCurrencyDisplayed(value));
-      console.log('inside', value);
-    }
+    if (isCurrencyDisplayed !== value) dispatch(setIsCurrencyDisplayed(value));
   };
 
   const activeLinkClassNames = [styles.link, styles['link-active']];

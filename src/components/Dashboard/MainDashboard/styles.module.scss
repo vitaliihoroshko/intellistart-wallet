@@ -4,38 +4,38 @@
 .dashboard {
   &__wrapper {
     font-family: 'Abel', sans-serif;
-    font-size: 18px;
+    font-size: 1.8rem;
     font-weight: 400;
-    line-height: 23px;
-    letter-spacing: 0em;
-    margin-top: 55px;
+    line-height: 2.3rem;
+    letter-spacing: 0;
+    margin-top: 5.5rem;
   }
 
   &__input__group {
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 20px;
+    grid-gap: 2rem;
   }
 
   &__table {
     &__head {
       background-color: $white-color;
-      padding: 16px 30px 19px;
+      padding: 1.6rem 3rem 1.9rem;
       display: flex;
       align-items: center;
-      gap: 177px;
-      border-radius: 30px;
+      gap: 17.7rem;
+      border-radius: 3rem;
     }
 
     &__item {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      padding: 15px 30px;
+      padding: 1.5rem 3rem;
       border-bottom: 1px solid $grey-color;
-      box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
-      font-size: 16px;
+      box-shadow: 0 1px 0 rgba($white-color, 0.6);
+      font-size: 1.6rem;
 
       &__left {
         display: flex;
@@ -44,8 +44,8 @@
       }
 
       &__square {
-        width: 24px;
-        height: 24px;
+        width: 2.4rem;
+        height: 2.4rem;
         background: transparent;
         border-radius: 2px;
       }
@@ -53,14 +53,15 @@
   }
 
   &__bottom {
-    padding: 0 30px;
-    font-size: 16px;
+    padding: 0 3rem;
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
 
     &__item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 15px;
+      margin-top: 1.5rem;
 
       &__red {
         color: $pink-color;
