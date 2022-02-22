@@ -17,6 +17,16 @@ const Chart = ({ categories }) => {
     return data;
   };
 
+  const getName = () => {
+    let data = [];
+    if (categories && categories?.categoriesSummary.length) {
+      data = categories?.categoriesSummary?.map(i => ` ${i.name}`);
+    } else {
+      data = [' You have no transactions'];
+    }
+    return data;
+  };
+
   const getColor = () => {
     let data = [
       '#FED057',
@@ -47,6 +57,7 @@ const Chart = ({ categories }) => {
           <div className={styles.doughnut}>
             <Doughnut
               data={{
+                labels: getName(),
                 datasets: [
                   {
                     label: '# of Votes',
@@ -58,7 +69,11 @@ const Chart = ({ categories }) => {
                   },
                 ],
               }}
-              options={{ maintainAspectRatio: false }}
+              options={{
+                plugins: {
+                  legend: false,
+                },
+              }}
               height={320}
               width={320}
             />
