@@ -7,7 +7,7 @@ import MainDashboard from 'components/Dashboard/MainDashboard';
 import Chart from 'components/Chart';
 import styles from './styles.module.scss';
 
-const DashboardPage = () => {
+const DiagramPage = () => {
   const [year, setYear] = useState('');
   const [month, setMonth] = useState('');
   const { token } = useSelector(state => state.session);
@@ -43,4 +43,4 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage;
+export default DiagramPage;

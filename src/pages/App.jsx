@@ -5,8 +5,8 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { autoSignIn } from 'store/slices/session/actions';
 import LoginPage from './Login';
 import RegisterPage from './Register';
-import DashboardPage from './Dashboard';
-import DiagramPage from './Diagram';
+import HomePage from './Dashboard/Home';
+import DiagramPage from './Dashboard/Diagram';
 import NotFoundPage from './NotFound';
 import ProtectedRoute from 'components/ProtectedRoute';
 import LoadingSpinner from 'components/LoadingSpinner';
@@ -37,7 +37,7 @@ const App = () => {
         )}
         <Route
           path="/home"
-          element={<ProtectedRoute element={<DashboardPage />} requiresAuth={true} />}
+          element={<ProtectedRoute element={<HomePage />} requiresAuth={true} />}
         />
         <Route
           path="/diagram"

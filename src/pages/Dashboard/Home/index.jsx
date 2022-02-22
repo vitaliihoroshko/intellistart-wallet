@@ -8,7 +8,7 @@ import AddTransactionsButton from 'components/Buttons/AddTransactionsButton';
 import ModalAddTransaction from 'components/Modals/ModalAddTransaction';
 import styles from './styles.module.scss';
 
-const DashboardPage = () => {
+const HomePage = () => {
   return (
     <>
       <ModalAddTransaction />
@@ -29,4 +29,4 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage;
+export default HomePage;
