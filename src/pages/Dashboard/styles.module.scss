@@ -1,5 +1,5 @@
 @import 'styles/variables';
-//@import 'styles/mixins';
+@import 'styles/mixins';
 
 .background {
   background-image: url('../../assets/images/bg-dashboard.png');
@@ -8,9 +8,19 @@
   margin-top: 8rem;
   display: flex;
   flex-direction: row;
-  // @include respond(phone) {
-  //   height: fit-content;
-  // }
+
+  @include respond(tablet-max) {
+    background-image: url('../../assets/images/bg-dashboard-tablet.png');
+    flex-direction: column;
+  }
+
+  @include respond(phone-max) {
+    background-image: none;
+    background-color: $mobile-bg-color;
+    flex-direction: column;
+    height: fit-content;
+    min-height: 100vh;
+  }
 }
 
 .hide_content {
@@ -24,46 +34,8 @@
   padding: 4rem 0 0 8.7rem;
   display: flex;
   flex-direction: column;
-}
 
-.rightSide {
-  padding: 4rem 0 0 3rem;
-}
-
-@media screen and (max-width: $phone-max) {
-  .background {
-    background-image: none;
-    background-color: $mobile-bg-color;
-    flex-direction: column;
-    height: fit-content;
-    min-height: 100vh;
-  }
-  .leftSide {
-    border: none;
-    padding: 0;
-    flex-direction: row;
-    width: 100%;
-    margin: 0;
-    height: fit-content;
-    justify-content: center;
-  }
-  .leftSide>div:nth-child(2){
-    display: none;
-  }
-  .rightSide {
-    margin-top: 3rem;
-    padding: 0;
-    display: flex;
-    align-self: center;
-  }
-}
-
-@media screen and (min-width: $tablet-min) and (max-width: $tablet-max) {
-  .background {
-    background-image: url('../../assets/images/bg-dashboard-tablet.png');
-    flex-direction: column;
-  }
-  .leftSide {
+  @include respond(tablet-max) {
     border: none;
     padding: 0;
     flex-direction: row;
@@ -72,10 +44,36 @@
     margin: 2rem 0 0 0;
     height: fit-content;
   }
-  .rightSide {
+
+  @include respond(phone-max) {
+    border: none;
+    padding: 0;
+    flex-direction: row;
+    width: 100%;
+    margin: 0;
+    height: fit-content;
+    justify-content: center;
+  }
+}
+
+.leftSide>div:nth-child(2){
+
+  @include respond(phone-max) {
+    display: none;
+  }
+}
+
+.rightSide {
+  padding: 4rem 0 0 3rem;
+
+  @include respond(tablet-max) {
     margin-top: 4rem;
     padding: 0;
     display: flex;
     align-self: center;
+  }
+
+  @include respond(phone-max) {
+    margin-top: 3rem;
   }
 }

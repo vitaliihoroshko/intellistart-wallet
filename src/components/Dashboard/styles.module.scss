@@ -1,4 +1,6 @@
 @import 'styles/variables';
+@import 'styles/mixins';
+
 .bg {
   background-image: url('../../assets/images/bg-dashboard.png');
   height:100vh;
@@ -10,6 +12,15 @@
   font-size: 1.6rem;
   line-height: 2rem;
   font-family: 'Abel', sans-serif;
+
+  @include respond(tablet-max) {
+    width: 68.8rem;
+  }
+
+  @include respond(phone-max) {
+    display: none;
+  }
+
 }
 table {
   border-collapse: collapse;
@@ -48,20 +59,37 @@ table {
   }
   &__type {
     width: 8.8rem;
+
+    @include respond(tablet-max) {
+      width: 8.5rem;
+    }
   }
   &__category {
     width: 14.2rem;
   }
   &__comment {
     width: 12rem;
+
+    @include respond(tablet-max) {
+      width: 11.9rem;
+    }
   }
   &__amount {
     width: 10rem;
     text-align: right;
+
+    @include respond(tablet-max) {
+      width: 10.1rem;
+    }
   }
   &__balance {
     width: 11.3rem;
     text-align: right;
+
+    @include respond(tablet-max) {
+      width: 11.3rem;
+      text-align: right;
+    }
   }
 }
 
@@ -90,31 +118,4 @@ table {
 
 .pagination__displaynone {
   display: none;
-}
-
-@media screen and (max-width: $phone-max) {
-  .dashboard {
-    display: none;
-  }
-}
-
-@media screen and (min-width: $tablet-min) and (max-width: $tablet-max) {
-  .dashboard {
-    width: 68.8rem;
-  }
-  .dashboard {
-    &__type {
-      width: 8.5rem;
-    }
-    &__comment {
-      width: 11.9rem;
-    }
-    &__amount {
-      width: 10.1rem;
-    }
-    &__balance {
-      width: 11.3rem;
-      text-align: right;
-    }
-  }
 }

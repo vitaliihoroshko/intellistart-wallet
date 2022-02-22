@@ -1,4 +1,14 @@
 @import 'styles/variables';
+@import 'styles/mixins';
+
+.card__container {
+  display: none;
+
+  @include respond(phone-max) {
+    display: block;
+ }
+}
+
 .card {
   display: block;
   width: 28rem;
@@ -74,10 +84,4 @@ tr:last-child td{
 
 .pagination__displaynone {
   display: none;
-}
-
-@media screen and (min-width: $tablet-min) {
-  .card__container {
-    display: none;
-  }
 }
