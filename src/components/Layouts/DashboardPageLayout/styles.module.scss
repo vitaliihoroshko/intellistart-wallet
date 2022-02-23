@@ -21,6 +21,10 @@
     height: fit-content;
     min-height: 100vh;
   }
+
+  @include respond(phone) {
+    margin-top: 6rem;
+  }
 }
 
 .hide-content {
