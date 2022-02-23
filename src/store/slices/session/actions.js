@@ -2,13 +2,15 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { getCurrentUser } from 'api/api-helper';
 import { signIn, signOut, setError } from '.';
-import { setIsLoading } from '../global';
+import { setIsLoading, setPathname } from 'store/slices/global';
+import { setTotalBalance } from 'store/slices/finance';
 
 export const signUserUp = (signUpDto, validationCallback) => {
   return async (dispatch, _, api) => {
     try {
       const { token, user } = await api.signUserUp(signUpDto);
       dispatch(signIn({ token, user }));
+      dispatch(setTotalBalance(user.balance));
     } catch (error) {
       if (error.response.status === 409) {
         dispatch(setError('User with such email already exists'));
@@ -25,6 +27,7 @@ export const signUserIn = (signInDto, validationCallback) => {
     try {
       const { token, user } = await api.signUserIn(signInDto);
       dispatch(signIn({ token, user }));
+      dispatch(setTotalBalance(user.balance));
     } catch (error) {
       if (error.response.status === 404) {
         dispatch(setError('User with such email is not found'));
@@ -43,6 +46,7 @@ export const signUserOut = token => {
     try {
       await api.signUserOut(token);
       dispatch(signOut());
+      dispatch(setPathname('/'));
     } catch (error) {
       dispatch(setError('Bearer auth failed'));
     }
@@ -57,6 +61,7 @@ export const autoSignIn = createAsyncThunk(
       dispatch(setIsLoading(true));
       try {
         const user = await getCurrentUser(token);
+        dispatch(setTotalBalance(user.balance));
         return { token, user };
       } catch (error) {
         return { error: 'Bearer auth failed' };
