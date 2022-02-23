@@ -57,13 +57,13 @@ const Main = ({ categories, month, year, changeMonth, changeYear }) => {
               <div className={styles['dashboard__bottom__item']}>
                 <div>Expenses:</div>
                 <p className={styles['dashboard__bottom__item__red']}>
-                  {categories.expenseSummary}
+                  {((categories.expenseSummary * 100) / 100).toFixed(2)}
                 </p>
               </div>
               <div className={styles['dashboard__bottom__item']}>
                 <div>Incomes:</div>
                 <p className={styles['dashboard__bottom__item__green']}>
-                  {categories.incomeSummary}
+                  {((categories.incomeSummary * 100) / 100).toFixed(2)}
                 </p>
               </div>
             </div>

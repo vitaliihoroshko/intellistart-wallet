@@ -41,17 +41,17 @@ const Currency = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr className={styles['table_row']}>
             <td className={styles['currency__currency']}>{usd}</td>
             <td className={styles['currency__purchase']}>{usdPurchase}</td>
             <td className={styles['currency__sale']}>{usdSale}</td>
           </tr>
-          <tr>
+          <tr className={styles['table_row']}>
             <td className={styles['currency__currency']}>{eur}</td>
             <td className={styles['currency__purchase']}>{eurPurchase}</td>
             <td className={styles['currency__sale']}>{eurSale}</td>
           </tr>
-          <tr>
+          <tr className={styles['table_row']}>
             <td className={styles['currency__currency']}>{rur}</td>
             <td className={styles['currency__purchase']}>{rurPurchase}</td>
             <td className={styles['currency__sale']}>{rurSale}</td>
