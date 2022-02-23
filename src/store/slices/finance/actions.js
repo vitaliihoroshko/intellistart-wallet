@@ -49,8 +49,7 @@ export const getTransactionCategories = token => {
   return async (dispatch, _, api) => {
     try {
       const categories = await api.getTransactionCategories(token);
-      const translatedCategories = translateCategoryNames(categories);
-      dispatch(setTransactionCategories(translatedCategories));
+      dispatch(setTransactionCategories(categories));
     } catch (error) {
       dispatch(setSessionError('Bearer authorization failed'));
     }
@@ -68,6 +67,7 @@ export const getTransactionsSummary = (token, period) => {
       });
       dispatch(setTransactionsSummary(transformedTransactionsSummary));
     } catch (error) {
+      console.log(error);
       if (error.response.status === 400) dispatch(setError('Validation error'));
       else if (error.response.status === 401) {
         dispatch(setSessionError('Bearer authorization failed'));
