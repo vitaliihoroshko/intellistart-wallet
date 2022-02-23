@@ -1,4 +1,5 @@
-import styles from '../components/Dashboard/styles.module.scss';
+import styles from 'components/Dashboard/styles.module.scss';
+
 export const createDataToShow = (initialArray, categories, currentPage) => {
   const data = initialArray.slice(currentPage * 5 - 5, currentPage * 5).map(value => {
     return {

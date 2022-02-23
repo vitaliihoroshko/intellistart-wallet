@@ -3,8 +3,8 @@ import { Field } from 'formik';
 import 'react-datepicker/dist/react-datepicker.css';
 import { string } from 'prop-types';
 
-import styles from './styles.module.scss';
 import calendar from 'assets/images/calendar.svg';
+import styles from './styles.module.scss';
 
 const DatePicker = ({ name }) => {
   return (

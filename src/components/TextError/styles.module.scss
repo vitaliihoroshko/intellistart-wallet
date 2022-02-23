@@ -21,10 +21,12 @@
     left: 48%;
     transform: translateX(-50%);
   }
+
   @include respond(35em) {
     &-icon {
       right: 14rem;
     }
+
     &-text {
       left: 37%;
     }
