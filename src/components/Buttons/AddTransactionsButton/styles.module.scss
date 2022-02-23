@@ -16,10 +16,11 @@
   border-radius: 50%;
   cursor: pointer;
   box-shadow: 0rem 0.6rem 1.5rem $forest-shadow-color;
-  transition: all 0.5s;
+  transition: all 0.3s;
 
   &:hover {
     background-color: $mountain-meadow-color;
+    transform: scale(1.1);
   }
 
   &:focus {

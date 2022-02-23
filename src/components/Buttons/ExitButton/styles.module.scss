@@ -9,6 +9,7 @@
   background-color: $white-color;
   border: none;
   cursor: pointer;
+  transition: transform 0.2s;
 
   .exit-icon {
     position: absolute;
@@ -27,6 +28,10 @@
     @include respond(30em) {
       display: none;
     }
+  }
+
+  &:active {
+    transform: scale(1.1);
   }
 
   @include respond(tablet) {
