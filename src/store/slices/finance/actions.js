@@ -1,4 +1,5 @@
 import { toast } from 'react-toastify';
+
 import {
   setTransactions,
   addTransaction,
@@ -7,7 +8,6 @@ import {
   setError,
 } from '.';
 import { setError as setSessionError } from 'store/slices/session';
-import { translateCategoryNames } from 'utils/translationFunctions';
 import { transformTransactionsSummary } from 'utils/helperFunctions';
 
 export const getTransactions = token => {
@@ -60,11 +60,7 @@ export const getTransactionsSummary = (token, period) => {
   return async (dispatch, _, api) => {
     try {
       const transactionsSummary = await api.getTransactionsSummary(token, period);
-      const translatedCategories = translateCategoryNames(transactionsSummary.categoriesSummary);
-      const transformedTransactionsSummary = transformTransactionsSummary({
-        ...transactionsSummary,
-        categoriesSummary: translatedCategories,
-      });
+      const transformedTransactionsSummary = transformTransactionsSummary(transactionsSummary);
       dispatch(setTransactionsSummary(transformedTransactionsSummary));
     } catch (error) {
       console.log(error);
