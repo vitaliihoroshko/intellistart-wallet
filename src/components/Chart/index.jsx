@@ -78,7 +78,10 @@ const Chart = ({ categories }) => {
               width={320}
             />
             <div className={styles.total}>
-              ₴ {categories?.periodTotal ? Math.abs(categories.periodTotal) : '0'}
+              ₴{' '}
+              {categories?.periodTotal
+                ? Math.abs((categories.periodTotal * 100) / 100).toFixed(2)
+                : '0'}
             </div>
           </div>
         </div>
