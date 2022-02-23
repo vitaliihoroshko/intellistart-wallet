@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import { oneOfType, string, object, array } from 'prop-types';
 import OutsideClickHandler from 'react-outside-click-handler';
 
 import arrowDown from 'assets/images/select-arrow.svg';
@@ -8,14 +8,14 @@ import styles from './style.module.scss';
 const Select = ({ options = [], value = '', placeholder = 'Label', onChange = () => {} }) => {
   const [open, setOpen] = useState(false);
 
-  function changeOpen(v) {
+  const changeOpen = v => {
     setOpen(v);
-  }
+  };
 
-  function clickOption(i) {
+  const clickOption = i => {
     onChange(i);
     changeOpen(false);
-  }
+  };
 
   return (
     <OutsideClickHandler onOutsideClick={() => changeOpen(false)}>
@@ -47,9 +47,9 @@ const Select = ({ options = [], value = '', placeholder = 'Label', onChange = ()
 };
 
 Select.propTypes = {
-  options: PropTypes.array,
-  placeholder: PropTypes.string,
-  value: PropTypes.string,
+  options: array,
+  placeholder: string,
+  value: oneOfType([string, object]),
 };
 
 export default Select;
