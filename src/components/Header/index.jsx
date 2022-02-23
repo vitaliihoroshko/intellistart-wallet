@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
-        <Logo />
+        <Logo link={true} />
       </div>
       <p className={styles['user-name']}>{user ? user.username : 'Name'}</p>
       <img src={divider} alt="divider" width={2} height={30} className={styles.divider} />

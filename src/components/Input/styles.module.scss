@@ -1,7 +1,6 @@
 @import 'styles/variables';
 @import 'styles/mixins.scss';
 
-
 .input {
   position: relative;
   margin-bottom: 2.9rem;
@@ -14,7 +13,6 @@
   }
 
   input {
-    font-family: 'Abel', sans-serif;
     font-size: 1.8rem;
     background-color: $white-color;
     width: 40.95rem;
@@ -42,7 +40,8 @@
         box-shadow: 0 0 0 3rem $white-color inset !important;
       }
     }
-    @include respond(35em){
+    
+    @include respond(35em) {
       width: 100%;
     }
   }

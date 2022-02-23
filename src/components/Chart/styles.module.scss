@@ -1,3 +1,5 @@
+@import 'styles/mixins';
+
 .title {
   font-family: 'Poppins', sans-serif;
   font-weight: normal;
@@ -15,11 +17,10 @@
 
 .total {
   position: absolute;
-  font-family: 'Abel', sans-serif;
-  font-size: 18px;
+  font-size: 1.8rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 23px;
+  line-height: 2.3rem;
   letter-spacing: 0em;
   top: 50%;
   left: 50%;
@@ -31,23 +32,17 @@
   max-height: 32rem;
 }
 
-// .chart {
-//    max-width: 32rem;
-// }
-
-.containerChart {
-  position: relative;
-}
-
-@media screen and (max-width: 768px) {
-  .chart {
+.chart {
+  @include respond(phone-max) {
     width: max-content;
     margin: 0 auto;
   }
-}
 
-@media screen and (max-width: 375px) {
-  .chart {
+  @include respond(23.4375em) {
     width: calc(100vw - 40px);
   }
+}
+
+.containerChart {
+  position: relative;
 }

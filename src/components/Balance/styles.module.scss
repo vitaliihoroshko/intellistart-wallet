@@ -11,7 +11,7 @@
 
 .balance {
   &__num {
-    font-family: 'Poppins Bold';
+    font-family: 'Poppins Bold', sans-serif;
     font-size: 3rem;
     line-height: 4.5rem;
     color: $black-color;
@@ -20,7 +20,6 @@
 
   &__text {
     color: $light-grey-color;
-    font-family: 'Abel', sans-serif;
     font-size: 1.2rem;
     line-height: 1.5rem;
     text-transform: uppercase;

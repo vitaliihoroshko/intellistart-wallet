@@ -9,6 +9,7 @@
   background-color: $white-color;
   border: none;
   cursor: pointer;
+  transition: transform 0.2s;
 
   .exit-icon {
     position: absolute;
@@ -17,7 +18,6 @@
   }
 
   span {
-    font-family: 'Abel', sans-serif;
     font-size: 1.8rem;
     position: absolute;
     top: -0.3rem;
@@ -27,6 +27,10 @@
     @include respond(30em) {
       display: none;
     }
+  }
+
+  &:active {
+    transform: scale(1.1);
   }
 
   @include respond(tablet) {

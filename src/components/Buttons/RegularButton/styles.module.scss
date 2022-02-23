@@ -2,7 +2,6 @@
 @import 'styles/mixins.scss';
 
 .button {
-  font-family: 'Abel', sans-serif;
   font-size: 1.8rem;
   background-color: $green-color;
   color: $white-color;
@@ -15,7 +14,7 @@
   line-height: 2.3rem;
   letter-spacing: 0.1em;
   cursor: pointer;
-  transition: all 0.5s;
+  transition: all 0.1s;
 
   &:hover {
     background-color: $mountain-meadow-color;
@@ -24,6 +23,10 @@
 
   &:focus {
     outline: none;
+  }
+
+  &:active {
+    transform: translateY(0.2rem);
   }
 
   @include respond(35em) {
@@ -38,6 +41,6 @@
 
   &:hover {
     background-color: $purple-color;
-    color: $white-color
+    color: $white-color;
   }
 }

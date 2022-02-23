@@ -3,15 +3,15 @@
 
 .bg {
   background-image: url('../../assets/images/bg-dashboard.png');
-  height:100vh;
+  height: 100vh;
   background-size: cover;
 }
+
 .dashboard {
   width: 70rem;
   border-collapse: collapse;
   font-size: 1.6rem;
   line-height: 2rem;
-  font-family: 'Abel', sans-serif;
 
   @include respond(tablet-max) {
     width: 68.8rem;
@@ -20,8 +20,8 @@
   @include respond(phone-max) {
     display: none;
   }
-
 }
+
 table {
   border-collapse: collapse;
 }
@@ -30,9 +30,11 @@ table {
   &__pinktext {
     color: $pink-color;
   }
+
   &__greentext {
     color: $green-color;
   }
+
   &__head {
     display: block;
     height: 5.8rem;
@@ -42,22 +44,26 @@ table {
     padding-top: 1.6rem;
     padding-bottom: 1.9rem;
   }
+
   &__head h3 {
     display: inline-block;
     font-weight: 400;
     font-size: 1.8rem;
     line-height: 2.3rem;
   }
+
   &__row {
     display: inline-block;
     height: 5.4rem;
     padding: 1.5rem 0 1.9rem 0;
     border-bottom: 1px solid $grey-color;
   }
+
   &__date {
     width: 11.6rem;
     padding-left: 2rem;
   }
+
   &__type {
     width: 8.8rem;
 
@@ -65,9 +71,11 @@ table {
       width: 8.5rem;
     }
   }
+
   &__category {
     width: 14.2rem;
   }
+
   &__comment {
     width: 12rem;
 
@@ -75,6 +83,7 @@ table {
       width: 11.9rem;
     }
   }
+
   &__amount {
     width: 10rem;
     text-align: right;
@@ -83,6 +92,7 @@ table {
       width: 10.1rem;
     }
   }
+
   &__balance {
     width: 11.3rem;
     text-align: right;
@@ -98,7 +108,6 @@ table {
   margin: 2rem 0 0 2rem;
   font-size: 1.6rem;
   line-height: 2rem;
-  font-family: 'Abel', sans-serif;
   border: 0.1rem solid $purple-color;
   background: $white-color;
   border-radius: 1rem;
@@ -107,7 +116,7 @@ table {
 
   &:not(:disabled):hover {
     background-color: $purple-color;
-    color: $white-color
+    color: $white-color;
   }
 
   @include respond(phone-max) {
@@ -116,7 +125,8 @@ table {
   }
 }
 
-.pagination__back, .pagination__next {
+.pagination__back,
+.pagination__next {
   background: $grey-color;
   border: none;
   cursor: default;

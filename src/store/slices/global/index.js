@@ -5,6 +5,7 @@ const initialState = {
   isModalLogoutOpen: false,
   isModalAddTransactionOpen: false,
   isCurrencyDisplayed: false,
+  pathname: '/',
 };
 
 const globalSlice = createSlice({
@@ -26,6 +27,10 @@ const globalSlice = createSlice({
     setIsCurrencyDisplayed(state, action) {
       state.isCurrencyDisplayed = action.payload;
     },
+
+    setPathname(state, action) {
+      state.pathname = action.payload;
+    },
   },
 });
 
@@ -36,6 +41,7 @@ export const {
   setIsModalLogoutOpen,
   setIsModalAddTransactionOpen,
   setIsCurrencyDisplayed,
+  setPathname,
 } = actions;
 
 export default reducer;

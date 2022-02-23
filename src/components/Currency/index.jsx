@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
+import { useMountedState } from 'react-use';
 
-import { usd, eur, rur, apiCall } from 'api/privat-api.js';
+import { usd, eur, rur, getCurrency } from 'api/privat-api.js';
 import { roundNumber } from 'utils/helperFunctions';
 import styles from './styles.module.scss';
 
@@ -11,18 +12,19 @@ const Currency = () => {
   const [eurSale, setEurSale] = useState();
   const [rurPurchase, setRurPurchase] = useState();
   const [rurSale, setRurSale] = useState();
+  const isMounted = useMountedState();
 
   useEffect(() => {
     (async () => {
-      const data = await apiCall();
+      const data = await getCurrency();
       for (const element of data) {
-        if (element.ccy == 'RUR') {
+        if (element.ccy === 'RUR' && isMounted()) {
           setRurPurchase(roundNumber(element.buy));
           setRurSale(roundNumber(element.sale));
-        } else if (element.ccy == 'EUR') {
+        } else if (element.ccy === 'EUR' && isMounted()) {
           setEurPurchase(roundNumber(element.buy));
           setEurSale(roundNumber(element.sale));
-        } else if (element.ccy == 'USD') {
+        } else if (element.ccy === 'USD' && isMounted()) {
           setUsdPurchase(roundNumber(element.buy));
           setUsdSale(roundNumber(element.sale));
         }

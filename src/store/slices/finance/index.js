@@ -12,9 +12,12 @@ const financeSlice = createSlice({
   name: 'finance',
   initialState,
   reducers: {
+    setTotalBalance(state, action) {
+      state.totalBalance = action.payload;
+    },
+
     setTransactions(state, action) {
-      state.transactions = action.payload.transactions;
-      state.totalBalance = action.payload.balance;
+      state.transactions = action.payload;
     },
 
     setTransactionCategories(state, action) {
@@ -39,6 +42,7 @@ const financeSlice = createSlice({
 const { reducer, actions } = financeSlice;
 
 export const {
+  setTotalBalance,
   setTransactions,
   setTransactionCategories,
   setTransactionsSummary,

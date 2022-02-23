@@ -6,14 +6,13 @@
 
   @include respond(phone-max) {
     display: block;
- }
+  }
 }
 
 .card {
   display: block;
   width: 28rem;
   height: 28.2rem;
-  font-family: 'Abel', sans-serif;
   background-color: $white-color;
   border-radius: 1rem;
   margin-bottom: 1rem;
@@ -28,6 +27,7 @@
     border-bottom: 1px solid $grey-color;
     height: 4.7rem;
   }
+
   &__value {
     text-align: right;
     padding: 0.5rem 1.9rem 0.8rem 0;
@@ -37,15 +37,19 @@
     border-bottom: 1px solid $grey-color;
     height: 4.7rem;
   }
+
   &__pinkline {
     border-left: 0.5rem solid $pink-color;
   }
+
   &__greenline {
     border-left: 0.5rem solid $green-color;
   }
+
   &__pinktext {
     color: $pink-color;
   }
+
   &__greentext {
     color: $green-color;
   }
@@ -55,7 +59,7 @@ table {
   border-collapse: collapse;
 }
 
-tr:last-child td{
+tr:last-child td {
   border: none;
 }
 
@@ -64,7 +68,6 @@ tr:last-child td{
   margin-bottom: 2rem;
   font-size: 1.6rem;
   line-height: 2rem;
-  font-family: 'Abel', sans-serif;
   border: 0.1rem solid $purple-color;
   background: $white-color;
   border-radius: 1rem;
@@ -72,11 +75,12 @@ tr:last-child td{
 
   &:not(:disabled):hover {
     background-color: $purple-color;
-    color: $white-color
+    color: $white-color;
   }
 }
 
-.pagination__back, .pagination__next {
+.pagination__back,
+.pagination__next {
   background: $grey-color;
   border: none;
   cursor: default;

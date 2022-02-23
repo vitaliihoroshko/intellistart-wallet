@@ -14,7 +14,6 @@
   }
 
   &-text {
-    font-family: 'Abel', sans-serif;
     font-size: 1.4rem;
     color: $red-color;
     position: absolute;
@@ -22,10 +21,12 @@
     left: 48%;
     transform: translateX(-50%);
   }
+
   @include respond(35em) {
     &-icon {
       right: 14rem;
     }
+
     &-text {
       left: 37%;
     }
