@@ -61,15 +61,15 @@ export const getСategoryColors = () => {
   return {
     income: '#00AD84',
     education: '#81E1FF',
-    household: '#4A56E2',
+    'household products': '#4A56E2',
     products: '#FFD8D0',
     entertainment: '#DA0606',
     car: '#FD9498',
-    other: '#112277',
+    'other expenses': '#112277',
     'child care': '#6E78E8',
     'self care': '#C5BAFF',
     leisure: '#24CCA7',
-    'basic expenses': '#FED057',
+    'main expenses': '#FED057',
   };
 };
 

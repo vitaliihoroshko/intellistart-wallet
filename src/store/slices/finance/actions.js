@@ -1,4 +1,5 @@
 import { toast } from 'react-toastify';
+
 import {
   setTransactions,
   addTransaction,
@@ -7,7 +8,6 @@ import {
   setError,
 } from '.';
 import { setError as setSessionError } from 'store/slices/session';
-import { translateCategoryNames } from 'utils/translationFunctions';
 import { transformTransactionsSummary } from 'utils/helperFunctions';
 
 export const getTransactions = token => {
@@ -49,8 +49,7 @@ export const getTransactionCategories = token => {
   return async (dispatch, _, api) => {
     try {
       const categories = await api.getTransactionCategories(token);
-      const translatedCategories = translateCategoryNames(categories);
-      dispatch(setTransactionCategories(translatedCategories));
+      dispatch(setTransactionCategories(categories));
     } catch (error) {
       dispatch(setSessionError('Bearer authorization failed'));
     }
@@ -61,11 +60,7 @@ export const getTransactionsSummary = (token, period) => {
   return async (dispatch, _, api) => {
     try {
       const transactionsSummary = await api.getTransactionsSummary(token, period);
-      const translatedCategories = translateCategoryNames(transactionsSummary.categoriesSummary);
-      const transformedTransactionsSummary = transformTransactionsSummary({
-        ...transactionsSummary,
-        categoriesSummary: translatedCategories,
-      });
+      const transformedTransactionsSummary = transformTransactionsSummary(transactionsSummary);
       dispatch(setTransactionsSummary(transformedTransactionsSummary));
     } catch (error) {
       if (error.response.status === 400) dispatch(setError('Validation error'));
