@@ -12,7 +12,7 @@ const Chart = ({ categories }) => {
     if (categories && categories?.categoriesSummary.length) {
       data = categories?.categoriesSummary?.map(i => i.total);
     } else {
-      data = [1];
+      data = [0.0001];
     }
     return data;
   };
