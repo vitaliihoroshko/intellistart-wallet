@@ -6,7 +6,7 @@
 
   @include respond(phone-max) {
     display: block;
- }
+  }
 }
 
 .card {
@@ -27,6 +27,7 @@
     border-bottom: 1px solid $grey-color;
     height: 4.7rem;
   }
+
   &__value {
     text-align: right;
     padding: 0.5rem 1.9rem 0.8rem 0;
@@ -36,15 +37,19 @@
     border-bottom: 1px solid $grey-color;
     height: 4.7rem;
   }
+
   &__pinkline {
     border-left: 0.5rem solid $pink-color;
   }
+
   &__greenline {
     border-left: 0.5rem solid $green-color;
   }
+
   &__pinktext {
     color: $pink-color;
   }
+
   &__greentext {
     color: $green-color;
   }
@@ -54,7 +59,7 @@ table {
   border-collapse: collapse;
 }
 
-tr:last-child td{
+tr:last-child td {
   border: none;
 }
 
@@ -70,11 +75,12 @@ tr:last-child td{
 
   &:not(:disabled):hover {
     background-color: $purple-color;
-    color: $white-color
+    color: $white-color;
   }
 }
 
-.pagination__back, .pagination__next {
+.pagination__back,
+.pagination__next {
   background: $grey-color;
   border: none;
   cursor: default;

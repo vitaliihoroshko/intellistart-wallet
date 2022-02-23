@@ -9,7 +9,7 @@ import moment from 'moment';
 import { setIsModalAddTransactionOpen } from 'store/slices/global';
 import RegularButton from 'components/Buttons/RegularButton';
 import { createTransaction } from 'store/slices/finance/actions';
-import dropdownArrow from 'assets/images/dropdown-arrow.svg';
+import dropdownArrow from 'assets/images/select-arrow.svg';
 import styles from './styles.module.scss';
 
 const TransactionForm = ({ modalIsOpened }) => {

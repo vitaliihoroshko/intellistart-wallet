@@ -23,6 +23,7 @@ const Card = () => {
     setCurrentPage(prevValue => prevValue - 1);
     window.scrollTo(0, 0);
   };
+
   const handleClickNext = () => {
     window.scrollTo(0, 0);
     setCurrentPage(prevValue => prevValue + 1);
