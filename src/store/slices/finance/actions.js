@@ -73,6 +73,7 @@ export const getTransactionsSummary = (token, period) => {
       const transformedTransactionsSummary = transformTransactionsSummary(transactionsSummary);
       dispatch(setTransactionsSummary(transformedTransactionsSummary));
     } catch (error) {
+      console.log(error);
       if (error.response.status === 400) dispatch(setError('Validation error'));
       else if (error.response.status === 401) {
         dispatch(setSessionError('Bearer authorization failed'));

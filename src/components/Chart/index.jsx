@@ -12,7 +12,7 @@ const Chart = ({ categories }) => {
     if (categories && categories?.categoriesSummary.length) {
       data = categories?.categoriesSummary?.map(i => i.total);
     } else {
-      data = [1];
+      data = [0.0001];
     }
     return data;
   };
@@ -78,7 +78,10 @@ const Chart = ({ categories }) => {
               width={320}
             />
             <div className={styles.total}>
-              ₴ {categories?.periodTotal ? Math.abs(categories.periodTotal) : '0'}
+              ₴{' '}
+              {categories?.periodTotal
+                ? Math.abs((categories.periodTotal * 100) / 100).toFixed(2)
+                : '0'}
             </div>
           </div>
         </div>
