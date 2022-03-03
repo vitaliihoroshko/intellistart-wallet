@@ -17,8 +17,8 @@ const DiagramPage = () => {
   useEffect(() => {
     dispatch(
       getTransactionsSummary(token, {
-        year: year.value,
-        month: month.value,
+        year: year instanceof Object ? year.value : '',
+        month: month instanceof Object ? month.value : '',
       }),
     );
   }, [year, month]);
