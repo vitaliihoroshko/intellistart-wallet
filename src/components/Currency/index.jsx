@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useMountedState } from 'react-use';
 
-import { usd, eur, rur, getCurrency } from 'api/privat-api.js';
+import { usd, eur, rur, getCurrency } from 'api/privat-api';
 import { roundNumber } from 'utils/helperFunctions';
 import styles from './styles.module.scss';
 
