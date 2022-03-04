@@ -5,7 +5,7 @@ import { node } from 'prop-types';
 import Navigation from 'components/Navigation';
 import Balance from 'components/Balance';
 import Currency from 'components/Currency';
-import useWindowWidth from 'hooks/useWindowWidth';
+import { useWindowWidth } from 'common/hooks';
 import styles from './styles.module.scss';
 
 const DashboardPageLayout = ({ children }) => {

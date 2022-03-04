@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 
 import { setIsCurrencyDisplayed } from 'store/slices/global';
-import useWindowWidth from 'hooks/useWindowWidth';
+import { useWindowWidth } from 'common/hooks';
 import homeIcon from 'assets/images/home.svg';
 import homeActiveIcon from 'assets/images/home-active.svg';
 import diagramIcon from 'assets/images/diagram.svg';
