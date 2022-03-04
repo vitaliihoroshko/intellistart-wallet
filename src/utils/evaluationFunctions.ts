@@ -1,4 +1,12 @@
-export const evaluatePasswordProgress = (value, dataCallback, visibilityCallback) => {
+import { Dispatch, SetStateAction } from 'react';
+
+import { ProgressData } from 'common/interfaces';
+
+export const evaluatePasswordProgress = (
+  value: string,
+  dataCallback: Dispatch<SetStateAction<ProgressData>>,
+  visibilityCallback: Dispatch<SetStateAction<boolean>>,
+): void => {
   if (value.length === 6) dataCallback({ progress: 10, tooltip: 'Password is very weak' });
   else if (value.length === 7) dataCallback({ progress: 20, tooltip: 'Password is weak' });
   else if (value.length === 8) dataCallback({ progress: 30, tooltip: 'Password is weak' });

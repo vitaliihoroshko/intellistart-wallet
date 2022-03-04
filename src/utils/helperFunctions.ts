@@ -1,8 +1,15 @@
-export const makeQueryParams = object => {
-  const elements = [];
-  const params = Object.keys(object);
-  for (const param of params) {
-    const value = object[param];
+import {
+  Period,
+  TransactionsSummary,
+  CategorySummary,
+  SelectOption,
+  CategoryColors,
+} from 'common/interfaces';
+
+export const makeQueryParams = (period: Period): string => {
+  const elements: string[] = [];
+  for (const param in period) {
+    const value = period[param as keyof Period];
     if (value) {
       const element = `${param}=${value}`;
       elements.push(element);
@@ -15,11 +22,11 @@ export const makeQueryParams = object => {
   return `?${elements.join('&')}`;
 };
 
-export const transformTransactionsSummary = data => {
+export const transformTransactionsSummary = (data: TransactionsSummary): TransactionsSummary => {
   const transformedData = {
     ...data,
     expenseSummary: Math.abs(data.expenseSummary),
-    categoriesSummary: data.categoriesSummary?.map(value => ({
+    categoriesSummary: data.categoriesSummary?.map((value: CategorySummary) => ({
       ...value,
       total: Math.abs(value.total),
     })),
@@ -27,7 +34,7 @@ export const transformTransactionsSummary = data => {
   return transformedData;
 };
 
-export const getMonths = () => {
+export const getMonths = (): SelectOption[] => {
   return [
     { title: 'January', value: 1 },
     { title: 'February', value: 2 },
@@ -44,7 +51,7 @@ export const getMonths = () => {
   ];
 };
 
-export const getYears = () => {
+export const getYears = (): SelectOption[] => {
   const time = new Date();
   const year = time.getFullYear();
   const array = [];
@@ -57,7 +64,7 @@ export const getYears = () => {
   return array;
 };
 
-export const getСategoryColors = () => {
+export const getСategoryColors = (): CategoryColors => {
   return {
     income: '#00AD84',
     education: '#81E1FF',
@@ -73,4 +80,4 @@ export const getСategoryColors = () => {
   };
 };
 
-export const roundNumber = number => (Math.round(number * 100) / 100).toFixed(2);
+export const roundNumber = (number: number): number => +(Math.round(number * 100) / 100).toFixed(2);
