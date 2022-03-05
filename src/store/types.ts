@@ -1,4 +1,4 @@
-import { Middleware, ThunkDispatch, Action } from '@reduxjs/toolkit';
+import { Middleware, ThunkDispatch, Action as BasicAction, PayloadAction } from '@reduxjs/toolkit';
 
 import { User, Transaction, TransactionCategory, TransactionsSummary } from 'common/interfaces';
 
@@ -29,6 +29,11 @@ export interface State {
   session: SessionState;
   global: GlobalState;
   finance: FinanceState;
+}
+
+export interface Action<T> {
+  type: string;
+  payload: T;
 }
 
 export interface ThunkOptions<E = any> {
@@ -65,8 +70,14 @@ export type GetDefaultMiddleware = <S = any>(
   options: GetDefaultMiddlewareOptions,
 ) => Middleware<{}, S>[];
 
-export type Thunk = (
-  dispatch: ThunkDispatch<State, unknown, Action>,
-  _: () => State,
-  api: ThunkOptions['extraArgument'],
-) => Promise<void>;
+export type Dispatch = ThunkDispatch<State, unknown, BasicAction>;
+
+export type GetState = () => State;
+
+export type Api = ThunkOptions['extraArgument'];
+
+export type Thunk = (dispatch: Dispatch, _: GetState, api: Api) => Promise<void>;
+
+export type FulfilledAction<T> = PayloadAction<T | undefined>;
+
+export type RejectedAction = PayloadAction<unknown>;
