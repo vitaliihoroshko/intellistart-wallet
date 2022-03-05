@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+import { GlobalState, Action } from 'store/types';
+
+const initialState: GlobalState = {
   isLoading: false,
   isModalLogoutOpen: false,
   isModalAddTransactionOpen: false,
@@ -12,23 +14,23 @@ const globalSlice = createSlice({
   name: 'global',
   initialState,
   reducers: {
-    setIsLoading(state, action) {
+    setIsLoading(state: GlobalState, action: Action<boolean>): void {
       state.isLoading = action.payload;
     },
 
-    setIsModalLogoutOpen(state, action) {
+    setIsModalLogoutOpen(state: GlobalState, action: Action<boolean>): void {
       state.isModalLogoutOpen = action.payload;
     },
 
-    setIsModalAddTransactionOpen(state, action) {
+    setIsModalAddTransactionOpen(state: GlobalState, action: Action<boolean>): void {
       state.isModalAddTransactionOpen = action.payload;
     },
 
-    setIsCurrencyDisplayed(state, action) {
+    setIsCurrencyDisplayed(state: GlobalState, action: Action<boolean>): void {
       state.isCurrencyDisplayed = action.payload;
     },
 
-    setPathname(state, action) {
+    setPathname(state: GlobalState, action: Action<string>): void {
       state.pathname = action.payload;
     },
   },
