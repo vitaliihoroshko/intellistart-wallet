@@ -1,8 +1,10 @@
-import { useEffect } from 'react';
+import { VoidFunctionComponent, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
+import { State } from 'store/types';
 import { autoSignIn } from 'store/slices/session/actions';
+import { PageRoute } from 'common/enums';
 import LoginPage from './Login';
 import RegisterPage from './Register';
 import HomePage from './Dashboard/Home';
@@ -11,8 +13,8 @@ import NotFoundPage from './NotFound';
 import ProtectedRoute from 'components/ProtectedRoute';
 import LoadingSpinner from 'components/LoadingSpinner';
 
-const App = () => {
-  const { isLoading } = useSelector(state => state.global);
+const App: VoidFunctionComponent = () => {
+  const { isLoading } = useSelector((state: State) => state.global);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,26 +27,26 @@ const App = () => {
       <Routes>
         {!isLoading && (
           <Route
-            path="/login"
+            path={PageRoute.Login}
             element={<ProtectedRoute element={<LoginPage />} requiresAuth={false} />}
           />
         )}
         {!isLoading && (
           <Route
-            path="/register"
+            path={PageRoute.Register}
             element={<ProtectedRoute element={<RegisterPage />} requiresAuth={false} />}
           />
         )}
         <Route
-          path="/home"
+          path={PageRoute.Home}
           element={<ProtectedRoute element={<HomePage />} requiresAuth={true} />}
         />
         <Route
-          path="/diagram"
+          path={PageRoute.Diagram}
           element={<ProtectedRoute element={<DiagramPage />} requiresAuth={true} />}
         />
-        <Route path="/" element={<Navigate to="/home" replace />} />
-        {!isLoading && <Route path="*" element={<NotFoundPage />} />}
+        <Route path={PageRoute.Default} element={<Navigate to={PageRoute.Home} replace />} />
+        {!isLoading && <Route path={PageRoute.NotFound} element={<NotFoundPage />} />}
       </Routes>
     </>
   );

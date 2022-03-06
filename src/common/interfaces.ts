@@ -91,8 +91,8 @@ export interface ButtonsStyles {
 }
 
 export interface SelectOption {
-  title: string | number;
-  value: number;
+  title: number | string;
+  value: number | string;
 }
 
 export interface CategoryColors {

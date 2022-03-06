@@ -1,3 +1,4 @@
+import { VoidFunctionComponent } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -8,7 +9,7 @@ import AddTransactionsButton from 'components/Buttons/AddTransactionsButton';
 import ModalAddTransaction from 'components/Modals/ModalAddTransaction';
 import styles from './styles.module.scss';
 
-const HomePage = () => {
+const HomePage: VoidFunctionComponent = () => {
   return (
     <>
       <ModalAddTransaction />
