@@ -1,21 +1,21 @@
-import { string, bool, func, node } from 'prop-types';
+import { FunctionComponent } from 'react';
 
 import styles from './styles.module.scss';
 
-const RegularButton = ({ type, isTransparent, clickHandler, children }) => {
+interface RegularButtonProps {
+  type?: 'button' | 'submit' | 'reset';
+  isTransparent?: boolean;
+  clickHandler?: () => void;
+}
+
+const RegularButton: FunctionComponent<RegularButtonProps> = props => {
+  const { type, isTransparent, clickHandler, children } = props;
   const classNames = [styles.button, isTransparent ? styles['transparent-button'] : ''];
   return (
     <button type={type ? type : 'button'} className={classNames.join(' ')} onClick={clickHandler}>
       {children}
     </button>
   );
-};
-
-RegularButton.propTypes = {
-  type: string,
-  isTransparent: bool,
-  clickHandler: func,
-  children: node.isRequired,
 };
 
 export default RegularButton;

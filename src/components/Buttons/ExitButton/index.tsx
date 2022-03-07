@@ -1,13 +1,16 @@
+import { VoidFunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { setIsModalLogoutOpen } from 'store/slices/global';
 import exitIcon from 'assets/images/exit-icon.svg';
 import styles from './styles.module.scss';
 
-const ExitButton = () => {
+const ExitButton: VoidFunctionComponent = () => {
   const dispatch = useDispatch();
 
-  const clickHandler = () => dispatch(setIsModalLogoutOpen(true));
+  const clickHandler = (): void => {
+    dispatch(setIsModalLogoutOpen(true));
+  };
 
   return (
     <>

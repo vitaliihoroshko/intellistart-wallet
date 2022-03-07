@@ -1,13 +1,16 @@
+import { VoidFunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { setIsModalAddTransactionOpen } from 'store/slices/global';
 import plus from 'assets/images/plus.svg';
 import styles from './styles.module.scss';
 
-const AddTransactionsButton = () => {
+const AddTransactionsButton: VoidFunctionComponent = () => {
   const dispatch = useDispatch();
 
-  const clickHandler = () => dispatch(setIsModalAddTransactionOpen(true));
+  const clickHandler = (): void => {
+    dispatch(setIsModalAddTransactionOpen(true));
+  };
 
   return (
     <button onClick={clickHandler} className={styles.button}>
