@@ -1,17 +1,17 @@
-import { useEffect, useState } from 'react';
+import { VoidFunctionComponent, useState, useEffect } from 'react';
 import { useMountedState } from 'react-use';
 
-import { usd, eur, rur, getCurrency } from 'api/privat-api';
+import { getCurrency, usd, eur, rur } from 'api/privat-api';
 import { roundNumber } from 'utils/helperFunctions';
 import styles from './styles.module.scss';
 
-const Currency = () => {
-  const [usdPurchase, setUsdPurchase] = useState();
-  const [usdSale, setUsdSale] = useState();
-  const [eurPurchase, setEurPurchase] = useState();
-  const [eurSale, setEurSale] = useState();
-  const [rurPurchase, setRurPurchase] = useState();
-  const [rurSale, setRurSale] = useState();
+const Currency: VoidFunctionComponent = () => {
+  const [usdPurchase, setUsdPurchase] = useState<number>();
+  const [usdSale, setUsdSale] = useState<number>();
+  const [eurPurchase, setEurPurchase] = useState<number>();
+  const [eurSale, setEurSale] = useState<number>();
+  const [rurPurchase, setRurPurchase] = useState<number>();
+  const [rurSale, setRurSale] = useState<number>();
   const isMounted = useMountedState();
 
   useEffect(() => {
@@ -19,20 +19,20 @@ const Currency = () => {
       const data = await getCurrency();
       for (const element of data) {
         if (element.ccy === 'RUR' && isMounted()) {
-          setRurPurchase(roundNumber(element.buy));
-          setRurSale(roundNumber(element.sale));
+          setRurPurchase(roundNumber(+element.buy));
+          setRurSale(roundNumber(+element.sale));
         } else if (element.ccy === 'EUR' && isMounted()) {
-          setEurPurchase(roundNumber(element.buy));
-          setEurSale(roundNumber(element.sale));
+          setEurPurchase(roundNumber(+element.buy));
+          setEurSale(roundNumber(+element.sale));
         } else if (element.ccy === 'USD' && isMounted()) {
-          setUsdPurchase(roundNumber(element.buy));
-          setUsdSale(roundNumber(element.sale));
+          setUsdPurchase(roundNumber(+element.buy));
+          setUsdSale(roundNumber(+element.sale));
         }
       }
     })();
   }, []);
 
-  const DenseTable = () => {
+  const DenseTable = (): JSX.Element => {
     return (
       <table className={styles['currency__box']}>
         <thead className={styles['currency__head']}>

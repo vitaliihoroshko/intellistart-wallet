@@ -1,51 +1,44 @@
+import { VoidFunctionComponent } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 
+import { TransactionsSummary, CategoryColors } from 'common/interfaces';
 import { getСategoryColors } from 'utils/helperFunctions';
 import styles from './styles.module.scss';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const Chart = ({ categories }) => {
-  const getData = () => {
-    let data = [];
-    if (categories && categories?.categoriesSummary.length) {
-      data = categories?.categoriesSummary?.map(i => i.total);
-    } else {
-      data = [0.0001];
-    }
+interface ChartProps {
+  categories: TransactionsSummary | null;
+}
+
+const Chart: VoidFunctionComponent<ChartProps> = ({ categories }) => {
+  const getData = (): number[] => {
+    const data: number[] = [];
+    if (categories?.categoriesSummary.length) {
+      const totals = categories.categoriesSummary.map(category => category.total);
+      data.push(...totals);
+    } else data.push(0.0001);
     return data;
   };
 
-  const getName = () => {
-    let data = [];
-    if (categories && categories?.categoriesSummary.length) {
-      data = categories?.categoriesSummary?.map(i => ` ${i.name}`);
-    } else {
-      data = [' You have no transactions'];
-    }
+  const getName = (): string[] => {
+    const data: string[] = [];
+    if (categories?.categoriesSummary.length) {
+      const names = categories?.categoriesSummary?.map(i => ` ${i.name}`);
+      data.push(...names);
+    } else data.push(' You have no transactions');
     return data;
   };
 
-  const getColor = () => {
-    let data = [
-      '#FED057',
-      '#FFD8D0',
-      '#FD9498',
-      '#C5BAFF',
-      '#6E78E8',
-      '#4A56E2',
-      '#81E1FF',
-      '#24CCA7',
-      '#00AD84',
-    ];
-
-    if (categories && categories?.categoriesSummary.length) {
-      data = categories?.categoriesSummary?.map(i => getСategoryColors()[i.name.toLowerCase()]);
-    } else {
-      data = ['#00AD84'];
-    }
-
+  const getColor = (): string[] => {
+    const data: string[] = [];
+    if (categories?.categoriesSummary.length) {
+      const colors = categories.categoriesSummary.map(
+        category => getСategoryColors()[category.name.toLowerCase() as keyof CategoryColors],
+      );
+      data.push(...colors);
+    } else data.push('#00AD84');
     return data;
   };
 
@@ -65,14 +58,16 @@ const Chart = ({ categories }) => {
                     backgroundColor: getColor(),
                     borderColor: getColor(),
                     borderWidth: 1,
-                    cutout: 110,
                   },
                 ],
               }}
               options={{
                 plugins: {
-                  legend: false,
+                  legend: {
+                    display: false,
+                  },
                 },
+                cutout: 110,
               }}
               height={320}
               width={320}

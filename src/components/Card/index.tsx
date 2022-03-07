@@ -1,30 +1,33 @@
-import { useState, useEffect } from 'react';
+import { VoidFunctionComponent, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { State } from 'store/types';
 import { getTransactions, getTransactionCategories } from 'store/slices/finance/actions';
 import { createDataToShow, chooseButtonsStyle } from 'utils/dashboardFunctions';
 import styles from './styles.module.scss';
 
-const Card = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const { token } = useSelector(state => state.session);
-  const { transactions } = useSelector(state => state.finance);
-  const { transactionCategories } = useSelector(state => state.finance);
+const Card: VoidFunctionComponent = () => {
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const { token } = useSelector((state: State) => state.session);
+  const { transactions } = useSelector((state: State) => state.finance);
+  const { transactionCategories } = useSelector((state: State) => state.finance);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getTransactionCategories(token));
-    dispatch(getTransactions(token));
+    if (token) {
+      dispatch(getTransactionCategories(token));
+      dispatch(getTransactions(token));
+    }
   }, []);
 
   const data = createDataToShow(transactions, transactionCategories, currentPage);
 
-  const handleClickBack = () => {
+  const handleClickBack = (): void => {
     setCurrentPage(prevValue => prevValue - 1);
     window.scrollTo(0, 0);
   };
 
-  const handleClickNext = () => {
+  const handleClickNext = (): void => {
     window.scrollTo(0, 0);
     setCurrentPage(prevValue => prevValue + 1);
   };
@@ -35,14 +38,14 @@ const Card = () => {
     return (
       <div className={styles['card__container']}>
         {data.map(item => {
-          let tableClasses;
-          let amountClasses;
+          const tableClasses: string[] = [styles.card];
+          const amountClasses: string[] = [styles['card__value']];
           if (item.type === '+') {
-            tableClasses = [styles.card, styles['card__greenline']];
-            amountClasses = [styles['card__value'], styles['card__greentext']];
+            tableClasses.push(styles['card__greenline']);
+            amountClasses.push(styles['card__greentext']);
           } else if (item.type === '-') {
-            tableClasses = [styles['card'], styles['card__pinkline']];
-            amountClasses = [styles['card__value'], styles['card__pinktext']];
+            tableClasses.push(styles['card__pinkline']);
+            amountClasses.push(styles['card__pinktext']);
           }
           return (
             <table key={item.id} className={tableClasses.join(' ')}>
