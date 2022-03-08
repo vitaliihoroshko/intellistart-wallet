@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { VoidFunctionComponent, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Formik, Form } from 'formik';
+import { Formik, Form, FormikHelpers } from 'formik';
 import { object, string, ref } from 'yup';
+import { Message } from 'yup/lib/types';
 
+import { State } from 'store/types';
 import { signUserUp } from 'store/slices/session/actions';
+import { SignUpDto } from 'common/interfaces';
 import Logo from 'components/Logo';
 import Input from 'components/Input';
 import RegularButton from 'components/Buttons/RegularButton';
@@ -14,19 +17,21 @@ import userIcon from 'assets/images/user-icon.svg';
 import { evaluatePasswordProgress } from 'utils/evaluationFunctions';
 import styles from './styles.module.scss';
 
-const RegistrationForm = () => {
-  const [submittedEmail, setSubmittedEmail] = useState('');
-  const sessionError = useSelector(state => state.session.error);
+const RegistrationForm: VoidFunctionComponent = () => {
+  const [submittedEmail, setSubmittedEmail] = useState<string>('');
+  const sessionError = useSelector<State, string | null>(state => state.session.error);
   const dispatch = useDispatch();
 
-  const initialValues = {
+  type Values = SignUpDto & { confirmPassword: string };
+
+  const initialValues: Values = {
     email: '',
     password: '',
     confirmPassword: '',
     username: '',
   };
 
-  const submitHandler = (values, actions) => {
+  const submitHandler = (values: Values, actions: FormikHelpers<Values>): void => {
     const { email, password, username } = values;
     setSubmittedEmail(email);
     const { validateForm } = actions;
@@ -37,7 +42,7 @@ const RegistrationForm = () => {
     email: string()
       .required('This field is required')
       .email('Invalid email format')
-      .test('Unique Email', sessionError, value => {
+      .test('Unique Email', sessionError as Message<{}>, (value: string | undefined): boolean => {
         return !(sessionError && sessionError.includes('email') && submittedEmail === value);
       }),
     password: string()

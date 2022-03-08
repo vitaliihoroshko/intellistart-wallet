@@ -1,51 +1,58 @@
-import { useEffect, useState, useRef } from 'react';
+import { VoidFunctionComponent, useState, useEffect, useRef, MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field, FormikHelpers, ErrorMessage } from 'formik';
 import { object, number, date, string } from 'yup';
 import DatePicker from 'components/DatePicker';
-import { bool } from 'prop-types';
 import moment from 'moment';
 
+import { State, SessionState, FinanceState } from 'store/types';
 import { setIsModalAddTransactionOpen } from 'store/slices/global';
+import { Transaction, TransactionCategory } from 'common/interfaces';
+import { TransactionType } from 'common/types';
 import RegularButton from 'components/Buttons/RegularButton';
 import { createTransaction } from 'store/slices/finance/actions';
 import dropdownArrow from 'assets/images/select-arrow.svg';
 import styles from './styles.module.scss';
+import { Message } from 'yup/lib/types';
 
-const TransactionForm = ({ modalIsOpened }) => {
-  const [checked, setChecked] = useState(true);
-  const [incomeCategory, setIncomeCategory] = useState({});
-  const [expensesCategories, setExpensesCategories] = useState([]);
-  const [showCategories, setShowCategories] = useState(false);
-  const [selected, setSelected] = useState('');
-  const [submitted, setSubmitted] = useState(false);
-  const dropdownList = useRef(null);
-  const { token } = useSelector(state => state.session);
-  const { transactionCategories } = useSelector(state => state.finance);
+interface TransactionFormProps {
+  modalIsOpened: boolean;
+}
+
+const TransactionForm: VoidFunctionComponent<TransactionFormProps> = ({ modalIsOpened }) => {
+  const [checked, setChecked] = useState<boolean>(true);
+  const [incomeCategory, setIncomeCategory] = useState<TransactionCategory>();
+  const [expensesCategories, setExpensesCategories] = useState<TransactionCategory[]>([]);
+  const [showCategories, setShowCategories] = useState<boolean>(false);
+  const [selected, setSelected] = useState<string>('');
+  const [submitted, setSubmitted] = useState<boolean>(false);
+  const dropdownList = useRef<HTMLDivElement>(null);
+  const { token } = useSelector<State, SessionState>(state => state.session);
+  const { transactionCategories } = useSelector<State, FinanceState>(state => state.finance);
   const dispatch = useDispatch();
-  const closeHandler = () => dispatch(setIsModalAddTransactionOpen(false));
 
   useEffect(() => {
     (async () => {
       if (modalIsOpened) {
-        setIncomeCategory(transactionCategories.find(value => value.name === 'Income'));
+        setIncomeCategory(transactionCategories.find(value => value.name === 'Income')!);
         setExpensesCategories(transactionCategories.filter(value => value.name !== 'Income'));
       }
     })();
   }, [modalIsOpened]);
 
-  const handleShowCategories = () => {
-    setShowCategories(!showCategories);
-  };
+  const handleShowCategories = (): void => setShowCategories(!showCategories);
 
-  const handleClickOutside = event => {
-    if (dropdownList.current && !dropdownList.current.contains(event.target)) {
+  const handleClickOutside = (event: Event | MouseEvent<HTMLDivElement>): void => {
+    const element = event.target as HTMLElement;
+    if (dropdownList.current && !dropdownList.current.contains(element)) {
       setShowCategories(false);
     }
   };
 
-  const handleShowError = () => {
-    setSubmitted(true);
+  const handleShowError = (): void => setSubmitted(true);
+
+  const closeHandler = (): void => {
+    dispatch(setIsModalAddTransactionOpen(false));
   };
 
   useEffect(() => {
@@ -55,12 +62,15 @@ const TransactionForm = ({ modalIsOpened }) => {
     };
   }, []);
 
-  const initialValues = {
+  type Values = Omit<Transaction, 'id' | 'userId' | 'balanceAfter'> & { checked: boolean };
+
+  const initialValues: Values = {
     amount: '',
     transactionDate: new Date(),
     categoryId: '',
     comment: '',
-    type: '',
+    type: 'EXPENSE',
+    checked,
   };
 
   const validationSchema = object({
@@ -68,10 +78,16 @@ const TransactionForm = ({ modalIsOpened }) => {
     transactionDate: date()
       .required('This field is required')
       .typeError('Date must be a dd.mm.yyyy format'),
-    categoryId: checked ? string().test(() => selected) : '',
+    categoryId: checked
+      ? string().test(
+          'Category is chosen',
+          'Category is not chosen' as Message<{}>,
+          (): boolean => !!selected,
+        )
+      : string().notRequired(),
   });
 
-  const submitHandler = async (values, actions) => {
+  const submitHandler = (values: Values, actions: FormikHelpers<Values>): void => {
     const { amount, transactionDate, comment } = values;
     const transformedDate = moment(transactionDate).format().split('T')[0];
 
@@ -80,11 +96,12 @@ const TransactionForm = ({ modalIsOpened }) => {
     const createTransactionDto = {
       amount: checked ? +`-${amount}` : +amount,
       transactionDate: transformedDate,
-      categoryId: checked ? category.id : incomeCategory.id,
+      categoryId: checked ? category?.id! : incomeCategory?.id!,
       comment,
-      type: checked ? 'EXPENSE' : 'INCOME',
+      type: checked ? ('EXPENSE' as TransactionType) : ('INCOME' as TransactionType),
     };
-    dispatch(createTransaction(createTransactionDto, token));
+
+    dispatch(createTransaction(createTransactionDto, token!));
     actions.resetForm();
     setSelected('');
     closeHandler();
@@ -140,14 +157,16 @@ const TransactionForm = ({ modalIsOpened }) => {
                   className={styles.dropdown__list_wrapper}
                 >
                   <ul
-                    onClick={e => setSelected(e.target.textContent)}
+                    onClick={event => {
+                      const element = event.target as HTMLUListElement;
+                      setSelected(element.textContent!);
+                    }}
                     className={`${styles.dropdown__list} ${
                       !showCategories ? styles.dropdown__list_hiden : ''
                     }`}
                   >
                     {expensesCategories.map(category => (
                       <li
-                        name="categoryId"
                         key={category.id}
                         className={styles.dropdown__list_item}
                         value={category.id}
@@ -190,10 +209,6 @@ const TransactionForm = ({ modalIsOpened }) => {
       </div>
     </>
   );
-};
-
-TransactionForm.propTypes = {
-  modalIsOpened: bool,
 };
 
 export default TransactionForm;
