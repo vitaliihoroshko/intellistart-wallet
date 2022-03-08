@@ -1,13 +1,17 @@
+import { VoidFunctionComponent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { bool } from 'prop-types';
 
 import walletImage from 'assets/images/wallet-logo.svg';
 import styles from './styles.module.scss';
 
-const Logo = ({ link }) => {
+interface LogoProps {
+  link?: boolean;
+}
+
+const Logo: VoidFunctionComponent<LogoProps> = ({ link }) => {
   const navigate = useNavigate();
 
-  const classNames = [styles.logo, link ? styles.link : ''];
+  const classNames: string[] = [styles.logo, link ? styles.link : ''];
 
   return (
     <div className={classNames.join(' ')} onClick={link ? () => navigate('/home') : () => {}}>
@@ -16,10 +20,6 @@ const Logo = ({ link }) => {
       <span>&nbsp;</span>
     </div>
   );
-};
-
-Logo.propTypes = {
-  link: bool,
 };
 
 export default Logo;
