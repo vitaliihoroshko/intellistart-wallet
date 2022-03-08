@@ -1,19 +1,23 @@
+import { FunctionComponent, MouseEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { State } from 'store/types';
 import { setIsModalAddTransactionOpen } from 'store/slices/global';
 import CloseButton from 'components/Buttons/CloseButton';
-import styles from './styles.module.scss';
 import TransactionForm from 'components/Forms/TransactionForm';
+import styles from './styles.module.scss';
 
-const ModalAddTransaction = () => {
-  const isOpened = useSelector(state => state.global.isModalAddTransactionOpen);
+const ModalAddTransaction: FunctionComponent = () => {
+  const isOpened = useSelector<State, boolean>(state => state.global.isModalAddTransactionOpen);
   const dispatch = useDispatch();
 
-  const preventClick = event => event.stopPropagation();
+  const preventClick = (event: MouseEvent<HTMLDivElement>): void => event.stopPropagation();
 
-  const closeHandler = () => dispatch(setIsModalAddTransactionOpen(false));
+  const closeHandler = (): void => {
+    dispatch(setIsModalAddTransactionOpen(false));
+  };
 
-  const classNames = [styles.modal, isOpened ? styles.modal_active : ''];
+  const classNames: string[] = [styles.modal, isOpened ? styles.modal_active : ''];
 
   return (
     <div className={classNames.join(' ')} onClick={closeHandler}>
