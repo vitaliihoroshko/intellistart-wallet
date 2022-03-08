@@ -1,18 +1,14 @@
-import { node } from 'prop-types';
+import { FunctionComponent } from 'react';
 
 import Header from 'components/Header';
 
-const Layout = ({ children }) => {
+const Layout: FunctionComponent = ({ children }) => {
   return (
     <>
       <Header />
       <main>{children}</main>
     </>
   );
-};
-
-Layout.propTypes = {
-  children: node.isRequired,
 };
 
 export default Layout;

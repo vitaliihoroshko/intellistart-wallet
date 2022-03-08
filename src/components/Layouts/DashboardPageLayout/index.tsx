@@ -1,17 +1,18 @@
+import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { node } from 'prop-types';
 
+import { State, GlobalState } from 'store/types';
 import Navigation from 'components/Navigation';
 import Balance from 'components/Balance';
 import Currency from 'components/Currency';
 import { useWindowWidth } from 'common/hooks';
 import styles from './styles.module.scss';
 
-const DashboardPageLayout = ({ children }) => {
+const DashboardPageLayout: FunctionComponent = ({ children }) => {
   const windowWidth = useWindowWidth();
-  const { isCurrencyDisplayed } = useSelector(state => state.global);
-  const { isModalAddTransactionOpen } = useSelector(state => state.global);
+  const { isCurrencyDisplayed } = useSelector<State, GlobalState>(state => state.global);
+  const { isModalAddTransactionOpen } = useSelector<State, GlobalState>(state => state.global);
   const { pathname } = useLocation();
 
   const isMobile = windowWidth <= 767;
@@ -19,7 +20,7 @@ const DashboardPageLayout = ({ children }) => {
   const contentIsShown = (isMobile && !isCurrencyDisplayed) || !isMobile;
   const currencyIsShown = !contentIsShown || !isMobile;
 
-  const classNames = [
+  const classNames: string[] = [
     styles.background,
     isModalAddTransactionOpen && windowWidth <= 480 ? styles['hide-content'] : '',
   ];
@@ -36,10 +37,6 @@ const DashboardPageLayout = ({ children }) => {
       {contentIsShown && <>{children}</>}
     </div>
   );
-};
-
-DashboardPageLayout.propTypes = {
-  children: node.isRequired,
 };
 
 export default DashboardPageLayout;
