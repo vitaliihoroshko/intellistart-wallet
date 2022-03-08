@@ -1,16 +1,16 @@
 import { VoidFunctionComponent, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { State } from 'store/types';
+import { State, SessionState, FinanceState } from 'store/types';
 import { getTransactions, getTransactionCategories } from 'store/slices/finance/actions';
 import { createDataToShow, chooseButtonsStyle } from 'utils/dashboardFunctions';
 import styles from './styles.module.scss';
 
 const Card: VoidFunctionComponent = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const { token } = useSelector((state: State) => state.session);
-  const { transactions } = useSelector((state: State) => state.finance);
-  const { transactionCategories } = useSelector((state: State) => state.finance);
+  const { token } = useSelector<State, SessionState>(state => state.session);
+  const { transactions } = useSelector<State, FinanceState>(state => state.finance);
+  const { transactionCategories } = useSelector<State, FinanceState>(state => state.finance);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const Card: VoidFunctionComponent = () => {
           return (
             <table key={item.id} className={tableClasses.join(' ')}>
               <tbody>
-                <tr key={item.transactionDate}>
+                <tr key={item.transactionDate as string}>
                   <td className={styles['card__key']}>Date</td>
                   <td className={styles['card__value']}>{item.transactionDate}</td>
                 </tr>

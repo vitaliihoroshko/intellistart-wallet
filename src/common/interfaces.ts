@@ -36,7 +36,7 @@ export interface CreateTransactionDto {
 
 export interface Transaction {
   id: string;
-  transactionDate: string;
+  transactionDate: Date | string;
   type: TransactionType;
   categoryId: string;
   userId: string;
@@ -107,4 +107,10 @@ export interface CategoryColors {
   'self care': string;
   leisure: string;
   'main expenses': string;
+}
+
+export interface NavigationIcons {
+  home: string;
+  diagram: string;
+  currency: string;
 }

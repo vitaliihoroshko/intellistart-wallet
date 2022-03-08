@@ -1,19 +1,24 @@
-import React, { useState } from 'react';
-import { oneOfType, string, object, array } from 'prop-types';
+import { VoidFunctionComponent, useState } from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
 
+import { SelectOption } from 'common/interfaces';
 import arrowDown from 'assets/images/select-arrow.svg';
 import styles from './style.module.scss';
 
-const Select = ({ options = [], value = '', placeholder = 'Label', onChange = () => {} }) => {
-  const [open, setOpen] = useState(false);
+interface SelectProps {
+  options: SelectOption[];
+  value: SelectOption | string;
+  placeholder: string;
+  onChange: (selectOption: SelectOption) => void;
+}
 
-  const changeOpen = v => {
-    setOpen(v);
-  };
+const Select: VoidFunctionComponent<SelectProps> = ({ options, value, placeholder, onChange }) => {
+  const [open, setOpen] = useState<boolean>(false);
 
-  const clickOption = i => {
-    onChange(i);
+  const changeOpen = (value: boolean): void => setOpen(value);
+
+  const clickOption = (selectOption: SelectOption): void => {
+    onChange(selectOption);
     changeOpen(false);
   };
 
@@ -21,7 +26,7 @@ const Select = ({ options = [], value = '', placeholder = 'Label', onChange = ()
     <OutsideClickHandler onOutsideClick={() => changeOpen(false)}>
       <div className={styles['select__wrapper']}>
         <div className={styles['select__head']} onClick={() => changeOpen(true)}>
-          <p>{value.title ?? placeholder}</p>
+          <p>{value instanceof Object ? value.title : placeholder}</p>
           <div>
             <img src={arrowDown} alt="arrow" />
           </div>
@@ -29,13 +34,13 @@ const Select = ({ options = [], value = '', placeholder = 'Label', onChange = ()
         {options.length && open && (
           <>
             <div className={styles['select__context']}>
-              {options.map(i => (
+              {options.map(option => (
                 <div
-                  key={i.value}
+                  key={option.value}
                   className={styles['select__context__item']}
-                  onClick={() => clickOption(i)}
+                  onClick={() => clickOption(option)}
                 >
-                  {i.title}
+                  {option.title}
                 </div>
               ))}
             </div>
@@ -44,12 +49,6 @@ const Select = ({ options = [], value = '', placeholder = 'Label', onChange = ()
       </div>
     </OutsideClickHandler>
   );
-};
-
-Select.propTypes = {
-  options: array,
-  placeholder: string,
-  value: oneOfType([string, object]),
 };
 
 export default Select;
