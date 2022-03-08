@@ -1,8 +1,9 @@
 import { Dispatch, SetStateAction } from 'react';
 
+import { EvaluationFunction } from 'common/types';
 import { ProgressData } from 'common/interfaces';
 
-export const evaluatePasswordProgress = (
+export const evaluatePasswordProgress: EvaluationFunction = (
   value: string,
   dataCallback: Dispatch<SetStateAction<ProgressData>>,
   visibilityCallback: Dispatch<SetStateAction<boolean>>,

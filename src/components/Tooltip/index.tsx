@@ -1,7 +1,11 @@
-import { string, node } from 'prop-types';
+import { FunctionComponent, ReactElement } from 'react';
 import TooltipComponent from '@mui/material/Tooltip';
 
-const Tooltip = ({ title, children }) => {
+interface TooltipProps {
+  title: string;
+}
+
+const Tooltip: FunctionComponent<TooltipProps> = ({ title, children }) => {
   return (
     <TooltipComponent
       title={title}
@@ -15,14 +19,9 @@ const Tooltip = ({ title, children }) => {
         },
       }}
     >
-      {children}
+      {children as ReactElement}
     </TooltipComponent>
   );
-};
-
-Tooltip.propTypes = {
-  title: string.isRequired,
-  children: node.isRequired,
 };
 
 export default Tooltip;

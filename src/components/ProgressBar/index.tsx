@@ -1,9 +1,14 @@
-import { number, string } from 'prop-types';
+import { VoidFunctionComponent } from 'react';
 
 import Tooltip from 'components/Tooltip';
 import styles from './styles.module.scss';
 
-const ProgressBar = ({ progress, tooltip }) => {
+interface ProgressBarProps {
+  progress: number;
+  tooltip: string;
+}
+
+const ProgressBar: VoidFunctionComponent<ProgressBarProps> = ({ progress, tooltip }) => {
   return (
     <Tooltip title={tooltip}>
       <div className={styles.bar}>
@@ -13,11 +18,6 @@ const ProgressBar = ({ progress, tooltip }) => {
       </div>
     </Tooltip>
   );
-};
-
-ProgressBar.propTypes = {
-  progress: number.isRequired,
-  tooltip: string.isRequired,
 };
 
 export default ProgressBar;
