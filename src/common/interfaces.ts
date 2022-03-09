@@ -1,4 +1,4 @@
-import { TransactionType } from './types';
+import { TransactionType, TransformedTransaction } from './types';
 
 export interface SignUpDto {
   username: string;
@@ -113,4 +113,10 @@ export interface NavigationIcons {
   home: string;
   diagram: string;
   currency: string;
+}
+
+export interface TableColumn {
+  Header: string;
+  accessor: keyof TransformedTransaction;
+  className: string;
 }

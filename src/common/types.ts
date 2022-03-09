@@ -1,10 +1,12 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import { UserData, Token, ProgressData } from './interfaces';
+import { UserData, Token, Transaction, ProgressData } from './interfaces';
 
 export type AuthResponse = UserData & Token;
 
 export type TransactionType = 'INCOME' | 'EXPENSE' | '+' | '-';
+
+export type TransformedTransaction = Transaction & { categoryName: string };
 
 export type EvaluationFunction = (
   value: string,

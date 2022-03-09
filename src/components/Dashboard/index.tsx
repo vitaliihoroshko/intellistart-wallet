@@ -1,60 +1,65 @@
-import { useMemo, useState, useEffect } from 'react';
+import { VoidFunctionComponent, useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useTable } from 'react-table';
+import { useTable, ColumnInstance, Cell, Row } from 'react-table';
 
+import { State, SessionState, FinanceState } from 'store/types';
 import { getTransactions, getTransactionCategories } from 'store/slices/finance/actions';
+import { TableColumn } from 'common/interfaces';
+import { TransformedTransaction } from 'common/types';
 import { createDataToShow, chooseButtonsStyle } from 'utils/dashboardFunctions';
 import styles from './styles.module.scss';
 
-const Dashboard = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const { token } = useSelector(state => state.session);
-  const { transactions } = useSelector(state => state.finance);
-  const { transactionCategories } = useSelector(state => state.finance);
+const Dashboard: VoidFunctionComponent = () => {
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const { token } = useSelector<State, SessionState>(state => state.session);
+  const { transactions } = useSelector<State, FinanceState>(state => state.finance);
+  const { transactionCategories } = useSelector<State, FinanceState>(state => state.finance);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getTransactionCategories(token));
-    dispatch(getTransactions(token));
+    if (token) {
+      dispatch(getTransactionCategories(token));
+      dispatch(getTransactions(token));
+    }
   }, []);
 
   const data = createDataToShow(transactions, transactionCategories, currentPage);
 
-  const handleClickBack = () => setCurrentPage(prevValue => prevValue - 1);
-  const handleClickNext = () => setCurrentPage(prevValue => prevValue + 1);
+  const handleClickBack = (): void => setCurrentPage(prevValue => prevValue - 1);
+  const handleClickNext = (): void => setCurrentPage(prevValue => prevValue + 1);
 
   const buttonsOptions = chooseButtonsStyle(currentPage, transactions);
 
-  const columns = useMemo(
+  const columns: TableColumn[] = useMemo(
     () => [
       {
         Header: 'Date',
-        accessor: 'transactionDate',
+        accessor: 'transactionDate' as keyof TransformedTransaction,
         className: styles['dashboard__date'],
       },
       {
         Header: 'Type',
-        accessor: 'type',
+        accessor: 'type' as keyof TransformedTransaction,
         className: styles['dashboard__type'],
       },
       {
         Header: 'Category',
-        accessor: 'categoryName',
+        accessor: 'categoryName' as keyof TransformedTransaction,
         className: styles['dashboard__category'],
       },
       {
         Header: 'Comment',
-        accessor: 'comment',
+        accessor: 'comment' as keyof TransformedTransaction,
         className: styles['dashboard__comment'],
       },
       {
         Header: 'Amount',
-        accessor: 'amount',
+        accessor: 'amount' as keyof TransformedTransaction,
         className: [styles['dashboard__amount']],
       },
       {
         Header: 'Balance',
-        accessor: 'balanceAfter',
+        accessor: 'balanceAfter' as keyof TransformedTransaction,
         className: styles['dashboard__balance'],
       },
     ],
@@ -62,17 +67,10 @@ const Dashboard = () => {
   );
 
   const tableInstance = useTable({ columns, data });
-  const defaultPropGetter = () => ({});
-  const {
-    getTableProps,
-    getTableBodyProps,
-    rows,
-    prepareRow,
-    getColumnProps = defaultPropGetter,
-    getCellProps = defaultPropGetter,
-  } = tableInstance;
 
-  function StatTable() {
+  const { getTableProps, getTableBodyProps, rows, prepareRow } = tableInstance;
+
+  const StatTable = (): JSX.Element => {
     return (
       <div className={styles['dashboard']}>
         <div className={styles['dashboard__head']}>
@@ -85,38 +83,31 @@ const Dashboard = () => {
         </div>
         <table {...getTableProps()}>
           <tbody {...getTableBodyProps()}>
-            {rows.map(row => {
+            {rows.map((row: Row<TransformedTransaction>) => {
               prepareRow(row);
               return (
-                <tr
-                  key={row.transactionDate}
-                  className={styles['dashboard__row']}
-                  {...row.getRowProps()}
-                >
-                  {row.cells.map(cell => {
+                <tr className={styles['dashboard__row']} {...row.getRowProps()}>
+                  {row.cells.map((cell: Cell<TransformedTransaction>) => {
+                    const column = cell.column as ColumnInstance<TransformedTransaction> & {
+                      className: string;
+                    };
                     return (
                       <td
-                        key={columns.accessor}
-                        {...cell.getCellProps(
-                          {
-                            className: cell.column.className,
-                            style: {
-                              color:
-                                row.original.type === '-' &&
-                                cell.column.className == styles['dashboard__amount']
-                                  ? '#ff6596'
-                                  : row.original.type === '+' &&
-                                    cell.column.className == styles['dashboard__amount']
-                                  ? '#24cca7'
-                                  : 'black',
-                            },
+                        {...cell.getCellProps({
+                          className: column.className,
+                          style: {
+                            color:
+                              row.original.type === '-' &&
+                              column.className == styles['dashboard__amount']
+                                ? '#ff6596'
+                                : row.original.type === '+' &&
+                                  column.className == styles['dashboard__amount']
+                                ? '#24cca7'
+                                : 'black',
                           },
-                          getColumnProps(cell.column),
-                          getCellProps(cell),
-                        )}
+                        })}
                       >
-                        {cell.column == 'amount' && Math.abs(cell.render('Cell'))}
-                        {cell.column != 'amount' && cell.render('Cell')}
+                        {cell.render('Cell')}
                       </td>
                     );
                   })}
@@ -143,7 +134,7 @@ const Dashboard = () => {
         </button>
       </div>
     );
-  }
+  };
 
   return <div>{StatTable()}</div>;
 };

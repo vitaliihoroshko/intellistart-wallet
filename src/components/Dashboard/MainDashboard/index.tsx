@@ -1,14 +1,26 @@
+import { VoidFunctionComponent } from 'react';
+
+import { TransactionsSummary, SelectOption, CategoryColors } from 'common/interfaces';
 import { getMonths, getYears, getСategoryColors } from 'utils/helperFunctions';
 import Select from 'components/Select';
 import styles from './styles.module.scss';
 
-const Main = ({ categories, month, year, changeMonth, changeYear }) => {
-  function getBgColor(name) {
-    name = name.toLowerCase();
-    let color = getСategoryColors()[name];
+interface MainDashboardProps {
+  categories: TransactionsSummary | null;
+  month: SelectOption | string;
+  year: SelectOption | string;
+  changeMonth: (month: SelectOption) => void;
+  changeYear: (year: SelectOption) => void;
+}
 
+const MainDashboard: VoidFunctionComponent<MainDashboardProps> = props => {
+  const { categories, month, year, changeMonth, changeYear } = props;
+
+  const getBgColor = (name: string): string => {
+    const categoryName = name.toLowerCase() as keyof CategoryColors;
+    const color: string = getСategoryColors()[categoryName];
     return color || '#000';
-  }
+  };
 
   return (
     <div className={styles['dashboard__wrapper']}>
@@ -38,7 +50,7 @@ const Main = ({ categories, month, year, changeMonth, changeYear }) => {
               <div>Amount</div>
             </div>
             <div className={styles['dashboard__table__body']}>
-              {categories?.categoriesSummary?.map(i => (
+              {categories?.categoriesSummary.map(i => (
                 <div key={i.name} className={styles['dashboard__table__item']}>
                   <div className={styles['dashboard__table__item__left']}>
                     <div
@@ -83,4 +95,4 @@ const Main = ({ categories, month, year, changeMonth, changeYear }) => {
   );
 };
 
-export default Main;
+export default MainDashboard;

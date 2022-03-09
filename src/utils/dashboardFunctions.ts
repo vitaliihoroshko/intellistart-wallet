@@ -1,12 +1,12 @@
 import { Transaction, TransactionCategory, ButtonsStyles } from 'common/interfaces';
-import { TransactionType } from 'common/types';
+import { TransactionType, TransformedTransaction } from 'common/types';
 import styles from 'components/Dashboard/styles.module.scss';
 
 export const createDataToShow = (
   initialArray: Transaction[],
   categories: TransactionCategory[],
   currentPage: number,
-): (Transaction & { categoryName: string })[] => {
+): TransformedTransaction[] => {
   const data = initialArray.slice(currentPage * 5 - 5, currentPage * 5).map(value => {
     return {
       ...value,
