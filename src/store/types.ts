@@ -1,6 +1,12 @@
 import { Middleware, ThunkDispatch, Action as BasicAction, PayloadAction } from '@reduxjs/toolkit';
 
-import { User, Transaction, TransactionCategory, TransactionsSummary } from 'common/interfaces';
+import {
+  User,
+  Transaction,
+  TransactionCategory,
+  TransactionsSummary,
+  ApiMiddleware,
+} from 'common/interfaces';
 
 export interface SessionState {
   token: string | null;
@@ -36,11 +42,11 @@ export interface Action<T> {
   payload: T;
 }
 
-export interface ThunkOptions<E = any> {
+export interface ThunkOptions<E = unknown> {
   extraArgument: E;
 }
 
-type IsImmutableFunc = (value: any) => boolean;
+type IsImmutableFunc = (value: unknown) => boolean;
 
 interface ImmutableStateInvariantMiddlewareOptions {
   isImmutable?: IsImmutableFunc;
@@ -50,8 +56,8 @@ interface ImmutableStateInvariantMiddlewareOptions {
 }
 
 interface SerializableStateInvariantMiddlewareOptions {
-  isSerializable?: (value: any) => boolean;
-  getEntries?: (value: any) => [string, any][];
+  isSerializable?: (value: unknown) => boolean;
+  getEntries?: (value: unknown) => [string, unknown][];
   ignoredActions?: string[];
   ignoredActionPaths?: string[];
   ignoredPaths?: string[];
@@ -66,7 +72,7 @@ interface GetDefaultMiddlewareOptions {
   serializableCheck?: boolean | SerializableStateInvariantMiddlewareOptions;
 }
 
-export type GetDefaultMiddleware = <S = any>(
+export type GetDefaultMiddleware = <S = unknown>(
   options: GetDefaultMiddlewareOptions,
 ) => Middleware<{}, S>[];
 
@@ -74,7 +80,7 @@ export type Dispatch = ThunkDispatch<State, unknown, BasicAction>;
 
 export type GetState = () => State;
 
-export type Api = ThunkOptions['extraArgument'];
+export type Api = ThunkOptions<ApiMiddleware>['extraArgument'];
 
 export type Thunk = (dispatch: Dispatch, _: GetState, api: Api) => Promise<void>;
 

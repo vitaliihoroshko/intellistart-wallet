@@ -1,4 +1,4 @@
-import { TransactionType, TransformedTransaction } from './types';
+import { TransactionType, TransformedTransaction, AuthResponse } from './types';
 
 export interface SignUpDto {
   username: string;
@@ -119,4 +119,18 @@ export interface TableColumn {
   Header: string;
   accessor: keyof TransformedTransaction;
   className: string;
+}
+
+export interface ApiMiddleware {
+  signUserUp: (signUpDto: SignUpDto) => Promise<AuthResponse>;
+  signUserIn: (signInDto: SignInDto) => Promise<AuthResponse>;
+  getCurrentUser: (token: string) => Promise<User>;
+  signUserOut: (token: string) => Promise<void>;
+  getTransactions: (token: string) => Promise<Transaction[]>;
+  getTransactionCategories: (token: string) => Promise<TransactionCategory[]>;
+  createTransaction: (
+    createTransactionDto: CreateTransactionDto,
+    token: string,
+  ) => Promise<Transaction>;
+  getTransactionsSummary: (token: string, period: Period) => Promise<TransactionsSummary>;
 }
