@@ -1,11 +1,11 @@
 import { VoidFunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
-import { State } from 'store/types';
+import { State, FinanceState } from 'store/types';
 import styles from './styles.module.scss';
 
 const Balance: VoidFunctionComponent = () => {
-  const { totalBalance } = useSelector((state: State) => state.finance);
+  const { totalBalance } = useSelector<State, FinanceState>(state => state.finance);
 
   return (
     <div className={styles['balance']}>

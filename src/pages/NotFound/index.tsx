@@ -2,12 +2,12 @@ import { VoidFunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { State } from 'store/types';
+import { State, SessionState } from 'store/types';
 import { PageRoute } from 'common/enums';
 import styles from './styles.module.scss';
 
 const NotFoundPage: VoidFunctionComponent = () => {
-  const { isAuth } = useSelector((state: State) => state.session);
+  const { isAuth } = useSelector<State, SessionState>(state => state.session);
 
   return (
     <>

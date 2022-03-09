@@ -1,7 +1,7 @@
 import { VoidFunctionComponent, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { State } from 'store/types';
+import { State, SessionState, FinanceState } from 'store/types';
 import { getTransactionsSummary } from 'store/slices/finance/actions';
 import { SelectOption } from 'common/interfaces';
 import DashboardPageLayout from 'components/Layouts/DashboardPageLayout';
@@ -12,8 +12,8 @@ import styles from './styles.module.scss';
 const DiagramPage: VoidFunctionComponent = () => {
   const [year, setYear] = useState<SelectOption | string>('');
   const [month, setMonth] = useState<SelectOption | string>('');
-  const { token } = useSelector((state: State) => state.session);
-  const { transactionsSummary } = useSelector((state: State) => state.finance);
+  const { token } = useSelector<State, SessionState>(state => state.session);
+  const { transactionsSummary } = useSelector<State, FinanceState>(state => state.finance);
   const dispatch = useDispatch();
 
   useEffect(() => {

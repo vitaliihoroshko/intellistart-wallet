@@ -2,7 +2,7 @@ import { VoidFunctionComponent, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-import { State } from 'store/types';
+import { State, GlobalState } from 'store/types';
 import { autoSignIn } from 'store/slices/session/actions';
 import { PageRoute } from 'common/enums';
 import LoginPage from './Login';
@@ -14,7 +14,7 @@ import ProtectedRoute from 'components/ProtectedRoute';
 import LoadingSpinner from 'components/LoadingSpinner';
 
 const App: VoidFunctionComponent = () => {
-  const { isLoading } = useSelector((state: State) => state.global);
+  const { isLoading } = useSelector<State, GlobalState>(state => state.global);
   const dispatch = useDispatch();
 
   useEffect(() => {
