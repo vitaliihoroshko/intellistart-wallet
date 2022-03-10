@@ -42,7 +42,7 @@ const RegistrationForm: VoidFunctionComponent = () => {
     email: string()
       .required('This field is required')
       .email('Invalid email format')
-      .test('Unique Email', sessionError as Message<{}>, (value: string | undefined): boolean => {
+      .test('Unique Email', sessionError as Message, (value: string | undefined): boolean => {
         return !(sessionError && sessionError.includes('email') && submittedEmail === value);
       }),
     password: string()

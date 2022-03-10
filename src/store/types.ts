@@ -74,7 +74,7 @@ interface GetDefaultMiddlewareOptions {
 
 export type GetDefaultMiddleware = <S = unknown>(
   options: GetDefaultMiddlewareOptions,
-) => Middleware<{}, S>[];
+) => Middleware<Record<string, unknown>, S>[];
 
 export type Dispatch = ThunkDispatch<State, unknown, BasicAction>;
 

@@ -85,28 +85,28 @@ const Dashboard: VoidFunctionComponent = () => {
           <tbody {...getTableBodyProps()}>
             {rows.map((row: Row<TransformedTransaction>) => {
               prepareRow(row);
+              const { key, ...restRowProps } = row.getRowProps();
               return (
-                <tr className={styles['dashboard__row']} {...row.getRowProps()}>
+                <tr key={key} className={styles['dashboard__row']} {...restRowProps}>
                   {row.cells.map((cell: Cell<TransformedTransaction>) => {
                     const column = cell.column as ColumnInstance<TransformedTransaction> & {
                       className: string;
                     };
-                    return (
-                      <td
-                        {...cell.getCellProps({
-                          className: column.className,
-                          style: {
-                            color:
-                              row.original.type === '-' &&
+                    const { key, ...restCellProps } = cell.getCellProps({
+                      className: column.className,
+                      style: {
+                        color:
+                          row.original.type === '-' &&
+                          column.className == styles['dashboard__amount']
+                            ? '#ff6596'
+                            : row.original.type === '+' &&
                               column.className == styles['dashboard__amount']
-                                ? '#ff6596'
-                                : row.original.type === '+' &&
-                                  column.className == styles['dashboard__amount']
-                                ? '#24cca7'
-                                : 'black',
-                          },
-                        })}
-                      >
+                            ? '#24cca7'
+                            : 'black',
+                      },
+                    });
+                    return (
+                      <td key={key} {...restCellProps}>
                         {cell.render('Cell')}
                       </td>
                     );

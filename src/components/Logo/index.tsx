@@ -14,7 +14,7 @@ const Logo: VoidFunctionComponent<LogoProps> = ({ link }) => {
   const classNames: string[] = [styles.logo, link ? styles.link : ''];
 
   return (
-    <div className={classNames.join(' ')} onClick={link ? () => navigate('/home') : () => {}}>
+    <div className={classNames.join(' ')} onClick={link ? () => navigate('/home') : undefined}>
       <img src={walletImage} alt="wallet-logo" width={40} height={40} className={styles.image} />
       <h1 className={styles.name}>Wallet</h1>
       <span>&nbsp;</span>

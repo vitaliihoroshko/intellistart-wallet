@@ -30,24 +30,16 @@ const LoginForm: VoidFunctionComponent = () => {
     email: string()
       .required('This field is required')
       .email('Invalid email format')
-      .test('Existing User', sessionError as Message<{}>, (value: string | undefined): boolean => {
+      .test('Existing User', sessionError as Message, (value: string | undefined): boolean => {
         return !(sessionError && sessionError.includes('email') && submittedEmail === value);
       }),
     password: string()
       .required('This field is required')
       .min(6, 'Password must be 6 chars minimum')
       .max(12, 'Password must be 12 chars maximum')
-      .test(
-        'Correct Password',
-        sessionError as Message<{}>,
-        (value: string | undefined): boolean => {
-          return !(
-            sessionError &&
-            sessionError.includes('password') &&
-            submittedPassword === value
-          );
-        },
-      ),
+      .test('Correct Password', sessionError as Message, (value: string | undefined): boolean => {
+        return !(sessionError && sessionError.includes('password') && submittedPassword === value);
+      }),
   });
 
   const submitHandler = (values: SignInDto, actions: FormikHelpers<SignInDto>): void => {

@@ -81,7 +81,7 @@ const TransactionForm: VoidFunctionComponent<TransactionFormProps> = ({ modalIsO
     categoryId: checked
       ? string().test(
           'Category is chosen',
-          'Category is not chosen' as Message<{}>,
+          'Category is not chosen' as Message,
           (): boolean => !!selected,
         )
       : string().notRequired(),
